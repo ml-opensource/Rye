@@ -34,7 +34,7 @@ import Rye
 
 let ryeConfiguration: RyeConfiguration = [Rye.Configuration.Key.text: "Message for the user"]
 
-let rye = RyeViewController.init(type: .`default`(configuration: ryeConfiguration), timeAlive: 2)
+let rye = RyeViewController.init(type: .standard(configuration: ryeConfiguration), timeAlive: 2)
 rye.show()
 
 ```
@@ -48,7 +48,7 @@ let ryeConfiguration: RyeConfiguration = [
     Rye.Configuration.Key.backgroundColor: UIColor.red.withAlphaComponent(0.4)
 ]
 
-let rye = RyeViewController.init(type: .`default`(configuration: ryeConfiguration), timeAlive: 2)
+let rye = RyeViewController.init(type: .standard(configuration: ryeConfiguration), timeAlive: 2)
 rye.show()
 
 ```
