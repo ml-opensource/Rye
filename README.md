@@ -7,8 +7,11 @@
 
 ## Intro
 
+Rye will enable you to display non intrusive 'Toast' type alerts to your users. 
+You can choose to display the default Rye alert type or go fully custom and display your own `UIView`.
 
 ## 📝 Requirements
+
 iOS 12
 Swift 5
 
