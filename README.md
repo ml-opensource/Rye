@@ -12,7 +12,7 @@ You can choose to display the default Rye alert type or go fully custom and disp
 
 ## 📝 Requirements
 
-iOS 12
+iOS 11.4
 Swift 5
 
 ## 📦 Installation
