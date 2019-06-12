@@ -7,7 +7,7 @@
 
 ## Intro
 
-Rye will enable you to display non intrusive 'Toast' type alerts to your users. 
+Rye allows you to present non intrusive "Toast" type alerts to your users.
 You can choose to display the default Rye alert type or go fully custom and display your own `UIView`.
 
 ## 📝 Requirements
@@ -34,10 +34,8 @@ import Rye
 
 let ryeConfiguration: RyeConfiguration = [Rye.Configuration.Key.text: "Message for the user"]
 
-DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
 let rye = RyeViewController.init(type: .`default`(configuration: ryeConfiguration), timeAlive: 2)
-    rye.show()
-}
+rye.show()
 
 ```
 
@@ -50,10 +48,8 @@ let ryeConfiguration: RyeConfiguration = [
     Rye.Configuration.Key.backgroundColor: UIColor.red.withAlphaComponent(0.4)
 ]
 
-DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-    let rye = RyeViewController.init(type: .`default`(configuration: ryeConfiguration), timeAlive: 2)
-    rye.show()
-}
+let rye = RyeViewController.init(type: .`default`(configuration: ryeConfiguration), timeAlive: 2)
+rye.show()
 
 ```
 
@@ -63,10 +59,8 @@ DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
 
 let customRyeView = RyeView()
 
-DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-    let rye = RyeViewController.init(type: .custom(customRyeView), timeAlive: 2)
-    rye.show()
-}
+let rye = RyeViewController.init(type: .custom(customRyeView), timeAlive: 2)
+rye.show()
 
 ```
 
@@ -78,7 +72,7 @@ If you decide to not provide a value for this parameter, you will be in charge o
 
 ### Possible Rye Configurations
 
-The following keys can be used in the configuration dictionary when preseting a default type Rye:
+The following keys can be used in the configuration dictionary when presenting a default type Rye:
 
     .backgroundColor (must be a UIColor)
     .textColor (must be a UIColor)
@@ -86,7 +80,7 @@ The following keys can be used in the configuration dictionary when preseting a 
     .text (must be a String)
     .cornerRadius (must be a CGFloat)
 
-If configuration is set to nil, default configuration will be used. Any options set, will override the default state.
+If configuration is set to nil, a default configuration will be used. Any options set, will override the default state.
 
 ## Example Project
 To learn more, please refer to the example project contained in this repository.

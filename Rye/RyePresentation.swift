@@ -40,10 +40,7 @@ public extension RyeViewController {
         view.layoutIfNeeded()
         
         // animate the RyeView on screen
-        animateRyeIn(completion: {
-            // trigger status bar update
-            self.setNeedsStatusBarAppearanceUpdate()
-        })
+        animateRyeIn()
             
     }
     
@@ -65,16 +62,13 @@ public extension RyeViewController {
             // update Rye state
             self.isShowing = false
             
-            // trigger status bar update
-            self.setNeedsStatusBarAppearanceUpdate()
-            
             // call completion
             completion?()
         })
         
     }
     
-    func animateRyeIn(completion: @escaping () -> Void) {
+    func animateRyeIn() {
         
         // calculate safeArea based on UIDevice current orientation to facilitate a good positioning of RyeView
         let safeArea: CGFloat
@@ -95,11 +89,9 @@ public extension RyeViewController {
         ryeViewBottomConstraint.constant = -safeArea - 16
         
         // animate
-        UIView.animate(withDuration: presentationAnimationDuration, animations: {
+        UIView.animate(withDuration: presentationAnimationDuration) {
             self.view.layoutIfNeeded()
-        }, completion: { _ in
-            completion()
-        })
+        }
         
     }
     

@@ -25,7 +25,7 @@ class RyeDemoViewController: UIViewController {
         let ryeConfiguration: RyeConfiguration = [Rye.Configuration.Key.text: "Message for the user"]
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            let rye = RyeViewController.init(type: .`default`(configuration: ryeConfiguration), timeAlive: 2)
+            let rye = RyeViewController.init(type: .standard(configuration: ryeConfiguration), timeAlive: 2)
             rye.show()
         }
     }
@@ -37,7 +37,7 @@ class RyeDemoViewController: UIViewController {
                                                   Rye.Configuration.Key.backgroundColor: UIColor.red.withAlphaComponent(0.4)]
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            let rye = RyeViewController.init(type: .`default`(configuration: ryeConfiguration), timeAlive: 2)
+            let rye = RyeViewController.init(type: .standard(configuration: ryeConfiguration), timeAlive: 2)
             rye.show()
         }
     }

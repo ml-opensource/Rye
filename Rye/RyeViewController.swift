@@ -56,10 +56,6 @@ public class RyeViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
-    
     // MARK: - View lifecycle
     
     public override func viewDidLoad() {
@@ -88,7 +84,7 @@ public class RyeViewController: UIViewController {
         }
         
         switch type {
-        case .default(let configuration):
+        case .standard(let configuration):
             
             // create default RyeView
             let ryeView = RyeDefaultView(frame: .zero,

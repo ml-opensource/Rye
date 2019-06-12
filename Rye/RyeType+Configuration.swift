@@ -13,7 +13,7 @@ public typealias RyeConfiguration = [Rye.Configuration.Key: Any]
 public struct Rye {
     
     public enum AlertType {
-        case `default`(configuration: RyeConfiguration?)
+        case standard(configuration: RyeConfiguration?)
         case custom(UIView)
     }
     
