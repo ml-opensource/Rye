@@ -14,13 +14,14 @@
 		4222826F22B0EAD3002668DA /* RyePresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4222826E22B0EAD3002668DA /* RyePresentation.swift */; };
 		4222827122B0EB09002668DA /* RyeType+Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4222827022B0EB09002668DA /* RyeType+Configuration.swift */; };
 		4222827922B0EBF3002668DA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4222827822B0EBF3002668DA /* AppDelegate.swift */; };
-		4222827B22B0EBF3002668DA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4222827A22B0EBF3002668DA /* ViewController.swift */; };
+		4222827B22B0EBF3002668DA /* RyeDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4222827A22B0EBF3002668DA /* RyeDemoViewController.swift */; };
 		4222827E22B0EBF3002668DA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4222827C22B0EBF3002668DA /* Main.storyboard */; };
 		4222828022B0EBF6002668DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4222827F22B0EBF6002668DA /* Assets.xcassets */; };
 		4222828322B0EBF6002668DA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4222828122B0EBF6002668DA /* LaunchScreen.storyboard */; };
 		4222828E22B0EED3002668DA /* Rye.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4222825222B0E4FD002668DA /* Rye.framework */; };
 		4222828F22B0EED3002668DA /* Rye.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4222825222B0E4FD002668DA /* Rye.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4222829222B0EF65002668DA /* RyeDefaultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4222829122B0EF65002668DA /* RyeDefaultView.swift */; };
+		4222829422B11385002668DA /* RyeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4222829322B11385002668DA /* RyeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,12 +67,13 @@
 		4222827022B0EB09002668DA /* RyeType+Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RyeType+Configuration.swift"; sourceTree = "<group>"; };
 		4222827622B0EBF3002668DA /* RyeExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RyeExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4222827822B0EBF3002668DA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4222827A22B0EBF3002668DA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		4222827A22B0EBF3002668DA /* RyeDemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RyeDemoViewController.swift; sourceTree = "<group>"; };
 		4222827D22B0EBF3002668DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4222827F22B0EBF6002668DA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4222828222B0EBF6002668DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4222828422B0EBF6002668DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4222829122B0EF65002668DA /* RyeDefaultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RyeDefaultView.swift; sourceTree = "<group>"; };
+		4222829322B11385002668DA /* RyeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RyeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,7 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				4222827822B0EBF3002668DA /* AppDelegate.swift */,
-				4222827A22B0EBF3002668DA /* ViewController.swift */,
+				4222829522B11410002668DA /* Rye VC */,
 				4222827C22B0EBF3002668DA /* Main.storyboard */,
 				4222827F22B0EBF6002668DA /* Assets.xcassets */,
 				4222828122B0EBF6002668DA /* LaunchScreen.storyboard */,
@@ -162,6 +164,23 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4222829522B11410002668DA /* Rye VC */ = {
+			isa = PBXGroup;
+			children = (
+				4222827A22B0EBF3002668DA /* RyeDemoViewController.swift */,
+				4222829622B11422002668DA /* RyeCustomView */,
+			);
+			path = "Rye VC";
+			sourceTree = "<group>";
+		};
+		4222829622B11422002668DA /* RyeCustomView */ = {
+			isa = PBXGroup;
+			children = (
+				4222829322B11385002668DA /* RyeView.swift */,
+			);
+			path = RyeCustomView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -326,8 +345,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4222827B22B0EBF3002668DA /* ViewController.swift in Sources */,
+				4222827B22B0EBF3002668DA /* RyeDemoViewController.swift in Sources */,
 				4222827922B0EBF3002668DA /* AppDelegate.swift in Sources */,
+				4222829422B11385002668DA /* RyeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

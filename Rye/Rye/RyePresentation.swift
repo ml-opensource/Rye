@@ -23,6 +23,15 @@ public extension RyeViewController {
         
         self.window = window
         
+        // check if we can show the RyeView
+        guard !isShowing else {
+            NSLog("An Rye is already showing. Multiple Ryes can not be presented at the same time")
+            return
+        }
+        
+        // update Rye state
+        isShowing = true
+        
         // create RyeView
         showRye(for: alertType)
         
@@ -32,19 +41,19 @@ public extension RyeViewController {
         
         // animate the RyeView on screen
         animateRyeIn(completion: {
-            // update Rye state
-            RyeViewController.isShowing = true
-            
             // trigger status bar update
             self.setNeedsStatusBarAppearanceUpdate()
         })
             
     }
     
-    func dismiss(completion: @escaping () -> Void) {
+    func dismiss(completion: (() -> Void)? = nil) {
         
         guard window != nil,
-            RyeViewController.isShowing else { return }
+            isShowing else {
+                NSLog("Can not dismiss Rye")
+                return
+        }
         
         // animate the RyeView off screen
         animateRyeOut(completion: {
@@ -54,13 +63,13 @@ public extension RyeViewController {
             self.window = nil
             
             // update Rye state
-            RyeViewController.isShowing = false
+            self.isShowing = false
             
             // trigger status bar update
             self.setNeedsStatusBarAppearanceUpdate()
             
             // call completion
-            completion()
+            completion?()
         })
         
     }
