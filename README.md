@@ -7,7 +7,7 @@
 
 ## Intro
 
-Rye allows you to present non intrusive "Toast" type alerts to your users.
+Rye allows you to present non intrusive alerts to your users of both "Toast" and "Snack Bar" types.
 You can choose to display the default Rye alert type or go fully custom and display your own `UIView`.
 
 ## 📝 Requirements
@@ -34,7 +34,10 @@ import Rye
 
 let ryeConfiguration: RyeConfiguration = [Rye.Configuration.Key.text: "Message for the user"]
 
-let rye = RyeViewController.init(type: .standard(configuration: ryeConfiguration), timeAlive: 2)
+let rye = RyeViewController.init(alertType: .toast,
+                                viewType: .standard(configuration: ryeConfiguration),
+                                at: .bottom(inset: 16),
+                                timeAlive: 2)
 rye.show()
 
 ```
@@ -48,7 +51,10 @@ let ryeConfiguration: RyeConfiguration = [
     Rye.Configuration.Key.backgroundColor: UIColor.red.withAlphaComponent(0.4)
 ]
 
-let rye = RyeViewController.init(type: .standard(configuration: ryeConfiguration), timeAlive: 2)
+let rye = RyeViewController.init(alertType: .toast,
+                                viewType: .standard(configuration: ryeConfiguration),
+                                at: .bottom(inset: 16),
+                                timeAlive: 2)
 rye.show()
 
 ```
@@ -59,16 +65,31 @@ rye.show()
 
 let customRyeView = RyeView()
 
-let rye = RyeViewController.init(type: .custom(customRyeView), timeAlive: 2)
+let rye = RyeViewController.init(alertType: .toast,
+                                viewType: .custom(customRyeView),
+                                at: .bottom(inset: 16),
+                                timeAlive: 2)
 rye.show()
 
 ```
 
+### Alert Type
+
+Rye allows you to define the alert type you want to display to your user. Possible alert types are: 
+
+- snackBar which is displayed at applications UIWindow level and allows interaction with the presented UIView
+- toast which is displayed at applications alert UIWindow level and doesn't allows interaction with the presented UIView
+
+###  Position 
+
+With Rye you can specify the position where the Rye view will be displayed on screen via the `position` parameter, which takes an associated value that allows you to specify the inset. 
+By default Rye will calculate the safe area insets for you, so be sure to specify only the extra desired inset.
+
+If you decide to not provide a value for this parameter, you will be in charge of dismissing the Rye when you think it is appropriate.
+
 ### Time Used 
 
 When creating an instance of  `RyeViewController` you can choose to provide a value for  the `timeAlive` parameter during initialisation. The value provided will be the time in seconds the Rye view will be presented on screen to the user. 
-
-If you decide to not provide a value for this parameter, you will be in charge of dismissing the Rye when you think it is appropriate.
 
 ### Possible Rye Configurations
 
