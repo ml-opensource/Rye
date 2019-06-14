@@ -10,6 +10,13 @@
 Rye allows you to present non intrusive alerts to your users of both "Toast" and "Snack Bar" types.
 You can choose to display the default Rye alert type or go fully custom and display your own `UIView`.
 
+### Examples 
+
+
+| ![](ExampleImages/example1.png) | ![](ExampleImages/example2.png)  | ![](ExampleImages/example3.png)  |
+|----------------|---|---|
+|      <center>Custom Rye with Image</center>      |  <center>Custom Rye with Button</center>  |  <center>Default Rye</center> |
+
 ## 📝 Requirements
 
 iOS 11.4
