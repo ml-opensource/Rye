@@ -22,6 +22,11 @@
 		4222828F22B0EED3002668DA /* Rye.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4222825222B0E4FD002668DA /* Rye.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4222829222B0EF65002668DA /* RyeDefaultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4222829122B0EF65002668DA /* RyeDefaultView.swift */; };
 		4222829422B11385002668DA /* RyeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4222829322B11385002668DA /* RyeView.swift */; };
+		42C7357422B3BEA7005FE75D /* RyeImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C7357322B3BEA7005FE75D /* RyeImageView.swift */; };
+		42C7357622B3BF89005FE75D /* RyeImageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42C7357522B3BF89005FE75D /* RyeImageView.xib */; };
+		42C7357922B3CB83005FE75D /* NibInitializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C7357822B3CB83005FE75D /* NibInitializable.swift */; };
+		42C7357B22B3CFA4005FE75D /* RyeButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C7357A22B3CFA4005FE75D /* RyeButtonView.swift */; };
+		42C7357D22B3CFCB005FE75D /* RyeButtonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42C7357C22B3CFCB005FE75D /* RyeButtonView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +79,11 @@
 		4222828422B0EBF6002668DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4222829122B0EF65002668DA /* RyeDefaultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RyeDefaultView.swift; sourceTree = "<group>"; };
 		4222829322B11385002668DA /* RyeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RyeView.swift; sourceTree = "<group>"; };
+		42C7357322B3BEA7005FE75D /* RyeImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RyeImageView.swift; sourceTree = "<group>"; };
+		42C7357522B3BF89005FE75D /* RyeImageView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RyeImageView.xib; sourceTree = "<group>"; };
+		42C7357822B3CB83005FE75D /* NibInitializable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibInitializable.swift; sourceTree = "<group>"; };
+		42C7357A22B3CFA4005FE75D /* RyeButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RyeButtonView.swift; sourceTree = "<group>"; };
+		42C7357C22B3CFCB005FE75D /* RyeButtonView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RyeButtonView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +159,7 @@
 		4222827722B0EBF3002668DA /* RyeExample */ = {
 			isa = PBXGroup;
 			children = (
+				42C7357722B3CB77005FE75D /* Extensions */,
 				4222827822B0EBF3002668DA /* AppDelegate.swift */,
 				4222829522B11410002668DA /* Rye VC */,
 				4222827C22B0EBF3002668DA /* Main.storyboard */,
@@ -179,8 +190,20 @@
 			isa = PBXGroup;
 			children = (
 				4222829322B11385002668DA /* RyeView.swift */,
+				42C7357322B3BEA7005FE75D /* RyeImageView.swift */,
+				42C7357522B3BF89005FE75D /* RyeImageView.xib */,
+				42C7357A22B3CFA4005FE75D /* RyeButtonView.swift */,
+				42C7357C22B3CFCB005FE75D /* RyeButtonView.xib */,
 			);
 			path = RyeCustomView;
+			sourceTree = "<group>";
+		};
+		42C7357722B3CB77005FE75D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				42C7357822B3CB83005FE75D /* NibInitializable.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -313,9 +336,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42C7357D22B3CFCB005FE75D /* RyeButtonView.xib in Resources */,
 				4222828322B0EBF6002668DA /* LaunchScreen.storyboard in Resources */,
 				4222828022B0EBF6002668DA /* Assets.xcassets in Resources */,
 				4222827E22B0EBF3002668DA /* Main.storyboard in Resources */,
+				42C7357622B3BF89005FE75D /* RyeImageView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,8 +371,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				4222827B22B0EBF3002668DA /* RyeDemoViewController.swift in Sources */,
+				42C7357922B3CB83005FE75D /* NibInitializable.swift in Sources */,
 				4222827922B0EBF3002668DA /* AppDelegate.swift in Sources */,
+				42C7357B22B3CFA4005FE75D /* RyeButtonView.swift in Sources */,
 				4222829422B11385002668DA /* RyeView.swift in Sources */,
+				42C7357422B3BEA7005FE75D /* RyeImageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

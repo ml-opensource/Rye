@@ -14,6 +14,7 @@ public class RyeViewController: UIViewController {
     
     var window: UIWindow?
     internal let presentationAnimationDuration: TimeInterval = 0.3
+    var ryeView: UIView!
     var isShowing: Bool {
         get {
             let key = "RyeViewControllerIsShowing"
@@ -27,29 +28,56 @@ public class RyeViewController: UIViewController {
         }
     }
     
+    // all presentation logic is done using parentView
+    var parentView: UIView {
+        switch alertType! {
+        case .snackBar:
+            guard let keyWindow = UIApplication.shared.keyWindow else {
+                assertionFailure("Can not present snack bar if there is no keyWindow")
+                return UIView()
+            }
+            return keyWindow
+        case .toast:
+            return view
+        }
+    }
     var alertType: Rye.AlertType!
+    var viewType: Rye.ViewType!
     var timeAlive: TimeInterval?
+    var position: Rye.Position!
     
     // MARK: - Rye View Properties
     
-    var ryeViewBottomConstraint: NSLayoutConstraint!
+    var ryeViewPositionConstraint: NSLayoutConstraint!
     
     // MARK: - Init
     
     /**
      Creates RyeViewController
      
-     - Parameter type: the Rye type
+     - Parameter alertType: the Rye AlertType
+     - Parameter viewType: the Rye ViewType, contains the UIView + Configuration
+     - Parameter position: contains the possition where the RyeView should be displayed on screen
      - Parameter timeAlive: Represents the duration for the RyeView to be displayed to the user. If nil is provided, then you will be responsable of removing the RyeView
 
      */
-    public init(type: Rye.AlertType, timeAlive: TimeInterval? = nil) {
-        self.alertType = type
+    public init(alertType: Rye.AlertType? = .toast,
+                viewType: Rye.ViewType? = .standard(configuration: nil),
+                at position: Rye.Position? = .bottom(inset: 16),
+                timeAlive: TimeInterval? = nil) {
+        self.alertType = alertType
+        self.viewType = viewType
         self.timeAlive = timeAlive
+        self.position = position
         super.init(nibName: nil, bundle: nil)
         
         // check if an alert is currently showing and update the isShowing value
-        isShowing = UIApplication.shared.windows.contains(where: {$0.windowLevel == .alert})
+        switch alertType! {
+        case .toast:
+            isShowing = UIApplication.shared.windows.contains(where: {$0.windowLevel == .alert})
+        case .snackBar:
+            isShowing = false
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -66,21 +94,35 @@ public class RyeViewController: UIViewController {
     
     // MARK: - Display helpers
     
-    func showRye(for type: Rye.AlertType) {
+    func showRye(for type: Rye.ViewType) {
         func addRyeView(_ ryeView: UIView) {
+            self.ryeView = ryeView
             // add RyeView to hierarchy
-            view.addSubview(ryeView)
+            parentView.addSubview(ryeView)
             ryeView.translatesAutoresizingMaskIntoConstraints = false
-            ryeView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-            ryeViewBottomConstraint = ryeView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-            ryeViewBottomConstraint.isActive = true
+            ryeView.centerXAnchor.constraint(equalTo: parentView.centerXAnchor).isActive = true
+            
+            // setup constraint
+            switch position! {
+            case .bottom:
+                ryeViewPositionConstraint = ryeView.bottomAnchor.constraint(equalTo: parentView.bottomAnchor)
+            case .top:
+                ryeViewPositionConstraint = ryeView.topAnchor.constraint(equalTo: parentView.topAnchor)
+            }
+            
+            ryeViewPositionConstraint.isActive = true
             
             // force RyeView to layout so it calculates it's frames
             ryeView.setNeedsLayout()
             ryeView.layoutIfNeeded()
             
             // update RyeView bottom constraint constat to position it outside of the application's UIWindow
-            ryeViewBottomConstraint.constant = ryeView.frame.height
+            switch position! {
+            case .bottom:
+                ryeViewPositionConstraint.constant = ryeView.frame.height
+            case .top:
+                ryeViewPositionConstraint.constant = -ryeView.frame.height
+            }
         }
         
         switch type {
