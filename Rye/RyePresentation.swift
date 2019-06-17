@@ -85,32 +85,50 @@ public extension RyeViewController {
     func animateRyeIn() {
         
         // calculate safeArea based on UIDevice current orientation to facilitate a good positioning of RyeView
-        let safeArea: CGFloat
-        switch UIDevice.current.orientation {
-        case .faceUp, .faceDown, .portrait, .unknown:
-            safeArea = UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0
-        case .portraitUpsideDown:
-            safeArea = UIApplication.shared.keyWindow?.safeAreaInsets.top ?? 0
-        case .landscapeLeft:
-            safeArea = UIApplication.shared.keyWindow?.safeAreaInsets.left ?? 0
-        case .landscapeRight:
-            safeArea = UIApplication.shared.keyWindow?.safeAreaInsets.right ?? 0
-        @unknown default:
-            safeArea = UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0
+        func getSafeAreaSpacing() -> CGFloat {
+            switch UIDevice.current.orientation {
+            case .faceUp, .faceDown, .portrait, .unknown:
+                return UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0
+            case .portraitUpsideDown:
+                return UIApplication.shared.keyWindow?.safeAreaInsets.top ?? 0
+            case .landscapeLeft:
+                return UIApplication.shared.keyWindow?.safeAreaInsets.left ?? 0
+            case .landscapeRight:
+                return UIApplication.shared.keyWindow?.safeAreaInsets.right ?? 0
+            @unknown default:
+                return UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0
+            }
         }
         
-        // update RyeView bottom constraint to position it on screen
-        switch position {
-        case .bottom(let inset)?:
-            ryeViewPositionConstraint.constant = -safeArea - inset
-        case .top(let inset)?:
-            ryeViewPositionConstraint.constant = safeArea + inset
-        default: break
+        func getRyeViewPositionConstant() -> CGFloat {
+            let safeArea = getSafeAreaSpacing()
+
+            // update RyeView bottom constraint to position it on screen
+            switch position! {
+            case .bottom(let inset):
+                return -safeArea - inset
+            case .top(let inset):
+                return safeArea + inset
+            }
+        }
+        
+        switch self.animationType! {
+        case .fadeInOut:
+            ryeView.alpha = 0
+            ryeViewPositionConstraint.constant = getRyeViewPositionConstant()
+        case .slideInOut:
+            ryeView.alpha = 1
+            ryeViewPositionConstraint.constant = getRyeViewPositionConstant()
         }
         
         // animate
-        UIView.animate(withDuration: presentationAnimationDuration) {
-            self.parentView.layoutIfNeeded()
+        UIView.animate(withDuration: animationDuration) {
+            switch self.animationType! {
+            case .fadeInOut:
+                self.ryeView.alpha = 1
+            case .slideInOut:
+                self.parentView.layoutIfNeeded()
+            }
         }
         
     }
@@ -118,17 +136,31 @@ public extension RyeViewController {
     func animateRyeOut(completion: @escaping () -> Void) {
         
         // update RyeView bottom constraint to position it off screen
-        switch position {
-        case .bottom?:
-            ryeViewPositionConstraint.constant = ryeView.frame.height
-        case .top?:
-            ryeViewPositionConstraint.constant = -ryeView.frame.height
-        default: break
+        
+        func getRyeViewPositionConstant() -> CGFloat {
+            switch position! {
+            case .bottom:
+                return ryeView.frame.height
+            case .top:
+                return -ryeView.frame.height
+            }
+        }
+        
+        switch self.animationType! {
+        case .fadeInOut:
+            break
+        case .slideInOut:
+            ryeViewPositionConstraint.constant = getRyeViewPositionConstant()
         }
         
         // animate
-        UIView.animate(withDuration: presentationAnimationDuration, animations: {
-            self.parentView.layoutIfNeeded()
+        UIView.animate(withDuration: animationDuration, animations: {
+            switch self.animationType! {
+            case .fadeInOut:
+                self.ryeView.alpha = 0
+            case .slideInOut:
+                self.parentView.layoutIfNeeded()
+            }
         }, completion: { _ in
             completion()
         })

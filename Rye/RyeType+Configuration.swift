@@ -43,17 +43,33 @@ public struct Rye {
              RyeView's font
              */
             case textFont
+            /**
+             RyeView's text
+             */
             case text
             /**
              RyeView's corner radius
              */
             case cornerRadius
+            /**
+             RyeView's animation type
+             */
+            case animationType
+            /**
+             RyeView's animation duration
+             */
+            case animationDuration
         }
     }
     
     public enum Position {
         case top(inset: CGFloat)
         case bottom(inset: CGFloat)
+    }
+    
+    public enum AnimationType {
+        case slideInOut
+        case fadeInOut
     }
     
 }
