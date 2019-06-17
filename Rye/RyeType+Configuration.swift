@@ -67,4 +67,9 @@ public struct Rye {
         case bottom(inset: CGFloat)
     }
     
+    public enum AnimationType {
+        case slideInOut
+        case fadeInOut
+    }
+    
 }

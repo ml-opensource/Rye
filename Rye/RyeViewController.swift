@@ -44,7 +44,8 @@ public class RyeViewController: UIViewController {
     var viewType: Rye.ViewType!
     var timeAlive: TimeInterval?
     var position: Rye.Position!
-    var presentationAnimationDuration: TimeInterval = 0.3
+    var animationDuration: TimeInterval!
+    var animationType: Rye.AnimationType!
     
     // MARK: - Rye View Properties
     
@@ -72,9 +73,11 @@ public class RyeViewController: UIViewController {
         
         switch viewType! {
         case .standard(let configuration):
-        
+            animationDuration = configuration?[Rye.Configuration.Key.animationDuration] as? TimeInterval ?? 0.3
+            animationType = configuration?[Rye.Configuration.Key.animationType] as? Rye.AnimationType ?? .slideInOut
         default:
-            presentationAnimationDuration = 0.3
+            animationDuration = 0.3
+            animationType = .slideInOut
         }
         
         super.init(nibName: nil, bundle: nil)
@@ -151,7 +154,7 @@ public class RyeViewController: UIViewController {
         // trigger the dismiss based on timeAlive value
         // a timeAlive of nil will never remove the RyeView
         guard let timeAlive = timeAlive else { return }
-        DispatchQueue.main.asyncAfter(deadline: .now() + timeAlive + presentationAnimationDuration) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + timeAlive + animationDuration) {
             self.dismiss()
         }
     }
