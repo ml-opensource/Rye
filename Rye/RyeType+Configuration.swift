@@ -43,11 +43,22 @@ public struct Rye {
              RyeView's font
              */
             case textFont
+            /**
+             RyeView's text
+             */
             case text
             /**
              RyeView's corner radius
              */
             case cornerRadius
+            /**
+             RyeView's animation type
+             */
+            case animationType
+            /**
+             RyeView's animation duration
+             */
+            case animationDuration
         }
     }
     

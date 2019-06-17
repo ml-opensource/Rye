@@ -13,7 +13,6 @@ public class RyeViewController: UIViewController {
     // MARK: - Properties
     
     var window: UIWindow?
-    internal let presentationAnimationDuration: TimeInterval = 0.3
     var ryeView: UIView!
     var isShowing: Bool {
         get {
@@ -45,6 +44,7 @@ public class RyeViewController: UIViewController {
     var viewType: Rye.ViewType!
     var timeAlive: TimeInterval?
     var position: Rye.Position!
+    var presentationAnimationDuration: TimeInterval = 0.3
     
     // MARK: - Rye View Properties
     
@@ -69,6 +69,14 @@ public class RyeViewController: UIViewController {
         self.viewType = viewType
         self.timeAlive = timeAlive
         self.position = position
+        
+        switch viewType! {
+        case .standard(let configuration):
+        
+        default:
+            presentationAnimationDuration = 0.3
+        }
+        
         super.init(nibName: nil, bundle: nil)
         
         // check if an alert is currently showing and update the isShowing value
