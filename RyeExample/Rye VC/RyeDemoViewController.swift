@@ -36,7 +36,8 @@ class RyeDemoViewController: UIViewController {
         // display Default Rye with custom configuration
         
         let ryeConfiguration: RyeConfiguration = [Rye.Configuration.Key.text: "Error message for the user",
-                                                  Rye.Configuration.Key.backgroundColor: UIColor.red.withAlphaComponent(0.4)]
+                                                  Rye.Configuration.Key.backgroundColor: UIColor.red.withAlphaComponent(0.4),
+                                                  Rye.Configuration.Key.animationType: Rye.AnimationType.fadeInOut]
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             let rye = RyeViewController.init(alertType: .toast,

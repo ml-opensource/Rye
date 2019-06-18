@@ -55,7 +55,8 @@ rye.show()
 
 let ryeConfiguration: RyeConfiguration = [
     Rye.Configuration.Key.text: "Error message for the user",
-    Rye.Configuration.Key.backgroundColor: UIColor.red.withAlphaComponent(0.4)
+    Rye.Configuration.Key.backgroundColor: UIColor.red.withAlphaComponent(0.4),
+    Rye.Configuration.Key.animationType: Rye.AnimationType.fadeInOut]
 ]
 
 let rye = RyeViewController.init(alertType: .toast,
@@ -107,6 +108,8 @@ The following keys can be used in the configuration dictionary when presenting a
     .textFont (must be a UIFont)
     .text (must be a String)
     .cornerRadius (must be a CGFloat)
+    .animationType (must be a Rye.AnimationType)
+    .animationDuration (must be a TimeInterval)
 
 If configuration is set to nil, a default configuration will be used. Any options set, will override the default state.
 
