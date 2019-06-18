@@ -2,3 +2,5 @@
 /.build
 /Packages
 /*.xcodeproj
+xcschememanagement.plist
+IDEWorkspaceChecks.plist
