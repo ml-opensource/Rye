@@ -1,3 +1,1 @@
-struct Rye {
-    var text = "Hello, World!"
-}
+../Rye/Rye/RyeViewController.swift
