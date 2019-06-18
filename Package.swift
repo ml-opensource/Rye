@@ -27,6 +27,5 @@ let package = Package(
         .testTarget(
             name: "RyeTests",
             dependencies: ["Rye"]),
-    ],
-    swiftLanguageVersions: [.v4_2, .v5]
+    ]
 )
