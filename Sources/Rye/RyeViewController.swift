@@ -1,1 +1,1 @@
-/Users/andreihogea/Rye/Rye/Rye/RyeViewController.swift
+../../Rye/Rye/RyeViewController.swift
