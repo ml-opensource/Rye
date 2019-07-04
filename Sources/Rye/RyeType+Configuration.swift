@@ -1,1 +1,1 @@
-/Users/andreihogea/Rye/Rye/Rye/RyeType+Configuration.swift
+../../Rye/Rye/RyeType+Configuration.swift
