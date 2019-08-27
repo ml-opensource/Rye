@@ -50,7 +50,10 @@ public extension RyeViewController {
     }
     
     func dismiss(completion: (() -> Void)? = nil) {
-                
+        guard isShowing else {
+            NSLog("Can not dismiss a Rye that it is not showing")
+            return
+        }
         // animate the RyeView off screen
         animateRyeOut(completion: {
             
