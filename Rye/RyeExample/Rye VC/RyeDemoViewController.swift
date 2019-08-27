@@ -14,7 +14,7 @@ class RyeDemoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        displayCustomToast()
+        displayCustomSnackBar()
     
     }
 
@@ -71,7 +71,13 @@ class RyeDemoViewController: UIViewController {
                                              at: .top(inset: 16),
                                              timeAlive: nil)
             rye.show()
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                rye.dismiss()
+            }
         }
+        
+        
         
     }
     

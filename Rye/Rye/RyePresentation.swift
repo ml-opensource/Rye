@@ -50,13 +50,7 @@ public extension RyeViewController {
     }
     
     func dismiss(completion: (() -> Void)? = nil) {
-        
-        guard window != nil,
-            isShowing else {
-                NSLog("Can not dismiss Rye")
-                return
-        }
-        
+                
         // animate the RyeView off screen
         animateRyeOut(completion: {
             
@@ -82,7 +76,7 @@ public extension RyeViewController {
         
     }
     
-    func animateRyeIn() {
+    internal func animateRyeIn() {
         
         // calculate safeArea based on UIDevice current orientation to facilitate a good positioning of RyeView
         func getSafeAreaSpacing() -> CGFloat {
@@ -133,7 +127,7 @@ public extension RyeViewController {
         
     }
     
-    func animateRyeOut(completion: @escaping () -> Void) {
+    internal func animateRyeOut(completion: @escaping () -> Void) {
         
         // update RyeView bottom constraint to position it off screen
         
