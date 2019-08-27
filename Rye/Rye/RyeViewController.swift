@@ -112,6 +112,7 @@ public class RyeViewController: UIViewController {
             parentView.addSubview(ryeView)
             ryeView.translatesAutoresizingMaskIntoConstraints = false
             ryeView.centerXAnchor.constraint(equalTo: parentView.centerXAnchor).isActive = true
+            ryeView.widthAnchor.constraint(lessThanOrEqualTo: parentView.widthAnchor, constant: -16).isActive = true
             
             // setup constraint
             switch position! {
