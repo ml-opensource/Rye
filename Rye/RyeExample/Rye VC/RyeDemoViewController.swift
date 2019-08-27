@@ -14,7 +14,7 @@ class RyeDemoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        displayCustomSnackBar()
+        displayDefaultToast()
     
     }
 
@@ -27,7 +27,7 @@ class RyeDemoViewController: UIViewController {
             let rye = RyeViewController.init(alertType: .toast,
                                              viewType: .standard(configuration: ryeConfiguration),
                                              at: .bottom(inset: 16),
-                                             timeAlive: 2)
+                                             timeAlive: 20)
             rye.show()
         }
     }
