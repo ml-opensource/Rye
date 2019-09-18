@@ -16,10 +16,10 @@ class RyeDefaultView: UIView {
         super.init(frame: frame)
     }
     
-    convenience init(frame: CGRect,
-                     configuration: RyeConfiguration?) {
-        self.init(frame: frame)
+    convenience init(configuration: RyeConfiguration?) {
+        self.init(frame: .zero)
         
+        translatesAutoresizingMaskIntoConstraints = false
         clipsToBounds = true
         
         layer.cornerRadius = (configuration?[.cornerRadius] as? CGFloat) ?? 8
@@ -47,8 +47,8 @@ class RyeDefaultView: UIView {
         
         label.translatesAutoresizingMaskIntoConstraints = false
         label.topAnchor.constraint(equalTo: topAnchor, constant: 8).isActive = true
-        label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8).isActive = true
+        label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16).isActive = true
         label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8).isActive = true
-        label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8).isActive = true
+        label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16).isActive = true
     }
 }

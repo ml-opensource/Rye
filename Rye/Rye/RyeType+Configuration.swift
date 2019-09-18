@@ -14,12 +14,11 @@ public struct Rye {
     
     public enum AlertType {
         /**
-         a SnackBar view. Displayed at applications UIWindow level
-         Allows interaction with the presented UIView
+         a SnackBar alert. Displayed at applications UIViewController level
          */
         case snackBar
-        /** an Toast like Alert. Displayed at alert UIWindow level.
-         Doesn't allow interaction with the presented UIView
+        /**
+         a Toast like alert. Displayed at alert level of the key UIWindow.
          */
         case toast
     }

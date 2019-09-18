@@ -31,13 +31,23 @@ public class RyeViewController: UIViewController {
     var parentView: UIView {
         switch alertType! {
         case .snackBar:
+            if var topController = UIApplication.shared.keyWindow?.rootViewController {
+                while let presentedViewController = topController.presentedViewController {
+                    topController = presentedViewController
+                }
+
+                return topController.view
+            } else {
+                assertionFailure("Could not find the top ViewController")
+                return UIView()
+            }
+
+        case .toast:
             guard let keyWindow = UIApplication.shared.keyWindow else {
                 assertionFailure("Can not present snack bar if there is no keyWindow")
                 return UIView()
             }
             return keyWindow
-        case .toast:
-            return view
         }
     }
     var alertType: Rye.AlertType!
@@ -139,10 +149,9 @@ public class RyeViewController: UIViewController {
         
         switch type {
         case .standard(let configuration):
-            
+            print(configuration)
             // create default RyeView
-            let ryeView = RyeDefaultView(frame: .zero,
-                                         configuration: configuration)
+            let ryeView = RyeDefaultView(configuration: configuration)
             
             addRyeView(ryeView)
             

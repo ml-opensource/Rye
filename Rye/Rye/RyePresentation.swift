@@ -105,6 +105,7 @@ public extension RyeViewController {
             case .bottom(let inset):
                 return -safeArea - inset
             case .top(let inset):
+                print(safeArea + inset)
                 return safeArea + inset
             }
         }
@@ -117,6 +118,8 @@ public extension RyeViewController {
             ryeView.alpha = 1
             ryeViewPositionConstraint.constant = getRyeViewPositionConstant()
         }
+        
+        print(ryeViewPositionConstraint.constant)
         
         // animate
         UIView.animate(withDuration: animationDuration) {
