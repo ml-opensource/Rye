@@ -14,8 +14,24 @@ class RyeDemoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        displayDefaultToast()
+        displayCustomSnackBar()
     
+    }
+    
+    private func x() {
+        let ryeConfiguration: RyeConfiguration = [
+            Rye.Configuration.Key.text: "Some text",
+            Rye.Configuration.Key.backgroundColor: UIColor.systemRed,
+            Rye.Configuration.Key.cornerRadius: CGFloat(16),
+            Rye.Configuration.Key.textFont: UIFont.systemFont(ofSize: 16),
+            Rye.Configuration.Key.animationType: Rye.AnimationType.slideInOut
+        ]
+        
+        let rye = RyeViewController(alertType: .snackBar,
+                                    viewType: .standard(configuration: ryeConfiguration),
+                                    at: .top(inset: 106),
+                                    timeAlive: 12.5)
+        rye.show()
     }
 
     private func displayDefaultToast() {
