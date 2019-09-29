@@ -149,7 +149,6 @@ public class RyeViewController: UIViewController {
         
         switch type {
         case .standard(let configuration):
-            print(configuration)
             // create default RyeView
             let ryeView = RyeDefaultView(configuration: configuration)
             
