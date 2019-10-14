@@ -7,7 +7,7 @@ Pod::Spec.new do |spec|
   spec.summary      = "Rye allows you to present non intrusive alerts to your users of both \"Toast\" and \"Snack Bar\" types. You can choose to display the default Rye alert type or go fully custom and display your own UIView."
   spec.homepage     = "https://github.com/nodes-ios/Rye"
 
-  spec.author       = { 'Name' => 'kjoneandrei' }
+  spec.author       = { "Nodes Agency - iOS" => "ios@nodes.dk" }
   spec.license      = { :type => 'MIT', :file => './LICENSE' }
 
   spec.platform     = :ios
