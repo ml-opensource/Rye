@@ -55,7 +55,9 @@ public extension RyeViewController {
             return
         }
         // animate the RyeView off screen
-        animateRyeOut(completion: {
+        animateRyeOut(completion: { [weak self] in
+            
+            guard let self = self else { return }
             
             switch self.alertType! {
             case .toast:

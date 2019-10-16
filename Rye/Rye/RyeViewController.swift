@@ -72,16 +72,16 @@ public class RyeViewController: UIViewController {
      - Parameter timeAlive: Represents the duration for the RyeView to be displayed to the user. If nil is provided, then you will be responsable of removing the RyeView
 
      */
-    public init(alertType: Rye.AlertType? = .toast,
-                viewType: Rye.ViewType? = .standard(configuration: nil),
-                at position: Rye.Position? = .bottom(inset: 16),
+    public init(alertType: Rye.AlertType = .toast,
+                viewType: Rye.ViewType = .standard(configuration: nil),
+                at position: Rye.Position = .bottom(inset: 16),
                 timeAlive: TimeInterval? = nil) {
         self.alertType = alertType
         self.viewType = viewType
         self.timeAlive = timeAlive
         self.position = position
         
-        switch viewType! {
+        switch viewType {
         case .standard(let configuration):
             animationDuration = configuration?[Rye.Configuration.Key.animationDuration] as? TimeInterval ?? 0.3
             animationType = configuration?[Rye.Configuration.Key.animationType] as? Rye.AnimationType ?? .slideInOut
@@ -93,7 +93,7 @@ public class RyeViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
         
         // check if an alert is currently showing and update the isShowing value
-        switch alertType! {
+        switch alertType {
         case .toast:
             isShowing = UIApplication.shared.windows.contains(where: {$0.windowLevel == .alert})
         case .snackBar:
@@ -113,11 +113,18 @@ public class RyeViewController: UIViewController {
         view.backgroundColor = .clear
     }
     
+    @objc func ryeTapped(_ sender: Any) {
+        dismiss()
+    }
+    
     // MARK: - Display helpers
     
     func showRye(for type: Rye.ViewType) {
         func addRyeView(_ ryeView: UIView) {
             self.ryeView = ryeView
+            
+            ryeView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(ryeTapped(_:))))
+            
             // add RyeView to hierarchy
             parentView.addSubview(ryeView)
             ryeView.translatesAutoresizingMaskIntoConstraints = false
