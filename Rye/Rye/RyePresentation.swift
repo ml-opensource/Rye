@@ -13,7 +13,7 @@ import UIKit
 public extension RyeViewController {
     func show() {
         
-        switch self.alertType! {
+        switch self.alertType {
         case .toast:
             // create a new UIWindow
             let window = UIWindow(frame: UIScreen.main.bounds)
@@ -59,7 +59,7 @@ public extension RyeViewController {
             
             guard let self = self else { return }
             
-            switch self.alertType! {
+            switch self.alertType {
             case .toast:
                 // remove the UIWindow
                 self.window?.isHidden = true
@@ -103,7 +103,7 @@ public extension RyeViewController {
             let safeArea = getSafeAreaSpacing()
 
             // update RyeView bottom constraint to position it on screen
-            switch position! {
+            switch position {
             case .bottom(let inset):
                 return -safeArea - inset
             case .top(let inset):
@@ -137,7 +137,7 @@ public extension RyeViewController {
         // update RyeView bottom constraint to position it off screen
         
         func getRyeViewPositionConstant() -> CGFloat {
-            switch position! {
+            switch position {
             case .bottom:
                 return ryeView.frame.height
             case .top:

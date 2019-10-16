@@ -29,7 +29,7 @@ public class RyeViewController: UIViewController {
     
     // all presentation logic is done using parentView
     var parentView: UIView {
-        switch alertType! {
+        switch alertType {
         case .snackBar:
             if var topController = UIApplication.shared.keyWindow?.rootViewController {
                 while let presentedViewController = topController.presentedViewController {
@@ -50,10 +50,10 @@ public class RyeViewController: UIViewController {
             return keyWindow
         }
     }
-    var alertType: Rye.AlertType!
-    var viewType: Rye.ViewType!
+    var alertType: Rye.AlertType
+    var viewType: Rye.ViewType
     var timeAlive: TimeInterval?
-    var position: Rye.Position!
+    var position: Rye.Position
     var animationDuration: TimeInterval!
     var animationType: Rye.AnimationType!
     
@@ -132,7 +132,7 @@ public class RyeViewController: UIViewController {
             ryeView.widthAnchor.constraint(lessThanOrEqualTo: parentView.widthAnchor, constant: -16).isActive = true
             
             // setup constraint
-            switch position! {
+            switch position {
             case .bottom:
                 ryeViewPositionConstraint = ryeView.bottomAnchor.constraint(equalTo: parentView.bottomAnchor)
             case .top:
@@ -146,7 +146,7 @@ public class RyeViewController: UIViewController {
             ryeView.layoutIfNeeded()
             
             // update RyeView bottom constraint constat to position it outside of the application's UIWindow
-            switch position! {
+            switch position {
             case .bottom:
                 ryeViewPositionConstraint.constant = ryeView.frame.height
             case .top:
