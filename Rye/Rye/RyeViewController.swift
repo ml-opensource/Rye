@@ -37,6 +37,11 @@ public class RyeViewController: UIViewController {
                 }
 
                 return topController.view
+            } else if var windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                var topController = windowScene.windows[0].rootViewController {
+                while let presentedViewController = topController.presentedViewController {
+                    topController = presentedViewController
+                }
             } else {
                 assertionFailure("Could not find the top ViewController")
                 return UIView()
