@@ -46,7 +46,7 @@ public class RyeViewController: UIViewController {
                     }
 
                 return topController.view
-                }
+                
             } else {
                 assertionFailure("Could not find the top ViewController")
                 return UIView()
