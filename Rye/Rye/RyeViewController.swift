@@ -85,9 +85,9 @@ public class RyeViewController: UIViewController {
         case .standard(let configuration):
             animationDuration = configuration?[Rye.Configuration.Key.animationDuration] as? TimeInterval ?? 0.3
             animationType = configuration?[Rye.Configuration.Key.animationType] as? Rye.AnimationType ?? .slideInOut
-        default:
+        case .custom(_, let animationType):
             animationDuration = 0.3
-            animationType = .slideInOut
+            self.animationType = animationType
         }
         
         super.init(nibName: nil, bundle: nil)
@@ -161,8 +161,7 @@ public class RyeViewController: UIViewController {
             
             addRyeView(ryeView)
             
-        case .custom(let ryeView):
-            
+        case .custom(let ryeView, _):
             addRyeView(ryeView)
 
         }
