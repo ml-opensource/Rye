@@ -85,6 +85,7 @@ public class RyeViewController: UIViewController {
     public init(alertType: Rye.AlertType = .toast,
                 viewType: Rye.ViewType = .standard(configuration: nil),
                 at position: Rye.Position = .bottom(inset: 16),
+                animationType: Rye.AnimationType = .slideInOut,
                 timeAlive: TimeInterval? = nil) {
         self.alertType = alertType
         self.viewType = viewType
@@ -94,10 +95,10 @@ public class RyeViewController: UIViewController {
         switch viewType {
         case .standard(let configuration):
             animationDuration = configuration?[Rye.Configuration.Key.animationDuration] as? TimeInterval ?? 0.3
-            animationType = configuration?[Rye.Configuration.Key.animationType] as? Rye.AnimationType ?? .slideInOut
+            self.animationType = configuration?[Rye.Configuration.Key.animationType] as? Rye.AnimationType ?? animationType
         default:
             animationDuration = 0.3
-            animationType = .slideInOut
+            self.animationType = animationType
         }
         
         super.init(nibName: nil, bundle: nil)
