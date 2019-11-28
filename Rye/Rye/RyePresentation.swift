@@ -16,14 +16,28 @@ public extension RyeViewController {
         switch self.alertType {
         case .toast:
             // create a new UIWindow
-            let window = UIWindow(frame: UIScreen.main.bounds)
-            
-            window.windowLevel = .alert
-            window.rootViewController = self
-            window.backgroundColor = .clear
-            window.makeKeyAndVisible()
+            var window: UIWindow?
+
+            if #available(iOS 13.0, *) {
+                let windowScene = UIApplication.shared
+                    .connectedScenes
+                    .filter { $0.activationState == .foregroundActive }
+                    .first
+                if let windowScene = windowScene as? UIWindowScene {
+                    window = UIWindow(windowScene: windowScene)
+                }
+            } else {
+
+                window = UIWindow(frame: UIScreen.main.bounds)
+
+                window!.windowLevel = .alert
+                window!.rootViewController = self
+                window!.backgroundColor = .clear
+                window!.makeKeyAndVisible()
+            }
             
             self.window = window
+
         case .snackBar:
             break
         }
