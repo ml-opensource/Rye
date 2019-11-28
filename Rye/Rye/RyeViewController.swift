@@ -39,7 +39,7 @@ public class RyeViewController: UIViewController {
                 return topController.view
 
             } else if #available(iOS 13.0, *),
-                var windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
                     var topController = windowScene.windows[0].rootViewController {
                     while let presentedViewController = topController.presentedViewController {
                         topController = presentedViewController
