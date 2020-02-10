@@ -16,16 +16,20 @@ class RyeTests: QuickSpec {
         describe("RyeDefaultView") {
             var defaultView: RyeDefaultView!
             var ryeConfiguration: RyeConfiguration!
-            let text = "Message for the user"
-
-            beforeEach {
-                ryeConfiguration = [Rye.Configuration.Key.text: text]
-                defaultView = RyeDefaultView(configuration: ryeConfiguration)
-            }
 
             context("checkDefaultViewLabelText") {
                 it("is equal") {
+                    let text = "Mock Text"
+                    ryeConfiguration = [Rye.Configuration.Key.text: text]
+                    defaultView = RyeDefaultView(configuration: ryeConfiguration)
                     expect(defaultView.label.text).to(equal(text))
+                }
+
+                it("sets defaultText") {
+                    let defaultText = "Add a message"
+                    ryeConfiguration = [Rye.Configuration.Key.textFont: UIFont.systemFont(ofSize: 20, weight: .bold)]
+                    defaultView = RyeDefaultView(configuration: ryeConfiguration)
+                    expect(defaultView.label.text).to(equal(defaultText))
                 }
             }
         }
