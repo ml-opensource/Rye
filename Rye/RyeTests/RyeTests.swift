@@ -8,27 +8,30 @@
 
 import XCTest
 @testable import Rye
+import Quick
+import Nimble
 
-class RyeTests: XCTestCase {
+class RyeTests: QuickSpec {
+    override func spec() {
+        describe("RyeDefaultView") {
+            var defaultView: RyeDefaultView!
+            var ryeConfiguration: RyeConfiguration!
 
-    override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
+            context("checkDefaultViewLabelText") {
+                it("is equal") {
+                    let text = "Mock Text"
+                    ryeConfiguration = [Rye.Configuration.Key.text: text]
+                    defaultView = RyeDefaultView(configuration: ryeConfiguration)
+                    expect(defaultView.label.text).to(equal(text))
+                }
 
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+                it("sets defaultText") {
+                    let defaultText = "Add a message"
+                    ryeConfiguration = [Rye.Configuration.Key.textFont: UIFont.systemFont(ofSize: 20, weight: .bold)]
+                    defaultView = RyeDefaultView(configuration: ryeConfiguration)
+                    expect(defaultView.label.text).to(equal(defaultText))
+                }
+            }
         }
     }
-
 }
