@@ -13,10 +13,11 @@ import UIKit
 public extension RyeViewController {
     func show() {
         
+        let passThroughTag: Int = 99
         switch self.alertType {
         case .toast:
             // create a new UIWindow
-            var window: UIWindow?
+            var window: PassThroughWindow?
 
             if #available(iOS 13.0, *) {
                 let windowScene = UIApplication.shared
@@ -24,11 +25,15 @@ public extension RyeViewController {
                     .filter { $0.activationState == .foregroundActive }
                     .first
                 if let windowScene = windowScene as? UIWindowScene {
-                    window = UIWindow(windowScene: windowScene)
+                    window = PassThroughWindow(windowScene: windowScene)
+                    window?.rootViewController?.view.tag = passThroughTag
+                    window?.passThroughTag = passThroughTag
                 }
             } else {
 
-                window = UIWindow(frame: UIScreen.main.bounds)
+                window = PassThroughWindow(frame: UIScreen.main.bounds)
+                window?.rootViewController?.view.tag = passThroughTag
+                window?.passThroughTag = passThroughTag
 
                 window!.windowLevel = .alert
                 window!.rootViewController = self
@@ -180,3 +185,4 @@ public extension RyeViewController {
         
     }
 }
+
