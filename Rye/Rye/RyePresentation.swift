@@ -13,6 +13,7 @@ import UIKit
 public extension RyeViewController {
     func show() {
         
+        let passThroughTag: Int = 99
         switch self.alertType {
         case .toast:
             // create a new UIWindow
@@ -25,14 +26,14 @@ public extension RyeViewController {
                     .first
                 if let windowScene = windowScene as? UIWindowScene {
                     window = PassTroughWindow(windowScene: windowScene)
-                    window?.rootViewController?.view.tag = 99
-                    window?.passTroughTag = 99
+                    window?.rootViewController?.view.tag = passThroughTag
+                    window?.passTroughTag = passThroughTag
                 }
             } else {
 
                 window = PassTroughWindow(frame: UIScreen.main.bounds)
-                window?.rootViewController?.view.tag = 99
-                window?.passTroughTag = 99
+                window?.rootViewController?.view.tag = passThroughTag
+                window?.passTroughTag = passThroughTag
 
                 window!.windowLevel = .alert
                 window!.rootViewController = self
@@ -185,18 +186,3 @@ public extension RyeViewController {
     }
 }
 
-class PassTroughWindow: UIWindow {
-    public var passTroughTag: Int?
-
-    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-
-        let hitView = super.hitTest(point, with: event)
-
-        if let passTroughTag = passTroughTag {
-            if passTroughTag == hitView?.tag {
-                return nil
-            }
-        }
-        return hitView
-    }
-}
