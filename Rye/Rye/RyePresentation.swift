@@ -16,7 +16,7 @@ public extension RyeViewController {
         switch self.alertType {
         case .toast:
             // create a new UIWindow
-            var window: UIWindow?
+            var window: PassTroughWindow?
 
             if #available(iOS 13.0, *) {
                 let windowScene = UIApplication.shared
@@ -24,11 +24,15 @@ public extension RyeViewController {
                     .filter { $0.activationState == .foregroundActive }
                     .first
                 if let windowScene = windowScene as? UIWindowScene {
-                    window = UIWindow(windowScene: windowScene)
+                    window = PassTroughWindow(windowScene: windowScene)
+                    window?.rootViewController?.view.tag = 99
+                    window?.passTroughTag = 99
                 }
             } else {
 
-                window = UIWindow(frame: UIScreen.main.bounds)
+                window = PassTroughWindow(frame: UIScreen.main.bounds)
+                window?.rootViewController?.view.tag = 99
+                window?.passTroughTag = 99
 
                 window!.windowLevel = .alert
                 window!.rootViewController = self
@@ -178,5 +182,21 @@ public extension RyeViewController {
             completion()
         })
         
+    }
+}
+
+class PassTroughWindow: UIWindow {
+    public var passTroughTag: Int?
+
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+
+        let hitView = super.hitTest(point, with: event)
+
+        if let passTroughTag = passTroughTag {
+            if passTroughTag == hitView?.tag {
+                return nil
+            }
+        }
+        return hitView
     }
 }
