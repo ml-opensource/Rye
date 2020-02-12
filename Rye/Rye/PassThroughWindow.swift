@@ -8,14 +8,14 @@
 
 import Foundation
 
-class PassTroughWindow: UIWindow {
-    public var passTroughTag: Int?
+class PassThroughWindow: UIWindow {
+    public var passThroughTag: Int?
 
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
 
         let hitView = super.hitTest(point, with: event)
 
-        if let passTroughTag = passTroughTag {
+        if let passTroughTag = passThroughTag {
             if passTroughTag == hitView?.tag {
                 return nil
             }

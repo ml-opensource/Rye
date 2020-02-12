@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2328602B23F43A3900561230 /* PassThroughWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2328602A23F43A3900561230 /* PassThroughWindow.swift */; };
 		4222825C22B0E4FE002668DA /* Rye.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4222825222B0E4FD002668DA /* Rye.framework */; };
 		4222826122B0E4FE002668DA /* RyeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4222826022B0E4FE002668DA /* RyeTests.swift */; };
 		4222826322B0E4FE002668DA /* Rye.h in Headers */ = {isa = PBXBuildFile; fileRef = 4222825522B0E4FD002668DA /* Rye.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -65,6 +66,7 @@
 
 /* Begin PBXFileReference section */
 		1ECD44005EB84663E7F388E6 /* Pods_Rye_RyeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Rye_RyeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2328602A23F43A3900561230 /* PassThroughWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassThroughWindow.swift; sourceTree = "<group>"; };
 		4222825222B0E4FD002668DA /* Rye.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Rye.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4222825522B0E4FD002668DA /* Rye.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Rye.h; sourceTree = "<group>"; };
 		4222825622B0E4FD002668DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -138,7 +140,6 @@
 				79C0E6683341A2D84B9C6DDD /* Pods-RyeExample.debug.xcconfig */,
 				E033D52092D58BDAFFA46119 /* Pods-RyeExample.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -173,6 +174,7 @@
 				4222829122B0EF65002668DA /* RyeDefaultView.swift */,
 				4222827022B0EB09002668DA /* RyeType+Configuration.swift */,
 				4222826E22B0EAD3002668DA /* RyePresentation.swift */,
+				2328602A23F43A3900561230 /* PassThroughWindow.swift */,
 			);
 			path = Rye;
 			sourceTree = "<group>";
@@ -478,6 +480,7 @@
 				4222827122B0EB09002668DA /* RyeType+Configuration.swift in Sources */,
 				4222826D22B0E8DE002668DA /* RyeViewController.swift in Sources */,
 				4222829222B0EF65002668DA /* RyeDefaultView.swift in Sources */,
+				2328602B23F43A3900561230 /* PassThroughWindow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
