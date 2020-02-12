@@ -37,6 +37,16 @@ public class RyeViewController: UIViewController {
                 }
 
                 return topController.view
+
+            } else if #available(iOS 13.0, *),
+                let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                    var topController = windowScene.windows[0].rootViewController {
+                    while let presentedViewController = topController.presentedViewController {
+                        topController = presentedViewController
+                    }
+
+                return topController.view
+                
             } else {
                 assertionFailure("Could not find the top ViewController")
                 return UIView()
@@ -158,12 +168,10 @@ public class RyeViewController: UIViewController {
         case .standard(let configuration):
             // create default RyeView
             let ryeView = RyeDefaultView(configuration: configuration)
-            
             addRyeView(ryeView)
             
         case .custom(let ryeView, _):
             addRyeView(ryeView)
-
         }
         
         // trigger the dismiss based on timeAlive value
