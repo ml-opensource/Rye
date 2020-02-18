@@ -178,6 +178,7 @@ public class RyeViewController: UIViewController {
         // a timeAlive of nil will never remove the RyeView
         guard let timeAlive = timeAlive else { return }
         DispatchQueue.main.asyncAfter(deadline: .now() + timeAlive + animationDuration) {
+            self.ryeView.removeFromSuperview()
             self.dismiss()
         }
     }
