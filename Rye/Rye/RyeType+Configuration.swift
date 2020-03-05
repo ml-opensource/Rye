@@ -31,18 +31,7 @@ public struct Rye {
          */
         case nonDismissable
     }
-    
-    public enum AlertType {
-        /**
-         a SnackBar alert. Displayed at applications UIViewController level
-         */
-//        case snackBar
-        /**
-         a Toast like alert. Displayed at alert level of the key UIWindow.
-         */
-        case toast
-    }
-    
+        
     public enum ViewType {
         case standard(configuration: RyeConfiguration?)
         case custom(UIView, animationType: AnimationType = .slideInOut)

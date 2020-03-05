@@ -38,7 +38,6 @@ public class RyeViewController: UIViewController {
 
     var dismissMode: Rye.DismissMode
     var viewType: Rye.ViewType
-    var timeAlive: TimeInterval?
     var position: Rye.Position
     var animationDuration: TimeInterval!
     var animationType: Rye.AnimationType!
@@ -60,11 +59,9 @@ public class RyeViewController: UIViewController {
      */
     public init(dismissMode: Rye.DismissMode = .automatic(interval: Rye.defaultDismissInterval),
                 viewType: Rye.ViewType = .standard(configuration: nil),
-                at position: Rye.Position = .bottom(inset: 16),
-                timeAlive: TimeInterval? = nil) {
+                at position: Rye.Position = .bottom(inset: 16)) {
         self.dismissMode = dismissMode
         self.viewType = viewType
-        self.timeAlive = timeAlive
         self.position = position
         
         switch viewType {
@@ -94,7 +91,7 @@ public class RyeViewController: UIViewController {
         view.backgroundColor = .clear
     }
     
-    @objc func ryeTapped(_ sender: Any) {
+    @objc func dismissRye(_ sender: Any) {
         dismiss()
     }
     
@@ -104,8 +101,11 @@ public class RyeViewController: UIViewController {
         func addRyeView(_ ryeView: UIView) {
             self.ryeView = ryeView
             
-            ryeView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(ryeTapped(_:))))
-            
+            if shouldAddGestureRecognizer(for: dismissMode) {
+                addTapGestureRecognizer()
+                addSwipeGestureRecognizer()
+            }
+        
             // add RyeView to hierarchy
             parentView.addSubview(ryeView)
             ryeView.translatesAutoresizingMaskIntoConstraints = false
@@ -147,10 +147,46 @@ public class RyeViewController: UIViewController {
         
         // trigger the dismiss based on timeAlive value
         // a timeAlive of nil will never remove the RyeView
-        guard let timeAlive = timeAlive else { return }
-        DispatchQueue.main.asyncAfter(deadline: .now() + timeAlive + animationDuration) {
-            self.ryeView.removeFromSuperview()
-            self.dismiss()
+        switch dismissMode {
+        case .automatic(interval: let interval):
+            DispatchQueue.main.asyncAfter(deadline: .now() + interval + animationDuration) {
+                self.ryeView.removeFromSuperview()
+                self.dismiss()
+            }
+        default:
+            break
+        }
+    }
+    
+    private func addTapGestureRecognizer() {
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissRye(_:)))
+        ryeView.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
+    private func addSwipeGestureRecognizer() {
+        let swipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(dismissRye(_:)))
+        switch position {
+        case .top:
+            swipeGestureRecognizer.direction = .up
+        case .bottom:
+            swipeGestureRecognizer.direction = .down
+        }
+        ryeView.addGestureRecognizer(swipeGestureRecognizer)
+    }
+    
+    private func shouldAddGestureRecognizer(for dismissMode: Rye.DismissMode) -> Bool {
+        if case Rye.DismissMode.gesture = dismissMode {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    private func shouldAddRemovalTimer(for dismissMode: Rye.DismissMode) -> Bool {
+        if case Rye.DismissMode.automatic = dismissMode {
+            return true
+        } else {
+            return false
         }
     }
 }
