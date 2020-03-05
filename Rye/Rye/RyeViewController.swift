@@ -30,28 +30,28 @@ public class RyeViewController: UIViewController {
     // all presentation logic is done using parentView
     var parentView: UIView {
         switch alertType {
-        case .snackBar:
-            if var topController = UIApplication.shared.keyWindow?.rootViewController {
-                while let presentedViewController = topController.presentedViewController {
-                    topController = presentedViewController
-                }
-
-                return topController.view
-
-            } else if #available(iOS 13.0, *),
-                let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-                    var topController = windowScene.windows[0].rootViewController {
-                    while let presentedViewController = topController.presentedViewController {
-                        topController = presentedViewController
-                    }
-
-                return topController.view
-                
-            } else {
-                assertionFailure("Could not find the top ViewController")
-                return UIView()
-            }
-
+//        case .snackBar:
+//            if var topController = UIApplication.shared.keyWindow?.rootViewController {
+//                while let presentedViewController = topController.presentedViewController {
+//                    topController = presentedViewController
+//                }
+//
+//                return topController.view
+//
+//            } else if #available(iOS 13.0, *),
+//                let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+//                    var topController = windowScene.windows[0].rootViewController {
+//                    while let presentedViewController = topController.presentedViewController {
+//                        topController = presentedViewController
+//                    }
+//
+//                return topController.view
+//
+//            } else {
+//                assertionFailure("Could not find the top ViewController")
+//                return UIView()
+//            }
+//
         case .toast:
             guard let keyWindow = UIApplication.shared.keyWindow else {
                 assertionFailure("Can not present snack bar if there is no keyWindow")
@@ -106,8 +106,8 @@ public class RyeViewController: UIViewController {
         switch alertType {
         case .toast:
             isShowing = UIApplication.shared.windows.contains(where: {$0.windowLevel == .alert})
-        case .snackBar:
-            isShowing = false
+//        case .snackBar:
+//            isShowing = false
         }
     }
     

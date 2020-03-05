@@ -42,9 +42,6 @@ public extension RyeViewController {
             }
             
             self.window = window
-
-        case .snackBar:
-            break
         }
         
         // check if we can show the RyeView
@@ -84,11 +81,6 @@ public extension RyeViewController {
                 self.window?.isHidden = true
                 self.window?.removeFromSuperview()
                 self.window = nil
-            case .snackBar:
-                // remove the Rye View
-                self.ryeView.isHidden = true
-                self.ryeView.removeFromSuperview()
-                self.ryeView = nil
             }
             
             // update Rye state

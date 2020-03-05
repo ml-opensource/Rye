@@ -10,12 +10,14 @@ import UIKit
 import Rye
 
 class RyeDemoViewController: UIViewController {
+    
+    var ryeViewController: RyeViewController?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        displayCustomSnackBar()
-    
+//        displayCustomSnackBar()
+        displayStandardRyeMessage()
     }
     
     private func x() {
@@ -27,7 +29,7 @@ class RyeDemoViewController: UIViewController {
             Rye.Configuration.Key.animationType: Rye.AnimationType.slideInOut
         ]
         
-        let rye = RyeViewController(alertType: .snackBar,
+        let rye = RyeViewController(alertType: .toast,
                                     viewType: .standard(configuration: ryeConfiguration),
                                     at: .top(inset: 106),
                                     timeAlive: 12.5)
@@ -78,40 +80,78 @@ class RyeDemoViewController: UIViewController {
         }
     }
     
-    private func displayCustomSnackBar() {
-        let customRyeView = RyeImageView.fromNib()
+    private func displayStandardRyeMessage() {
+        let ryeConfiguration: RyeConfiguration = [
+            Rye.Configuration.Key.text : "Plain old standard hello from rye",
+            Rye.Configuration.Key.backgroundColor: UIColor.red.withAlphaComponent(0.7),
+            Rye.Configuration.Key.animationType: Rye.AnimationType.fadeInOut
+        ]
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            let rye = RyeViewController.init(alertType: .snackBar,
-                                             viewType: .custom(customRyeView),
-                                             at: .top(inset: 16),
-                                             timeAlive: nil)
+            let rye = RyeViewController(alertType: .toast,
+                                        viewType: .standard(configuration: ryeConfiguration),
+                                        at: .top(inset: 0.0),
+                                        timeAlive: 5.0)
             rye.show()
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                rye.dismiss()
-            }
         }
-        
-        
-        
     }
     
-    private func displayCustomSnackBarWithButton() {
+    private func displayCustomRyeMessage() {
         let customRyeView = RyeButtonView.fromNib()
+        customRyeView.delegate = self
+//        let customRyeView = RyeImageView.fromNib()
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            let rye = RyeViewController.init(alertType: .snackBar,
-                                             viewType: .custom(customRyeView),
-                                             at: .top(inset: 16),
-                                             timeAlive: nil)
-            rye.show()
-        }
+        ryeViewController = RyeViewController(alertType: .toast,
+                                    viewType: .custom(customRyeView, animationType: .fadeInOut),
+                                    at: .bottom(inset: 0.0),
+                                    timeAlive: 10.0)
         
+        ryeViewController?.show()
     }
+
+    
+    
+    
+//    private func displayCustomSnackBar() {
+//        let customRyeView = RyeImageView.fromNib()
+//
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+//            let rye = RyeViewController.init(alertType: .snackBar,
+//                                             viewType: .custom(customRyeView),
+//                                             at: .top(inset: 16),
+//                                             timeAlive: nil)
+//            rye.show()
+//
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+//                rye.dismiss()
+//            }
+//        }
+//
+//
+//
+//    }
+    
+//    private func displayCustomSnackBarWithButton() {
+//        let customRyeView = RyeButtonView.fromNib()
+//
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+//            let rye = RyeViewController.init(alertType: .snackBar,
+//                                             viewType: .custom(customRyeView),
+//                                             at: .top(inset: 16),
+//                                             timeAlive: nil)
+//            rye.show()
+//        }
+//
+//    }
     
     @IBAction func buttonAction(_ sender: Any) {
-        print("tap")
+        displayCustomRyeMessage()
+    }
+}
+
+extension RyeDemoViewController: RyeButtonViewDelegate {
+    func didTapButton(in sender: RyeButtonView) {
+        ryeViewController?.dismiss()
     }
 }
 

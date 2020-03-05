@@ -16,7 +16,7 @@ public struct Rye {
         /**
          a SnackBar alert. Displayed at applications UIViewController level
          */
-        case snackBar
+//        case snackBar
         /**
          a Toast like alert. Displayed at alert level of the key UIWindow.
          */
