@@ -14,35 +14,32 @@ public extension RyeViewController {
     func show() {
         
         let passThroughTag: Int = 99
-        switch self.alertType {
-        case .toast:
-            // create a new UIWindow
-            var window: PassThroughWindow?
-
-            if #available(iOS 13.0, *) {
-                let windowScene = UIApplication.shared
-                    .connectedScenes
-                    .filter { $0.activationState == .foregroundActive }
-                    .first
-                if let windowScene = windowScene as? UIWindowScene {
-                    window = PassThroughWindow(windowScene: windowScene)
-                    window?.rootViewController?.view.tag = passThroughTag
-                    window?.passThroughTag = passThroughTag
-                }
-            } else {
-
-                window = PassThroughWindow(frame: UIScreen.main.bounds)
+        // create a new UIWindow
+        var window: PassThroughWindow?
+        
+        if #available(iOS 13.0, *) {
+            let windowScene = UIApplication.shared
+                .connectedScenes
+                .filter { $0.activationState == .foregroundActive }
+                .first
+            if let windowScene = windowScene as? UIWindowScene {
+                window = PassThroughWindow(windowScene: windowScene)
                 window?.rootViewController?.view.tag = passThroughTag
                 window?.passThroughTag = passThroughTag
-
-                window!.windowLevel = .alert
-                window!.rootViewController = self
-                window!.backgroundColor = .clear
-                window!.makeKeyAndVisible()
             }
+        } else {
             
-            self.window = window
+            window = PassThroughWindow(frame: UIScreen.main.bounds)
+            window?.rootViewController?.view.tag = passThroughTag
+            window?.passThroughTag = passThroughTag
+            
+            window!.windowLevel = .alert
+            window!.rootViewController = self
+            window!.backgroundColor = .clear
+            window!.makeKeyAndVisible()
         }
+        
+        self.window = window
         
         // check if we can show the RyeView
         guard !isShowing else {
@@ -75,13 +72,10 @@ public extension RyeViewController {
             
             guard let self = self else { return }
             
-            switch self.alertType {
-            case .toast:
-                // remove the UIWindow
-                self.window?.isHidden = true
-                self.window?.removeFromSuperview()
-                self.window = nil
-            }
+            // remove the UIWindow
+            self.window?.isHidden = true
+            self.window?.removeFromSuperview()
+            self.window = nil
             
             // update Rye state
             self.isShowing = false

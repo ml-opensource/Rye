@@ -29,38 +29,14 @@ public class RyeViewController: UIViewController {
     
     // all presentation logic is done using parentView
     var parentView: UIView {
-        switch alertType {
-//        case .snackBar:
-//            if var topController = UIApplication.shared.keyWindow?.rootViewController {
-//                while let presentedViewController = topController.presentedViewController {
-//                    topController = presentedViewController
-//                }
-//
-//                return topController.view
-//
-//            } else if #available(iOS 13.0, *),
-//                let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-//                    var topController = windowScene.windows[0].rootViewController {
-//                    while let presentedViewController = topController.presentedViewController {
-//                        topController = presentedViewController
-//                    }
-//
-//                return topController.view
-//
-//            } else {
-//                assertionFailure("Could not find the top ViewController")
-//                return UIView()
-//            }
-//
-        case .toast:
-            guard let keyWindow = UIApplication.shared.keyWindow else {
-                assertionFailure("Can not present snack bar if there is no keyWindow")
-                return UIView()
-            }
-            return keyWindow
+        guard let keyWindow = UIApplication.shared.keyWindow else {
+            assertionFailure("Can not present snack bar if there is no keyWindow")
+            return UIView()
         }
+        return keyWindow
     }
-    var alertType: Rye.AlertType
+
+    var dismissMode: Rye.DismissMode
     var viewType: Rye.ViewType
     var timeAlive: TimeInterval?
     var position: Rye.Position
@@ -82,11 +58,11 @@ public class RyeViewController: UIViewController {
      - Parameter timeAlive: Represents the duration for the RyeView to be displayed to the user. If nil is provided, then you will be responsable of removing the RyeView
 
      */
-    public init(alertType: Rye.AlertType = .toast,
+    public init(dismissMode: Rye.DismissMode = .automatic(interval: Rye.defaultDismissInterval),
                 viewType: Rye.ViewType = .standard(configuration: nil),
                 at position: Rye.Position = .bottom(inset: 16),
                 timeAlive: TimeInterval? = nil) {
-        self.alertType = alertType
+        self.dismissMode = dismissMode
         self.viewType = viewType
         self.timeAlive = timeAlive
         self.position = position
@@ -103,12 +79,7 @@ public class RyeViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
         
         // check if an alert is currently showing and update the isShowing value
-        switch alertType {
-        case .toast:
-            isShowing = UIApplication.shared.windows.contains(where: {$0.windowLevel == .alert})
-//        case .snackBar:
-//            isShowing = false
-        }
+        isShowing = UIApplication.shared.windows.contains(where: {$0.windowLevel == .alert})
     }
     
     required init?(coder aDecoder: NSCoder) {
