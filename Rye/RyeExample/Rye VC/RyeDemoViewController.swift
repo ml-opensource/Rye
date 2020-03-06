@@ -16,122 +16,52 @@ class RyeDemoViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
         
-//        displayCustomSnackBar()
-        displayStandardRyeMessage()
-    }
-    
-    private func x() {
-        let ryeConfiguration: RyeConfiguration = [
-            Rye.Configuration.Key.text: "Some text",
-            Rye.Configuration.Key.backgroundColor: UIColor.systemRed,
-            Rye.Configuration.Key.cornerRadius: CGFloat(16),
-            Rye.Configuration.Key.textFont: UIFont.systemFont(ofSize: 16),
-            Rye.Configuration.Key.animationType: Rye.AnimationType.slideInOut
-        ]
-        
-        let rye = RyeViewController(viewType: .standard(configuration: ryeConfiguration),
-                                    at: .top(inset: 106))
-        rye.show()
-    }
-
-//    private func displayDefaultToast() {
-//        // display Default Rye
-//
-//        let ryeConfiguration: RyeConfiguration = [Rye.Configuration.Key.text: "Message for the user"]
-//
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-//            let rye = RyeViewController.init(viewType: .standard(configuration: ryeConfiguration),
-//                                             at: .bottom(inset: 16),
-//                                             timeAlive: 20)
-//            rye.show()
-//        }
-//    }
-//
-//    private func displayDefaultToastWithCustomConfiguration() {
-//        // display Default Rye with custom configuration
-//
-//        let ryeConfiguration: RyeConfiguration = [Rye.Configuration.Key.text: "Error message for the user",
-//                                                  Rye.Configuration.Key.backgroundColor: UIColor.red.withAlphaComponent(0.4),
-//                                                  Rye.Configuration.Key.animationType: Rye.AnimationType.fadeInOut]
-//
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-//            let rye = RyeViewController.init(dismissMode: .automatic(interval: 10),
-//                                             viewType: .standard(configuration: ryeConfiguration),
-//                                             at: .bottom(inset: 16),
-//                                             timeAlive: 20)
-//            rye.show()
-//        }
-//    }
-//
-//    private func displayCustomToast() {
-//        // display Custom Rye
-//
-//        let customRyeView = RyeView()
-//
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-//            let rye = RyeViewController.init(viewType: .custom(customRyeView),
-//                                             at: .bottom(inset: 16),
-//                                             timeAlive: 2)
-//            rye.show()
-//        }
-//    }
-    
-    private func displayStandardRyeMessage() {
-//        let ryeConfiguration: RyeConfiguration = [
-//            Rye.Configuration.Key.text : "Plain old standard hello from rye",
-//            Rye.Configuration.Key.backgroundColor: UIColor.red.withAlphaComponent(0.7),
-//            Rye.Configuration.Key.animationType: Rye.AnimationType.fadeInOut
-//        ]
-//
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-//            let rye = RyeViewController(dismissMode: .gesture,
-//                                        viewType: .standard(configuration: ryeConfiguration),
-//                                        at: .top(inset: 0.0),
-//                                        timeAlive: 5.0)
-//            rye.show()
-//        }
-    }
-    
     private func displayAutomaticMessage() {
-        let timeInterval = 3.0
         let ryeConfiguration: RyeConfiguration = [
-            Rye.Configuration.Key.text : "This message will self destruct after \(timeInterval) seconds",
-            Rye.Configuration.Key.backgroundColor: UIColor.red.withAlphaComponent(0.7),
-            Rye.Configuration.Key.animationType: Rye.AnimationType.fadeInOut
+            .text : "This message will self destruct after \(Rye.defaultDismissInterval) seconds",
+            .backgroundColor: UIColor.red.withAlphaComponent(0.7),
+            .animationType: Rye.AnimationType.slideInOut
         ]
         
-        let rye = RyeViewController(dismissMode: .automatic(interval: 2.0),
+        ryeViewController = RyeViewController(dismissMode: .automatic(interval: Rye.defaultDismissInterval),
                                     viewType: .standard(configuration: ryeConfiguration),
-                                    at: .top(inset: 0.0))
-        rye.show()
+                                    at: .top(inset: 40.0))
+        ryeViewController?.show(withDismissCompletion: {
+            self.ryeViewController = nil
+        })
     }
     
 
     private func displayGestureMessage() {
         let ryeConfiguration: RyeConfiguration = [
-            Rye.Configuration.Key.text : "Tap this message to dismiss it",
-            Rye.Configuration.Key.backgroundColor: UIColor.lightGray.withAlphaComponent(0.7),
-            Rye.Configuration.Key.animationType: Rye.AnimationType.fadeInOut
+            .text : "Tap or swipe this message to dismiss it",
+            .backgroundColor: UIColor.lightGray.withAlphaComponent(0.7),
+            .animationType: Rye.AnimationType.slideInOut
         ]
         
         ryeViewController = RyeViewController(dismissMode: .gesture,
                                     viewType: .standard(configuration: ryeConfiguration),
-                                    at: .bottom(inset: 0.0))
-        ryeViewController?.show()
+                                    at: .top(inset: 0.0))
+        ryeViewController?.show(withDismissCompletion: {
+            self.ryeViewController = nil
+        })
     }
 
     private func displayNonDismissableMessage() {
         let ryeConfiguration: RyeConfiguration = [
-            Rye.Configuration.Key.text : "This message will stay till you tap the button again",
-            Rye.Configuration.Key.backgroundColor: UIColor.blue.withAlphaComponent(0.7),
-            Rye.Configuration.Key.animationType: Rye.AnimationType.fadeInOut
+            .text : "This message will stay till you tap the button again",
+            .backgroundColor: UIColor.blue.withAlphaComponent(0.7),
+            .animationType: Rye.AnimationType.fadeInOut
         ]
         
         ryeViewController = RyeViewController(dismissMode: .nonDismissable,
                                               viewType: .standard(configuration: ryeConfiguration),
                                     at: .top(inset: 0.0))
-        ryeViewController?.show()
+        ryeViewController?.show(withDismissCompletion: {
+            self.ryeViewController = nil
+        })
     }
 
     private func displayCustomRyeMessage() {

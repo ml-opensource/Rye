@@ -41,6 +41,7 @@ public class RyeViewController: UIViewController {
     var position: Rye.Position
     var animationDuration: TimeInterval!
     var animationType: Rye.AnimationType!
+    var dismissCompletion: (() -> Void)? = nil
     
     // MARK: - Rye View Properties
     
@@ -146,11 +147,9 @@ public class RyeViewController: UIViewController {
         }
         
         // trigger the dismiss based on timeAlive value
-        // a timeAlive of nil will never remove the RyeView
         switch dismissMode {
         case .automatic(interval: let interval):
             DispatchQueue.main.asyncAfter(deadline: .now() + interval + animationDuration) {
-                self.ryeView.removeFromSuperview()
                 self.dismiss()
             }
         default:
@@ -158,6 +157,7 @@ public class RyeViewController: UIViewController {
         }
     }
     
+    // MARK: - Private Helper methods
     private func addTapGestureRecognizer() {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissRye(_:)))
         ryeView.addGestureRecognizer(tapGestureRecognizer)
@@ -188,5 +188,5 @@ public class RyeViewController: UIViewController {
         } else {
             return false
         }
-    }
+    }        
 }
