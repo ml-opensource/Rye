@@ -82,15 +82,13 @@ public extension RyeViewController {
                 window?.backgroundColor = .clear
             }
         } else {
-            
             window = PassThroughWindow(frame: UIScreen.main.bounds)
             window?.rootViewController?.view.tag = passThroughTag
             window?.passThroughTag = passThroughTag
             
-            window!.windowLevel = .alert
-            window!.rootViewController = self
-            window!.backgroundColor = .clear
-            window!.makeKeyAndVisible()
+            window?.windowLevel = .alert
+            window?.rootViewController = self
+            window?.backgroundColor = .clear
         }
         
         return window
