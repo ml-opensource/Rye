@@ -11,47 +11,16 @@ import UIKit
 // MARK: - Presentaion
 
 public extension RyeViewController {
-    func show() {
-        
-        let passThroughTag: Int = 99
-        switch self.alertType {
-        case .toast:
-            // create a new UIWindow
-            var window: PassThroughWindow?
-
-            if #available(iOS 13.0, *) {
-                let windowScene = UIApplication.shared
-                    .connectedScenes
-                    .filter { $0.activationState == .foregroundActive }
-                    .first
-                if let windowScene = windowScene as? UIWindowScene {
-                    window = PassThroughWindow(windowScene: windowScene)
-                    window?.rootViewController?.view.tag = passThroughTag
-                    window?.passThroughTag = passThroughTag
-                }
-            } else {
-
-                window = PassThroughWindow(frame: UIScreen.main.bounds)
-                window?.rootViewController?.view.tag = passThroughTag
-                window?.passThroughTag = passThroughTag
-
-                window!.windowLevel = .alert
-                window!.rootViewController = self
-                window!.backgroundColor = .clear
-                window!.makeKeyAndVisible()
-            }
-            
-            self.window = window
-
-        case .snackBar:
-            break
-        }
+    func show(withDismissCompletion dismissCompletion: (() -> Void)? = nil) {
+        self.dismissCompletion = dismissCompletion
         
         // check if we can show the RyeView
         guard !isShowing else {
-            NSLog("An Rye is already showing. Multiple Ryes can not be presented at the same time")
+            NSLog("A Rye alert is already showing. Multiple Ryes can not be presented at the same time")
             return
         }
+    
+        self.window = createAlertWindow()
         
         // update Rye state
         isShowing = true
@@ -65,39 +34,66 @@ public extension RyeViewController {
         
         // animate the RyeView on screen
         animateRyeIn()
-            
     }
     
-    func dismiss(completion: (() -> Void)? = nil) {
+    func dismiss() {
         guard isShowing else {
             NSLog("Can not dismiss a Rye that it is not showing")
             return
         }
         // animate the RyeView off screen
+        
         animateRyeOut(completion: { [weak self] in
             
             guard let self = self else { return }
             
-            switch self.alertType {
-            case .toast:
-                // remove the UIWindow
-                self.window?.isHidden = true
-                self.window?.removeFromSuperview()
-                self.window = nil
-            case .snackBar:
-                // remove the Rye View
-                self.ryeView.isHidden = true
-                self.ryeView.removeFromSuperview()
-                self.ryeView = nil
-            }
+            self.ryeView.removeFromSuperview()
+            
+            // remove the UIWindow
+            self.window?.isHidden = true
+            self.window?.removeFromSuperview()
+            self.window = nil
             
             // update Rye state
             self.isShowing = false
-            
+                        
             // call completion
-            completion?()
+            self.dismissCompletion?()
         })
+    }
+    
+    private func createAlertWindow() -> UIWindow? {
+        let passThroughTag: Int = 99
+        // create a new UIWindow
+        var window: PassThroughWindow?
         
+        if #available(iOS 13.0, *) {
+            let windowScene = UIApplication.shared
+                .connectedScenes
+                .filter { $0.activationState == .foregroundActive }
+                .first
+            if let windowScene = windowScene as? UIWindowScene {
+                window = PassThroughWindow(windowScene: windowScene)
+                window?.rootViewController?.view.tag = passThroughTag
+                window?.passThroughTag = passThroughTag
+                
+                window?.windowLevel = .alert
+                window?.rootViewController = self
+                window?.backgroundColor = .clear
+            }
+        } else {
+            
+            window = PassThroughWindow(frame: UIScreen.main.bounds)
+            window?.rootViewController?.view.tag = passThroughTag
+            window?.passThroughTag = passThroughTag
+            
+            window!.windowLevel = .alert
+            window!.rootViewController = self
+            window!.backgroundColor = .clear
+            window!.makeKeyAndVisible()
+        }
+        
+        return window
     }
     
     internal func animateRyeIn() {

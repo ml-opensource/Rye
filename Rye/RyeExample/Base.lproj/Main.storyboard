@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -18,26 +17,60 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="65W-w4-TBj">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="buttonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wGw-mA-KPp"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="MMz-R6-e4e">
+                                <rect key="frame" x="16" y="76" width="382" height="191.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show Rye Message with DisplayMode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="25C-f0-ZVc">
+                                        <rect key="frame" x="0.0" y="0.0" width="382" height="35.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="65W-w4-TBj">
+                                        <rect key="frame" x="154.5" y="43.5" width="73" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="FaC-Yt-RvV"/>
+                                        </constraints>
+                                        <state key="normal" title=".automatic"/>
+                                        <connections>
+                                            <action selector="didTapAutomatic:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jyP-sb-SSa"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FC3-Kx-wDr">
+                                        <rect key="frame" x="162.5" y="95.5" width="57" height="44"/>
+                                        <state key="normal" title=".gesture"/>
+                                        <connections>
+                                            <action selector="didTapGesture:" destination="BYZ-38-t0r" eventType="touchUpInside" id="grX-Yl-VCc"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O2V-Nf-9hR">
+                                        <rect key="frame" x="135" y="147.5" width="112" height="44"/>
+                                        <state key="normal" title=".nonDismissable"/>
+                                        <connections>
+                                            <action selector="didTapNonDissmisable:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XQU-Cn-IE2"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="65W-w4-TBj" firstAttribute="height" secondItem="FC3-Kx-wDr" secondAttribute="height" id="5HL-LK-MnH"/>
+                                    <constraint firstItem="65W-w4-TBj" firstAttribute="height" secondItem="O2V-Nf-9hR" secondAttribute="height" id="bSF-aS-HZp"/>
+                                    <constraint firstAttribute="trailing" secondItem="25C-f0-ZVc" secondAttribute="trailing" id="rel-Ir-m78"/>
+                                    <constraint firstItem="25C-f0-ZVc" firstAttribute="leading" secondItem="MMz-R6-e4e" secondAttribute="leading" id="tTC-ZY-wgn"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="65W-w4-TBj" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Ok9-tm-lVX"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="65W-w4-TBj" secondAttribute="bottom" id="ceE-5L-3bn"/>
-                            <constraint firstItem="65W-w4-TBj" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="dGM-8l-X4U"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="65W-w4-TBj" secondAttribute="trailing" id="uLt-iN-ZMO"/>
+                            <constraint firstItem="MMz-R6-e4e" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="32" id="bdc-MR-2fQ"/>
+                            <constraint firstItem="MMz-R6-e4e" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="fe1-Bc-fYx"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="MMz-R6-e4e" secondAttribute="trailing" constant="16" id="pMt-Us-r7Z"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="139" y="113"/>
         </scene>
     </scenes>
 </document>

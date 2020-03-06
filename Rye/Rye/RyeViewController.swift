@@ -29,43 +29,19 @@ public class RyeViewController: UIViewController {
     
     // all presentation logic is done using parentView
     var parentView: UIView {
-        switch alertType {
-        case .snackBar:
-            if var topController = UIApplication.shared.keyWindow?.rootViewController {
-                while let presentedViewController = topController.presentedViewController {
-                    topController = presentedViewController
-                }
-
-                return topController.view
-
-            } else if #available(iOS 13.0, *),
-                let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-                    var topController = windowScene.windows[0].rootViewController {
-                    while let presentedViewController = topController.presentedViewController {
-                        topController = presentedViewController
-                    }
-
-                return topController.view
-                
-            } else {
-                assertionFailure("Could not find the top ViewController")
-                return UIView()
-            }
-
-        case .toast:
-            guard let keyWindow = UIApplication.shared.keyWindow else {
-                assertionFailure("Can not present snack bar if there is no keyWindow")
-                return UIView()
-            }
-            return keyWindow
+        guard let keyWindow = UIApplication.shared.keyWindow else {
+            assertionFailure("Can not present snack bar if there is no keyWindow")
+            return UIView()
         }
+        return keyWindow
     }
-    var alertType: Rye.AlertType
+
+    var dismissMode: Rye.DismissMode
     var viewType: Rye.ViewType
-    var timeAlive: TimeInterval?
     var position: Rye.Position
     var animationDuration: TimeInterval!
     var animationType: Rye.AnimationType!
+    var dismissCompletion: (() -> Void)? = nil
     
     // MARK: - Rye View Properties
     
@@ -82,13 +58,11 @@ public class RyeViewController: UIViewController {
      - Parameter timeAlive: Represents the duration for the RyeView to be displayed to the user. If nil is provided, then you will be responsable of removing the RyeView
 
      */
-    public init(alertType: Rye.AlertType = .toast,
+    public init(dismissMode: Rye.DismissMode = .automatic(interval: Rye.defaultDismissInterval),
                 viewType: Rye.ViewType = .standard(configuration: nil),
-                at position: Rye.Position = .bottom(inset: 16),
-                timeAlive: TimeInterval? = nil) {
-        self.alertType = alertType
+                at position: Rye.Position = .bottom(inset: 16)) {
+        self.dismissMode = dismissMode
         self.viewType = viewType
-        self.timeAlive = timeAlive
         self.position = position
         
         switch viewType {
@@ -103,12 +77,7 @@ public class RyeViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
         
         // check if an alert is currently showing and update the isShowing value
-        switch alertType {
-        case .toast:
-            isShowing = UIApplication.shared.windows.contains(where: {$0.windowLevel == .alert})
-        case .snackBar:
-            isShowing = false
-        }
+        isShowing = UIApplication.shared.windows.contains(where: {$0.windowLevel == .alert})
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -123,7 +92,7 @@ public class RyeViewController: UIViewController {
         view.backgroundColor = .clear
     }
     
-    @objc func ryeTapped(_ sender: Any) {
+    @objc func dismissRye(_ sender: Any) {
         dismiss()
     }
     
@@ -133,8 +102,11 @@ public class RyeViewController: UIViewController {
         func addRyeView(_ ryeView: UIView) {
             self.ryeView = ryeView
             
-            ryeView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(ryeTapped(_:))))
-            
+            if shouldAddGestureRecognizer(for: dismissMode) {
+                addTapGestureRecognizer()
+                addSwipeGestureRecognizer()
+            }
+        
             // add RyeView to hierarchy
             parentView.addSubview(ryeView)
             ryeView.translatesAutoresizingMaskIntoConstraints = false
@@ -175,11 +147,46 @@ public class RyeViewController: UIViewController {
         }
         
         // trigger the dismiss based on timeAlive value
-        // a timeAlive of nil will never remove the RyeView
-        guard let timeAlive = timeAlive else { return }
-        DispatchQueue.main.asyncAfter(deadline: .now() + timeAlive + animationDuration) {
-            self.ryeView.removeFromSuperview()
-            self.dismiss()
+        switch dismissMode {
+        case .automatic(interval: let interval):
+            DispatchQueue.main.asyncAfter(deadline: .now() + interval + animationDuration) {
+                self.dismiss()
+            }
+        default:
+            break
         }
     }
+    
+    // MARK: - Private Helper methods
+    private func addTapGestureRecognizer() {
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissRye(_:)))
+        ryeView.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
+    private func addSwipeGestureRecognizer() {
+        let swipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(dismissRye(_:)))
+        switch position {
+        case .top:
+            swipeGestureRecognizer.direction = .up
+        case .bottom:
+            swipeGestureRecognizer.direction = .down
+        }
+        ryeView.addGestureRecognizer(swipeGestureRecognizer)
+    }
+    
+    private func shouldAddGestureRecognizer(for dismissMode: Rye.DismissMode) -> Bool {
+        if case Rye.DismissMode.gesture = dismissMode {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    private func shouldAddRemovalTimer(for dismissMode: Rye.DismissMode) -> Bool {
+        if case Rye.DismissMode.automatic = dismissMode {
+            return true
+        } else {
+            return false
+        }
+    }        
 }
