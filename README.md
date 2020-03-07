@@ -56,7 +56,7 @@ At the very minimum you need to consider:
 
 To show a text using a Rye alert you need to create a `RyeConfiguration`. This is a dictionary allowing you to configure various UI related aspects of your Rye alert. For more information on available keys, please refer to the section: [Possible Rye Configuration Values](#possible-rye-configuration-values) below.
 
-One of the values you can add to a `RyeConfiguration` - in fact the only value you _need_ to add - is a text to show in your alert.
+One of the values you can add to a `RyeConfiguration` is a text to show in your alert.
 
 ```swift
 let ryeConfiguration: RyeConfiguration = [Rye.Configuration.Key.text: "Message for the user"]
@@ -73,7 +73,9 @@ public enum ViewType {
 }
 ```
 
-As you can see, the `standard` type takes a `RyeConfiguration` as a parameter and the `custom` type takes the view you would like to use and an `Rye.AnimationType` (with a default value already provided). For more on the `AnimationType` please refer to the section [Animation Type](#animation-type) below.
+As you can see, the `standard` ViewType takes an optional `RyeConfiguration` as a parameter. This means that you don't _have_ to provide a `RyeConfiguration` in which case default values will be used for all parameters including the text (but you probably don't want an alert showing the text "Add a message" do you?).
+
+ The `custom` ViewType takes the view you would like to use and an `Rye.AnimationType` (with a default value already provided). For more on the `AnimationType` please refer to the section [Animation Type](#animation-type) below.
 
 #### Where To Show the Alert?
 
@@ -88,7 +90,7 @@ public enum Position {
 
 For more on the `Rye.Position` please refer to the section [Position](#position) below.
 
-### Display Default Rye
+### Display a Default Rye
 
 Following these principles we are now ready to show our first Rye alert.
 
@@ -100,6 +102,8 @@ let rye = RyeViewController.init(viewType: .standard(configuration: ryeConfigura
                                  at: .bottom(inset: 16))
 rye.show()
 ```
+
+This will result in a Rye alert with the text "Message for the user" appearing at the bottom at the screen and then disappearing automatically after 2.5 seconds.
 
 ### Control the Dismiss Type
 
@@ -167,7 +171,7 @@ rye.show(withDismissCompletion: {
 
 ### Dismiss Rye Alerts Manually
 
-Keep a reference to the `RyeViewController` and call `dismiss` when you are ready to let go.
+If you have selected a to show a Rye alert as `.nonDismissable` you have to dismiss it yourself. Keep a reference to the `RyeViewController` and call `dismiss` when you are ready to let go.
 
 ```swift
 import Rye
@@ -176,8 +180,8 @@ var rye: RyeViewController?
 
 let ryeConfiguration: RyeConfiguration = [Rye.Configuration.Key.text: "Message for the user"]
 rye = RyeViewController.init(dismissMode: .nonDismissable,
-                                 viewType: .standard(configuration: ryeConfiguration),
-                                 at: .bottom(inset: 16))
+                             viewType: .standard(configuration: ryeConfiguration),
+                             at: .bottom(inset: 16))
 rye?.show()
 
 ...at a later point in time
@@ -185,6 +189,8 @@ rye?.dismiss()
 ```
 
 ### Descriptions of Parameters
+
+Below you can find descriptions of the various parameters used to control a Rye alert.
 
 #### Display Modes
 
