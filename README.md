@@ -42,9 +42,9 @@ pod 'nodes-ios/Rye'
 To display a Rye alert you declare a new `RyeViewController` and then call:
 
 - `show`: to show the alert
-- `hide`: to hide the alert
+- `dismiss`: to dismiss the alert
 
-**note:** Depending on which `dismissMode` you have selected, you may not need to hide the alert yourself, see the section about `displayModes` below for more information.
+**note:** Depending on which `dismissMode` you have selected, you may not need to dismiss the alert yourself, see the section about `displayModes` below for more information.
 
 At the very minimum you need to consider:
 
@@ -73,7 +73,7 @@ public enum ViewType {
 }
 ```
 
-As you can see, the `standard` type takes a `RyeConfiguration` as a parameter and the `custom` type takes the view you would like to use and an `Rye.AnimationType` (with a default value already provided). For more on the `AnimationType` please refer to the section "Animation Type" below.
+As you can see, the `standard` type takes a `RyeConfiguration` as a parameter and the `custom` type takes the view you would like to use and an `Rye.AnimationType` (with a default value already provided). For more on the `AnimationType` please refer to the section [Animation Type](#animation-type) below.
 
 #### Where To Show the Alert?
 
@@ -86,7 +86,7 @@ public enum Position {
 }
 ```
 
-For more on the `Rye.Position` please refer to the section "Position" below.
+For more on the `Rye.Position` please refer to the section [Position](#position) below.
 
 ### Display Default Rye
 
@@ -167,19 +167,21 @@ rye.show(withDismissCompletion: {
 
 ### Dismiss Rye Alerts Manually
 
-Simple
+Keep a reference to the `RyeViewController` and call `dismiss` when you are ready to let go.
 
 ```swift
 import Rye
 ...
+var rye: RyeViewController?
+
 let ryeConfiguration: RyeConfiguration = [Rye.Configuration.Key.text: "Message for the user"]
-let rye = RyeViewController.init(dismissMode: .nonDismissable,
+rye = RyeViewController.init(dismissMode: .nonDismissable,
                                  viewType: .standard(configuration: ryeConfiguration),
                                  at: .bottom(inset: 16))
-rye.show()
+rye?.show()
 
 ...at a later point in time
-rye.dismiss()
+rye?.dismiss()
 ```
 
 ### Descriptions of Parameters
@@ -190,7 +192,7 @@ Rye supports three different `displayMode` values which can be passed when creat
 
 - `automatic`: The alert appears and disappears automatically after a specified interval.
 - `gesture`: To dismiss the alert you can tap or swipe it.
-- `nonDismissable`: The alert will stay permanently on screen until it is dismissed by calling `hide()` on your `RyeViewController` instance.
+- `nonDismissable`: The alert will stay permanently on screen until it is dismissed by calling `dismiss()` on your `RyeViewController` instance.
 
 If you do not pass this value when creating a new `RyeViewController`, a default value of `automatic` with a default interval of 2.5 seconds is used (the default interval is defined in `Rye.defaultDismissInterval`)
 
