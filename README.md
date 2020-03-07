@@ -54,7 +54,7 @@ At the very minimum you need to consider:
 
 #### Show Text
 
-To show a text using a Rye alert you need to create a `RyeConfiguration`. This is a dictionary allowing you to configure various UI related aspects of your Rye alert. For more information on available keys, please refer to the section: "Possible Rye Configuration Values" below.
+To show a text using a Rye alert you need to create a `RyeConfiguration`. This is a dictionary allowing you to configure various UI related aspects of your Rye alert. For more information on available keys, please refer to the section: [Possible Rye Configuration Values](#possible-rye-configuration-values) below.
 
 One of the values you can add to a `RyeConfiguration` - in fact the only value you _need_ to add - is a text to show in your alert.
 
