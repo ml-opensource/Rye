@@ -44,7 +44,7 @@ To display a Rye alert you declare a new `RyeViewController` and then call:
 - `show`: to show the alert
 - `dismiss`: to dismiss the alert
 
-**note:** Depending on which `dismissMode` you have selected, you may not need to dismiss the alert yourself, see the section about `displayModes` below for more information.
+**note:** Depending on which `dismissMode` you have selected, you may not need to dismiss the alert yourself, see the section about [`displayModes`](#display-modes) below for more information.
 
 At the very minimum you need to consider:
 
