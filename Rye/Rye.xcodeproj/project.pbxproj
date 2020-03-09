@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -28,9 +28,6 @@
 		42C7357922B3CB83005FE75D /* NibInitializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C7357822B3CB83005FE75D /* NibInitializable.swift */; };
 		42C7357B22B3CFA4005FE75D /* RyeButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C7357A22B3CFA4005FE75D /* RyeButtonView.swift */; };
 		42C7357D22B3CFCB005FE75D /* RyeButtonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42C7357C22B3CFCB005FE75D /* RyeButtonView.xib */; };
-		8F0C7AF5E4A25DD45CE46C54 /* Pods_RyeExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF4F89B5E45873FC724D842A /* Pods_RyeExample.framework */; };
-		9DFCF115FF1F96BAA94E5E68 /* Pods_Rye.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 740641B05D9DAB775653DD30 /* Pods_Rye.framework */; };
-		EBE5A8CE8611B2FA99BD79B5 /* Pods_Rye_RyeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ECD44005EB84663E7F388E6 /* Pods_Rye_RyeTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,7 +62,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1ECD44005EB84663E7F388E6 /* Pods_Rye_RyeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Rye_RyeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2328602A23F43A3900561230 /* PassThroughWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassThroughWindow.swift; sourceTree = "<group>"; };
 		4222825222B0E4FD002668DA /* Rye.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Rye.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4222825522B0E4FD002668DA /* Rye.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Rye.h; sourceTree = "<group>"; };
@@ -90,14 +86,6 @@
 		42C7357822B3CB83005FE75D /* NibInitializable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibInitializable.swift; sourceTree = "<group>"; };
 		42C7357A22B3CFA4005FE75D /* RyeButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RyeButtonView.swift; sourceTree = "<group>"; };
 		42C7357C22B3CFCB005FE75D /* RyeButtonView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RyeButtonView.xib; sourceTree = "<group>"; };
-		740641B05D9DAB775653DD30 /* Pods_Rye.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Rye.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		79C0E6683341A2D84B9C6DDD /* Pods-RyeExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RyeExample.debug.xcconfig"; path = "Target Support Files/Pods-RyeExample/Pods-RyeExample.debug.xcconfig"; sourceTree = "<group>"; };
-		80BD40644C4BF72E76406214 /* Pods-Rye.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rye.debug.xcconfig"; path = "Target Support Files/Pods-Rye/Pods-Rye.debug.xcconfig"; sourceTree = "<group>"; };
-		BEB6651381A5356DFA7C8510 /* Pods-Rye-RyeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rye-RyeTests.release.xcconfig"; path = "Target Support Files/Pods-Rye-RyeTests/Pods-Rye-RyeTests.release.xcconfig"; sourceTree = "<group>"; };
-		E033D52092D58BDAFFA46119 /* Pods-RyeExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RyeExample.release.xcconfig"; path = "Target Support Files/Pods-RyeExample/Pods-RyeExample.release.xcconfig"; sourceTree = "<group>"; };
-		EF4F89B5E45873FC724D842A /* Pods_RyeExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RyeExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F0A86A97F389297EAF5E501B /* Pods-Rye.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rye.release.xcconfig"; path = "Target Support Files/Pods-Rye/Pods-Rye.release.xcconfig"; sourceTree = "<group>"; };
-		F32096F82DE8A96E6D02D7C5 /* Pods-Rye-RyeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rye-RyeTests.debug.xcconfig"; path = "Target Support Files/Pods-Rye-RyeTests/Pods-Rye-RyeTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,7 +93,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9DFCF115FF1F96BAA94E5E68 /* Pods_Rye.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,7 +101,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4222825C22B0E4FE002668DA /* Rye.framework in Frameworks */,
-				EBE5A8CE8611B2FA99BD79B5 /* Pods_Rye_RyeTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -123,26 +109,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				4222828E22B0EED3002668DA /* Rye.framework in Frameworks */,
-				8F0C7AF5E4A25DD45CE46C54 /* Pods_RyeExample.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2084E4C15CA3693DEBF9D10B /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				80BD40644C4BF72E76406214 /* Pods-Rye.debug.xcconfig */,
-				F0A86A97F389297EAF5E501B /* Pods-Rye.release.xcconfig */,
-				F32096F82DE8A96E6D02D7C5 /* Pods-Rye-RyeTests.debug.xcconfig */,
-				BEB6651381A5356DFA7C8510 /* Pods-Rye-RyeTests.release.xcconfig */,
-				79C0E6683341A2D84B9C6DDD /* Pods-RyeExample.debug.xcconfig */,
-				E033D52092D58BDAFFA46119 /* Pods-RyeExample.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		4222824822B0E4FD002668DA = {
 			isa = PBXGroup;
 			children = (
@@ -150,8 +122,6 @@
 				4222825F22B0E4FE002668DA /* RyeTests */,
 				4222827722B0EBF3002668DA /* RyeExample */,
 				4222825322B0E4FD002668DA /* Products */,
-				4222828C22B0EE81002668DA /* Frameworks */,
-				2084E4C15CA3693DEBF9D10B /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -202,16 +172,6 @@
 			path = RyeExample;
 			sourceTree = "<group>";
 		};
-		4222828C22B0EE81002668DA /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				740641B05D9DAB775653DD30 /* Pods_Rye.framework */,
-				1ECD44005EB84663E7F388E6 /* Pods_Rye_RyeTests.framework */,
-				EF4F89B5E45873FC724D842A /* Pods_RyeExample.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		4222829522B11410002668DA /* Rye VC */ = {
 			isa = PBXGroup;
 			children = (
@@ -259,7 +219,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4222826622B0E4FE002668DA /* Build configuration list for PBXNativeTarget "Rye" */;
 			buildPhases = (
-				4CC3059554D92922AB9D480F /* [CP] Check Pods Manifest.lock */,
 				4222824D22B0E4FD002668DA /* Headers */,
 				4222824E22B0E4FD002668DA /* Sources */,
 				4222824F22B0E4FD002668DA /* Frameworks */,
@@ -278,11 +237,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4222826922B0E4FE002668DA /* Build configuration list for PBXNativeTarget "RyeTests" */;
 			buildPhases = (
-				E403469C4069033B58FA5A4F /* [CP] Check Pods Manifest.lock */,
 				4222825722B0E4FE002668DA /* Sources */,
 				4222825822B0E4FE002668DA /* Frameworks */,
 				4222825922B0E4FE002668DA /* Resources */,
-				CD3CF400E4B43C55CC19AC36 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -298,7 +255,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4222828522B0EBF6002668DA /* Build configuration list for PBXNativeTarget "RyeExample" */;
 			buildPhases = (
-				E7D136D70BFB0FA6F3F4EAB1 /* [CP] Check Pods Manifest.lock */,
 				4222827222B0EBF3002668DA /* Sources */,
 				4222827322B0EBF3002668DA /* Frameworks */,
 				4222827422B0EBF3002668DA /* Resources */,
@@ -384,92 +340,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		4CC3059554D92922AB9D480F /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Rye-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		CD3CF400E4B43C55CC19AC36 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Rye-RyeTests/Pods-Rye-RyeTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Rye-RyeTests/Pods-Rye-RyeTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Rye-RyeTests/Pods-Rye-RyeTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E403469C4069033B58FA5A4F /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Rye-RyeTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E7D136D70BFB0FA6F3F4EAB1 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-RyeExample-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		4222824E22B0E4FD002668DA /* Sources */ = {
@@ -664,7 +534,6 @@
 		};
 		4222826722B0E4FE002668DA /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 80BD40644C4BF72E76406214 /* Pods-Rye.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -694,7 +563,6 @@
 		};
 		4222826822B0E4FE002668DA /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F0A86A97F389297EAF5E501B /* Pods-Rye.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -723,7 +591,6 @@
 		};
 		4222826A22B0E4FE002668DA /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F32096F82DE8A96E6D02D7C5 /* Pods-Rye-RyeTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -743,7 +610,6 @@
 		};
 		4222826B22B0E4FE002668DA /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BEB6651381A5356DFA7C8510 /* Pods-Rye-RyeTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -763,7 +629,6 @@
 		};
 		4222828622B0EBF6002668DA /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 79C0E6683341A2D84B9C6DDD /* Pods-RyeExample.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -785,7 +650,6 @@
 		};
 		4222828722B0EBF6002668DA /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E033D52092D58BDAFFA46119 /* Pods-RyeExample.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
