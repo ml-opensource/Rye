@@ -147,9 +147,9 @@ For even more control you can create your own subclass of `UIView` and use `.cus
 ```swift
 import Rye
 ...
-let customRyeView = RyeView()
 
-let rye = RyeViewController.init(viewType: .custom(customRyeView),
+let customView = YourCustomViewHere()
+let rye = RyeViewController.init(viewType: .custom(customView),
                                  at: .bottom(inset: 16))
 rye.show()
 
