@@ -42,6 +42,7 @@ public class RyeViewController: UIViewController {
     var animationDuration: TimeInterval!
     var animationType: Rye.AnimationType!
     var dismissCompletion: (() -> Void)? = nil
+    private var dismissWorkItem: DispatchWorkItem?
     
     // MARK: - Rye View Properties
     
@@ -116,7 +117,8 @@ public class RyeViewController: UIViewController {
         view.backgroundColor = .clear
     }
     
-    @objc func dismissRye(_ sender: Any) {
+    @objc func cancelWorkItemAndDismissRye(_ sender: Any) {
+        dismissWorkItem?.cancel()
         dismiss()
     }
     
@@ -173,9 +175,11 @@ public class RyeViewController: UIViewController {
         // trigger the dismiss based on timeAlive value
         switch dismissMode {
         case .automatic(interval: let interval):
-            DispatchQueue.main.asyncAfter(deadline: .now() + interval + animationDuration) {
+            dismissWorkItem = DispatchWorkItem(block: {
                 self.dismiss()
-            }
+            })
+            DispatchQueue.main.asyncAfter(deadline: .now() + interval + animationDuration,
+                                          execute: self.dismissWorkItem!)
         default:
             break
         }
@@ -183,12 +187,12 @@ public class RyeViewController: UIViewController {
     
     // MARK: - Private Helper methods
     private func addTapGestureRecognizer() {
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissRye(_:)))
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(cancelWorkItemAndDismissRye))
         ryeView.addGestureRecognizer(tapGestureRecognizer)
     }
     
     private func addSwipeGestureRecognizer() {
-        let swipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(dismissRye(_:)))
+        let swipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(cancelWorkItemAndDismissRye))
         switch position {
         case .top:
             swipeGestureRecognizer.direction = .up
@@ -199,18 +203,10 @@ public class RyeViewController: UIViewController {
     }
     
     private func shouldAddGestureRecognizer(for dismissMode: Rye.DismissMode) -> Bool {
-        if case Rye.DismissMode.gesture = dismissMode {
-            return true
-        } else {
+        if case Rye.DismissMode.nonDismissable = dismissMode {
             return false
+        } else {
+            return true
         }
     }
-    
-    private func shouldAddRemovalTimer(for dismissMode: Rye.DismissMode) -> Bool {
-        if case Rye.DismissMode.automatic = dismissMode {
-            return true
-        } else {
-            return false
-        }
-    }        
 }
