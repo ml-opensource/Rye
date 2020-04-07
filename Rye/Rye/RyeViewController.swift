@@ -80,6 +80,30 @@ public class RyeViewController: UIViewController {
         isShowing = UIApplication.shared.windows.contains(where: {$0.windowLevel == .alert})
     }
     
+    /**
+     Creates RyeViewController
+     
+     - Parameter alertType: the Rye AlertType
+     - Parameter viewType: the Rye ViewType, contains the UIView + Configuration
+     - Parameter position: contains the possition where the RyeView should be displayed on screen
+     - Parameter timeAlive: Represents the duration for the RyeView to be displayed to the user. If nil is provided, then you will be responsable of removing the RyeView
+     */
+    @available(*, deprecated, message: "Please see the README section \"Updating from v1.x.x to v2.0.0\" for notes on how to update")
+    public convenience init(alertType: Rye.AlertType = .toast,
+                viewType: Rye.ViewType = .standard(configuration: nil),
+                at position: Rye.Position = .bottom(inset: 16),
+                timeAlive: TimeInterval? = nil) {
+        var dismissMode: Rye.DismissMode
+        if let timeAlive = timeAlive {
+            dismissMode = .automatic(interval: timeAlive)
+        } else {
+            dismissMode = .nonDismissable
+        }
+        self.init(dismissMode: dismissMode,
+                  viewType: viewType,
+                  at: position)
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

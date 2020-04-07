@@ -235,7 +235,20 @@ The following keys can be used in the configuration dictionary when presenting a
 If configuration is set to nil, a default configuration will be used. Any options set, will override the default state.
 
 ## Example Project
-To learn more, please refer to the example project contained in this repository.
+To learn more, please refer to the RyeExample project contained in this repository.
+
+## Updating from v1.x.x to v2.0.0
+In version 2.0.0 of Rye we changed the way you display messages.
+
+Gone is the distinction between `.toast` and `.snackBar`. Instead every message is now displayed in a separate `UIWindow` at the very top level of your view stack and you must decide how to dismiss the message with the previously described [`displayModes`](#display-modes).
+
+This also means that the previous init method: `RyeViewController.init(alertType:viewType:at:timeAlive:)` has been deprecated. If you use this init method with version 2.0.0 you will receive a deprecation warning during compilation.
+
+You can - if you stubbornly insist - still use the now old `init` method. Behind the scenes Rye will create a new `RyeViewController` for you and set the `displayMode` based on these rules:
+
+_If_ you have added a `timeAlive` value, that `timeAlive` will be used to create a `displayMode` with a value of `.automatic(interval: timeAlive)`
+
+_If_ you have _not_ added a `timeAlive` value, the `displayMode` will be `.nonDismissable`.
 
 ## 👥 Credits
 Made with ❤️ at [Nodes](http://nodesagency.com).

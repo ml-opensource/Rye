@@ -31,6 +31,18 @@ public struct Rye {
          */
         case nonDismissable
     }
+    
+    @available(*, deprecated, message: "Please see the README section \"Updating from v1.x.x to v2.0.0\" for notes on how to update")
+    public enum AlertType {
+        /**
+         a SnackBar alert. Displayed at applications UIViewController level
+         */
+        case snackBar
+        /**
+         a Toast like alert. Displayed at alert level of the key UIWindow.
+         */
+        case toast
+    }
         
     public enum ViewType {
         case standard(configuration: RyeConfiguration?)

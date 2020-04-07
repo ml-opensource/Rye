@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="jYf-jg-epa">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="jYf-jg-epa">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -27,7 +27,7 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lf7-96-9iy">
                                                     <rect key="frame" x="16" y="16" width="382" height="158"/>
-                                                    <string key="text">This sandbox app allows you to see how the various settings in a Rye view affects how it is displayed. To change the dismissInterval and the content offset please update directly in the ViewController code.</string>
+                                                    <string key="text">This sandbox app shows you how the various settings of a Rye view affects how it is displayed. To change the dismissInterval and the contentInset, please update their values directly in the RyeDemoViewController.swift file.</string>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -247,17 +247,17 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="AKI-bb-s9G">
-                                                    <rect key="frame" x="16" y="16" width="288" height="68"/>
+                                                    <rect key="frame" x="16" y="16" width="382" height="68"/>
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4xz-C0-gCX">
-                                                            <rect key="frame" x="0.0" y="0.0" width="288" height="29"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="382" height="29"/>
                                                             <state key="normal" title="Generate Rye Message"/>
                                                             <connections>
                                                                 <action selector="didTapGenerateMessage:" destination="jYf-jg-epa" eventType="touchUpInside" id="x4b-wU-Sau"/>
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8ou-wz-e3Y">
-                                                            <rect key="frame" x="0.0" y="39" width="288" height="29"/>
+                                                            <rect key="frame" x="0.0" y="39" width="382" height="29"/>
                                                             <state key="normal" title="Dismiss Rye Message"/>
                                                             <connections>
                                                                 <action selector="didTapDismissMessage:" destination="jYf-jg-epa" eventType="touchUpInside" id="LET-UT-AsP"/>
