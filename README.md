@@ -214,7 +214,7 @@ By default Rye will calculate the safe area insets for you, so be sure to specif
 Rye provides two animation types:
 
 - slideInOut: slides the view in from either top or bottom (depending on which `Position` you have selected). When dismissed the view is slid out in the same direction.
-- fadeInOut: fades the view in and out again when dismissed.
+- `fadeInOut`: fades the view in and out again when dismissed.
 
 To control how long the animation will take when using a `.standard` view, please use the `animationDuration` key of the `RyeConfiguration` and provide a `TimeInterval` value.
 
