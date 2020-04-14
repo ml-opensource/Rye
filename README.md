@@ -73,7 +73,7 @@ public enum ViewType {
 }
 ```
 
-As you can see, the `standard` ViewType takes an optional `RyeConfiguration` as a parameter. This means that you don't _have_ to provide a `RyeConfiguration` in which case default values will be used for all parameters including the text (but you probably don't want an alert showing the text "Add a message" do you?).
+As you can see, the `standard` ViewType takes an optional `RyeConfiguration` as a parameter. This means that you don't _have_ to provide a `RyeConfiguration` in which case default values will be used for all parameters including the text (but you probably don't want an alert showing the text "Add a message", do you?).
 
  The `custom` ViewType takes the view you would like to use and an `Rye.AnimationType` (with a default value already provided). For more on the `AnimationType` please refer to the section [Animation Type](#animation-type) below.
 
