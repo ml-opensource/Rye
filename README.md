@@ -234,10 +234,33 @@ The following keys can be used in the configuration dictionary when presenting a
 
 If configuration is set to nil, a default configuration will be used. Any options set, will override the default state.
 
+## ⚠️ Gotchas
+
+To display a Rye message a `parentView` is needed to determine _in relation to what_ the Rye message is positioned.
+
+If you try to display a Rye message before a `parentView` can be obtained, you will see this warning in the console of your IDE.
+
+> A parentView could not be found to display the Rye message on. Are you trying to show a Rye message before the view lifecycle is ready to display views?
+
+### An Example
+To see the above error message in all its beauty, try adding the code below to `viewDidLoad` of a `UIViewController`
+
+```swift
+let ryeConfiguration: RyeConfiguration = [Rye.Configuration.Key.text: "Message for the user"]
+let rye = RyeViewController.init(dismissMode: .gesture,
+                                 viewType: .standard(configuration: ryeConfiguration),
+                                 at: .bottom(inset: 16))
+rye.show()
+```
+
+You will see the error message in the console of your IDE of choice and nothing else! 
+
+Rye could not obtain a `parentView` so it showed the error message and stopped execution.
+
 ## Example Project
 To learn more, please refer to the RyeExample project contained in this repository.
 
-## Updating from v1.x.x to v2.0.0
+## ⬆️ Updating from v1.x.x to v2.0.0
 In version 2.0.0 of Rye we changed the way you display messages.
 
 Gone is the distinction between `.toast` and `.snackBar`. Instead every message is now displayed in a separate `UIWindow` at the very top level of your view stack and you must decide how to dismiss the message with the previously described [`displayModes`](#display-modes).
