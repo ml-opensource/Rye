@@ -28,10 +28,9 @@ public class RyeViewController: UIViewController {
     }
     
     // all presentation logic is done using parentView
-    var parentView: UIView {
+    var parentView: UIView? {
         guard let keyWindow = UIApplication.shared.keyWindow else {
-            assertionFailure("Can not present snack bar if there is no keyWindow")
-            return UIView()
+            return nil
         }
         return keyWindow
     }
@@ -126,6 +125,11 @@ public class RyeViewController: UIViewController {
     
     func showRye(for type: Rye.ViewType) {
         func addRyeView(_ ryeView: UIView) {
+            guard let parentView = parentView else {
+                NSLog("A parentView could not be found to display the Rye message on. Are you trying to show a Rye message before the view lifecycle is ready to display views?")
+                return
+            }
+            
             self.ryeView = ryeView
             
             if shouldAddGestureRecognizer(for: dismissMode) {
@@ -133,6 +137,7 @@ public class RyeViewController: UIViewController {
                 addSwipeGestureRecognizer()
             }
         
+            
             // add RyeView to hierarchy
             parentView.addSubview(ryeView)
             ryeView.translatesAutoresizingMaskIntoConstraints = false

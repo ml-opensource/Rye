@@ -19,6 +19,11 @@ public extension RyeViewController {
             NSLog("A Rye alert is already showing. Multiple Ryes can not be presented at the same time")
             return
         }
+        
+        guard let parentView = parentView else {
+            NSLog("A parentView could not be found to display the Rye message on. Are you trying to show a Rye message before the view lifecycle is ready to display views?")
+            return
+        }
     
         self.window = createAlertWindow()
         
@@ -139,7 +144,7 @@ public extension RyeViewController {
             case .fadeInOut:
                 self.ryeView.alpha = 1
             case .slideInOut:
-                self.parentView.layoutIfNeeded()
+                self.parentView?.layoutIfNeeded()
             }
         }
         
@@ -171,7 +176,7 @@ public extension RyeViewController {
             case .fadeInOut:
                 self.ryeView.alpha = 0
             case .slideInOut:
-                self.parentView.layoutIfNeeded()
+                self.parentView?.layoutIfNeeded()
             }
         }, completion: { _ in
             completion()
