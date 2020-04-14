@@ -284,6 +284,7 @@
                     </tableView>
                     <connections>
                         <outlet property="dismissRyeButton" destination="8ou-wz-e3Y" id="2hk-fM-o5R"/>
+                        <outlet property="generateMessageButton" destination="4xz-C0-gCX" id="dyi-Jl-lPO"/>
                         <outlet property="ryeMessageTextField" destination="Yfv-08-rut" id="XYm-Pa-JLZ"/>
                     </connections>
                 </tableViewController>
