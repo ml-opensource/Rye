@@ -236,26 +236,14 @@ If configuration is set to nil, a default configuration will be used. Any option
 
 ## ⚠️ Gotchas
 
-To display a Rye message a `parentView` is needed to determine _in relation to what_ the Rye message is positioned.
+In order to display a Rye message a `parentView` is needed to determine _in relation to what_ the Rye message is positioned.
 
 If you try to display a Rye message before a `parentView` can be obtained, you will see this warning in the console of your IDE.
 
 > A parentView could not be found to display the Rye message on. Are you trying to show a Rye message before the view lifecycle is ready to display views?
 
-### An Example
-To see the above error message in all its beauty, try adding the code below to `viewDidLoad` of a `UIViewController`
+This can be seen if you try to call `show()` on a `RyeViewController` in `viewDidLoad()` of a `UIViewController` for instance.
 
-```swift
-let ryeConfiguration: RyeConfiguration = [Rye.Configuration.Key.text: "Message for the user"]
-let rye = RyeViewController.init(dismissMode: .gesture,
-                                 viewType: .standard(configuration: ryeConfiguration),
-                                 at: .bottom(inset: 16))
-rye.show()
-```
-
-You will see the error message in the console of your IDE of choice and nothing else! 
-
-Rye could not obtain a `parentView` so it showed the error message and stopped execution.
 
 ## Example Project
 To learn more, please refer to the RyeExample project contained in this repository.
