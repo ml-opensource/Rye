@@ -122,7 +122,8 @@ class RyeDemoViewController: UITableViewController {
             let ryeConfiguration: RyeConfiguration = [
                 .text : ryeMessageTextField.text ?? "",
                 .backgroundColor: UIColor.black.withAlphaComponent(0.5),
-                .animationType: animationType
+                .animationType: animationType,
+                .cornerRadius: CGFloat(15.0)
             ]
             selectedViewType = .standard(configuration: ryeConfiguration)
         }

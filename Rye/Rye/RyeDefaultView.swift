@@ -27,7 +27,7 @@ class RyeDefaultView: UIView {
         
         makeMessageLabel(with: (configuration?[.text] as? String) ?? "Add a message",
                          font: (configuration?[.textFont] as? UIFont) ?? UIFont.systemFont(ofSize: 14, weight: .semibold),
-                         textColor: (configuration?[.text] as? UIColor) ?? .white)
+                         textColor: (configuration?[.textColor] as? UIColor) ?? .white)
     }
     
     required init?(coder aDecoder: NSCoder) {
