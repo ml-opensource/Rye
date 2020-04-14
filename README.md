@@ -171,7 +171,7 @@ rye.show(withDismissCompletion: {
 
 ### Dismiss Rye Alerts Manually
 
-If you have selected a to show a Rye alert as `.nonDismissable` you have to dismiss it yourself. Keep a reference to the `RyeViewController` and call `dismiss` when you are ready to let go.
+If you have selected to show a Rye alert as `.nonDismissable` you have to dismiss it yourself. Keep a reference to the `RyeViewController` and call `dismiss` when you are ready to let go.
 
 ```swift
 import Rye
