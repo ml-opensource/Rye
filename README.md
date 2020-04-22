@@ -92,7 +92,7 @@ For more on the `Rye.Position` please refer to the section [Position](#position)
 
 ### Display a Default Rye
 
-Following these principles we are now ready to show our first Rye alert.
+Following these principles, we are now ready to show our first Rye alert.
 
 ```swift
 import Rye
@@ -131,7 +131,7 @@ import Rye
 let ryeConfiguration: RyeConfiguration = [
     Rye.Configuration.Key.text: "Error message for the user",
     Rye.Configuration.Key.backgroundColor: UIColor.red.withAlphaComponent(0.4),
-    Rye.Configuration.Key.animationType: Rye.AnimationType.fadeInOut]
+    Rye.Configuration.Key.animationType: Rye.AnimationType.fadeInOut
 ]
 
 let rye = RyeViewController.init(viewType: .standard(configuration: ryeConfiguration),
@@ -198,13 +198,13 @@ Rye supports three different `displayMode` values which can be passed when creat
 
 - `automatic`: The alert appears and disappears automatically after a specified interval.
 - `gesture`: To dismiss the alert you can tap or swipe it.
-- `nonDismissable`: The alert will stay permanently on screen until it is dismissed by calling `dismiss()` on your `RyeViewController` instance.
+- `nonDismissable`: The alert will stay permanently on the screen until it is dismissed by calling `dismiss()` on your `RyeViewController` instance.
 
 If you do not pass this value when creating a new `RyeViewController`, a default value of `automatic` with a default interval of 2.5 seconds is used (the default interval is defined in `Rye.defaultDismissInterval`)
 
 #### Position
 
-With Rye you can specify the position where the Rye alert will be displayed on screen via the `position` parameter, which takes an associated value that allows you to specify the inset.
+With Rye, you can specify the position where the Rye alert will be displayed on the screen via the `position` parameter, which takes an associated value that allows you to specify the inset.
 
 By default Rye will calculate the safe area insets for you, so be sure to specify only the extra desired inset.
 
@@ -251,7 +251,7 @@ To learn more, please refer to the RyeExample project contained in this reposito
 ## ⬆️ Updating from v1.x.x to v2.0.0
 In version 2.0.0 of Rye we changed the way you display messages.
 
-Gone is the distinction between `.toast` and `.snackBar`. Instead every message is now displayed in a separate `UIWindow` at the very top level of your view stack and you must decide how to dismiss the message with the previously described [`displayModes`](#display-modes).
+Gone is the distinction between `.toast` and `.snackBar`. Instead, every message is now displayed in a separate `UIWindow` at the very top level of your view stack and you must decide how to dismiss the message with the previously described [`displayModes`](#display-modes).
 
 This also means that the previous init method: `RyeViewController.init(alertType:viewType:at:timeAlive:)` has been deprecated. If you use this init method with version 2.0.0 you will receive a deprecation warning during compilation.
 
