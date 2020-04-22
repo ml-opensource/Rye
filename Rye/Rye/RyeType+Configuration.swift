@@ -12,6 +12,27 @@ public typealias RyeConfiguration = [Rye.Configuration.Key: Any]
 
 public struct Rye {
     
+    /**
+        default period of time to show an alert in ´DismissMode.automatic´
+     */
+    public static var defaultDismissInterval: TimeInterval = 2.5
+    
+    public enum DismissMode {
+        /**
+         The message will automatically disappear after `interval` seconds
+         */
+        case automatic(interval: TimeInterval)
+        /**
+         The message can be dismissed by tapping or swiping it away
+         */
+        case gesture
+        /**
+         The message is not dismissable
+         */
+        case nonDismissable
+    }
+    
+    @available(*, deprecated, message: "Please see the README section \"Updating from v1.x.x to v2.0.0\" for notes on how to update")
     public enum AlertType {
         /**
          a SnackBar alert. Displayed at applications UIViewController level
@@ -22,7 +43,7 @@ public struct Rye {
          */
         case toast
     }
-    
+        
     public enum ViewType {
         case standard(configuration: RyeConfiguration?)
         case custom(UIView, animationType: AnimationType = .slideInOut)
@@ -70,5 +91,4 @@ public struct Rye {
         case slideInOut
         case fadeInOut
     }
-    
 }

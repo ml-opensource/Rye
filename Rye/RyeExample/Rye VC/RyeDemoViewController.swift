@@ -9,109 +9,143 @@
 import UIKit
 import Rye
 
-class RyeDemoViewController: UIViewController {
+class RyeDemoViewController: UITableViewController {
+    
+    // MARK: - Outlets
+    @IBOutlet weak var ryeMessageTextField: UITextField!
+    @IBOutlet weak var dismissRyeButton: UIButton!
+    @IBOutlet weak var generateMessageButton: UIButton!
 
+    // MARK: - Variables
+    var ryeViewController: RyeViewController?
+    var isShowingNonDismissableMessage: Bool = false
+    
+    let contentInset: CGFloat = 20.0
+    var dismissMode: Rye.DismissMode = .automatic(interval: Rye.defaultDismissInterval)
+    var viewType: Rye.ViewType = .standard(configuration: nil)
+    var position: Rye.Position = .top(inset: 20.0)
+    var animationType: Rye.AnimationType = .slideInOut
+    let customView = RyeImageView.fromNib()
+    
+    // MARK: - Lifecycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        displayCustomSnackBar()
-    
+        tableView.tableFooterView = UIView()
+        dismissRyeButton.isHidden = true
     }
     
-    private func x() {
-        let ryeConfiguration: RyeConfiguration = [
-            Rye.Configuration.Key.text: "Some text",
-            Rye.Configuration.Key.backgroundColor: UIColor.systemRed,
-            Rye.Configuration.Key.cornerRadius: CGFloat(16),
-            Rye.Configuration.Key.textFont: UIFont.systemFont(ofSize: 16),
-            Rye.Configuration.Key.animationType: Rye.AnimationType.slideInOut
-        ]
-        
-        let rye = RyeViewController(alertType: .snackBar,
-                                    viewType: .standard(configuration: ryeConfiguration),
-                                    at: .top(inset: 106),
-                                    timeAlive: 12.5)
-        rye.show()
+    // MARK: - TableView methods
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.section {
+        case 0, 1:
+            break
+        case 2:
+            updateDismissMode(for: indexPath)
+        case 3:
+            updateViewMode(for: indexPath)
+        case 4:
+            updatePosition(for: indexPath)
+        case 5:
+            updateAnimationType(for: indexPath)
+        default:
+            break
+        }
+    }
+    
+    private func updateDismissMode(for indexPath: IndexPath) {
+        for row in 0...2 {
+            tableView.cellForRow(at: IndexPath(row: row, section: indexPath.section))?.accessoryType = .none
+        }
+        tableView.cellForRow(at: IndexPath(row: indexPath.row, section: indexPath.section))?.accessoryType = .checkmark
+        switch indexPath.row {
+        case 0:
+            dismissMode = .automatic(interval: Rye.defaultDismissInterval)
+        case 1:
+            dismissMode = .gesture
+        case 2:
+            dismissMode = .nonDismissable
+        default:
+            break
+        }
+    }
+    
+    private func updateViewMode(for indexPath: IndexPath) {
+        for row in 0...1 {
+            tableView.cellForRow(at: IndexPath(row: row, section: indexPath.section))?.accessoryType = .none
+        }
+        tableView.cellForRow(at: IndexPath(row: indexPath.row, section: indexPath.section))?.accessoryType = .checkmark
+        switch indexPath.row {
+        case 0:
+            viewType = .standard(configuration: nil)
+        case 1:
+            viewType = .custom(customView, animationType: animationType)
+        default:
+            break
+        }
     }
 
-    private func displayDefaultToast() {
-        // display Default Rye
-        
-        let ryeConfiguration: RyeConfiguration = [Rye.Configuration.Key.text: "Message for the user"]
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            let rye = RyeViewController.init(alertType: .toast,
-                                             viewType: .standard(configuration: ryeConfiguration),
-                                             at: .bottom(inset: 16),
-                                             timeAlive: 20)
-            rye.show()
+    private func updatePosition(for indexPath: IndexPath) {
+        for row in 0...1 {
+            tableView.cellForRow(at: IndexPath(row: row, section: indexPath.section))?.accessoryType = .none
+        }
+        tableView.cellForRow(at: IndexPath(row: indexPath.row, section: indexPath.section))?.accessoryType = .checkmark
+        switch indexPath.row {
+        case 0:
+            position = .top(inset: contentInset)
+        case 1:
+            position = .bottom(inset: contentInset)
+        default:
+            break
+        }
+    }
+
+
+    private func updateAnimationType(for indexPath: IndexPath) {
+        for row in 0...1 {
+            tableView.cellForRow(at: IndexPath(row: row, section: indexPath.section))?.accessoryType = .none
+        }
+        tableView.cellForRow(at: IndexPath(row: indexPath.row, section: indexPath.section))?.accessoryType = .checkmark
+        switch indexPath.row {
+        case 0:
+            animationType = .slideInOut
+        case 1:
+            animationType = .fadeInOut
+        default:
+            break
         }
     }
     
-    private func displayDefaultToastWithCustomConfiguration() {
-        // display Default Rye with custom configuration
+    // MARK: - IBActions
+    @IBAction func didTapGenerateMessage(_ sender: UIButton) {
+        var selectedViewType = viewType
+        generateMessageButton.isEnabled = false
+
+        if case Rye.ViewType.standard = viewType {
+            let ryeConfiguration: RyeConfiguration = [
+                .text : ryeMessageTextField.text ?? "",
+                .backgroundColor: UIColor.black.withAlphaComponent(0.5),
+                .animationType: animationType,
+                .cornerRadius: CGFloat(15.0)
+            ]
+            selectedViewType = .standard(configuration: ryeConfiguration)
+        }
         
-        let ryeConfiguration: RyeConfiguration = [Rye.Configuration.Key.text: "Error message for the user",
-                                                  Rye.Configuration.Key.backgroundColor: UIColor.red.withAlphaComponent(0.4),
-                                                  Rye.Configuration.Key.animationType: Rye.AnimationType.fadeInOut]
+        ryeViewController = RyeViewController(dismissMode: dismissMode,
+                                              viewType: selectedViewType,
+                                              at: position)
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            let rye = RyeViewController.init(alertType: .toast,
-                                             viewType: .standard(configuration: ryeConfiguration),
-                                             at: .bottom(inset: 16),
-                                             timeAlive: 2)
-            rye.show()
+        ryeViewController?.show(withDismissCompletion: {
+            self.ryeViewController = nil
+            self.generateMessageButton.isEnabled = true
+        })
+        
+        if case Rye.DismissMode.nonDismissable = dismissMode {
+            dismissRyeButton.isHidden = false
         }
     }
     
-    private func displayCustomToast() {
-        // display Custom Rye
-        
-        let customRyeView = RyeView()
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            let rye = RyeViewController.init(alertType: .toast,
-                                             viewType: .custom(customRyeView),
-                                             at: .bottom(inset: 16),
-                                             timeAlive: 2)
-            rye.show()
-        }
-    }
-    
-    private func displayCustomSnackBar() {
-        let customRyeView = RyeImageView.fromNib()
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            let rye = RyeViewController.init(alertType: .snackBar,
-                                             viewType: .custom(customRyeView),
-                                             at: .top(inset: 16),
-                                             timeAlive: nil)
-            rye.show()
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                rye.dismiss()
-            }
-        }
-        
-        
-        
-    }
-    
-    private func displayCustomSnackBarWithButton() {
-        let customRyeView = RyeButtonView.fromNib()
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            let rye = RyeViewController.init(alertType: .snackBar,
-                                             viewType: .custom(customRyeView),
-                                             at: .top(inset: 16),
-                                             timeAlive: nil)
-            rye.show()
-        }
-        
-    }
-    
-    @IBAction func buttonAction(_ sender: Any) {
-        print("tap")
+    @IBAction func didTapDismissMessage(_ sender: UIButton) {
+        ryeViewController?.dismiss()
+        dismissRyeButton.isHidden = true
     }
 }
-

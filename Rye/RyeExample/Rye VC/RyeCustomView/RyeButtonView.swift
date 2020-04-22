@@ -8,7 +8,13 @@
 
 import UIKit
 
+protocol RyeButtonViewDelegate: class {
+    func didTapButton(in sender: RyeButtonView)
+}
+
 class RyeButtonView: UIView {
+    
+    weak var delegate: RyeButtonViewDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -20,5 +26,6 @@ class RyeButtonView: UIView {
     
     @IBAction func reconnectAction(_ sender: Any) {
         print("reconnect")
+        delegate?.didTapButton(in: self)
     }
 }
