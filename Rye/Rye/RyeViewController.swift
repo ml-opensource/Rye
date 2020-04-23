@@ -28,10 +28,9 @@ public class RyeViewController: UIViewController {
     }
     
     // all presentation logic is done using parentView
-    var parentView: UIView {
+    var parentView: UIView? {
         guard let keyWindow = UIApplication.shared.keyWindow else {
-            assertionFailure("Can not present snack bar if there is no keyWindow")
-            return UIView()
+            return nil
         }
         return keyWindow
     }
@@ -42,6 +41,7 @@ public class RyeViewController: UIViewController {
     var animationDuration: TimeInterval!
     var animationType: Rye.AnimationType!
     var dismissCompletion: (() -> Void)? = nil
+    private var dismissWorkItem: DispatchWorkItem?
     
     // MARK: - Rye View Properties
     
@@ -80,6 +80,30 @@ public class RyeViewController: UIViewController {
         isShowing = UIApplication.shared.windows.contains(where: {$0.windowLevel == .alert})
     }
     
+    /**
+     Creates RyeViewController
+     
+     - Parameter alertType: the Rye AlertType
+     - Parameter viewType: the Rye ViewType, contains the UIView + Configuration
+     - Parameter position: contains the possition where the RyeView should be displayed on screen
+     - Parameter timeAlive: Represents the duration for the RyeView to be displayed to the user. If nil is provided, then you will be responsable of removing the RyeView
+     */
+    @available(*, deprecated, message: "Please see the README section \"Updating from v1.x.x to v2.0.0\" for notes on how to update")
+    public convenience init(alertType: Rye.AlertType = .toast,
+                viewType: Rye.ViewType = .standard(configuration: nil),
+                at position: Rye.Position = .bottom(inset: 16),
+                timeAlive: TimeInterval? = nil) {
+        var dismissMode: Rye.DismissMode
+        if let timeAlive = timeAlive {
+            dismissMode = .automatic(interval: timeAlive)
+        } else {
+            dismissMode = .nonDismissable
+        }
+        self.init(dismissMode: dismissMode,
+                  viewType: viewType,
+                  at: position)
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -92,7 +116,8 @@ public class RyeViewController: UIViewController {
         view.backgroundColor = .clear
     }
     
-    @objc func dismissRye(_ sender: Any) {
+    @objc func cancelWorkItemAndDismissRye(_ sender: Any) {
+        dismissWorkItem?.cancel()
         dismiss()
     }
     
@@ -100,6 +125,11 @@ public class RyeViewController: UIViewController {
     
     func showRye(for type: Rye.ViewType) {
         func addRyeView(_ ryeView: UIView) {
+            guard let parentView = parentView else {
+                NSLog("A parentView could not be found to display the Rye message on. Are you trying to show a Rye message before the view lifecycle is ready to display views?")
+                return
+            }
+            
             self.ryeView = ryeView
             
             if shouldAddGestureRecognizer(for: dismissMode) {
@@ -107,6 +137,7 @@ public class RyeViewController: UIViewController {
                 addSwipeGestureRecognizer()
             }
         
+            
             // add RyeView to hierarchy
             parentView.addSubview(ryeView)
             ryeView.translatesAutoresizingMaskIntoConstraints = false
@@ -149,9 +180,11 @@ public class RyeViewController: UIViewController {
         // trigger the dismiss based on timeAlive value
         switch dismissMode {
         case .automatic(interval: let interval):
-            DispatchQueue.main.asyncAfter(deadline: .now() + interval + animationDuration) {
+            dismissWorkItem = DispatchWorkItem(block: {
                 self.dismiss()
-            }
+            })
+            DispatchQueue.main.asyncAfter(deadline: .now() + interval + animationDuration,
+                                          execute: self.dismissWorkItem!)
         default:
             break
         }
@@ -159,12 +192,12 @@ public class RyeViewController: UIViewController {
     
     // MARK: - Private Helper methods
     private func addTapGestureRecognizer() {
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissRye(_:)))
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(cancelWorkItemAndDismissRye))
         ryeView.addGestureRecognizer(tapGestureRecognizer)
     }
     
     private func addSwipeGestureRecognizer() {
-        let swipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(dismissRye(_:)))
+        let swipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(cancelWorkItemAndDismissRye))
         switch position {
         case .top:
             swipeGestureRecognizer.direction = .up
@@ -175,18 +208,10 @@ public class RyeViewController: UIViewController {
     }
     
     private func shouldAddGestureRecognizer(for dismissMode: Rye.DismissMode) -> Bool {
-        if case Rye.DismissMode.gesture = dismissMode {
-            return true
-        } else {
+        if case Rye.DismissMode.nonDismissable = dismissMode {
             return false
+        } else {
+            return true
         }
     }
-    
-    private func shouldAddRemovalTimer(for dismissMode: Rye.DismissMode) -> Bool {
-        if case Rye.DismissMode.automatic = dismissMode {
-            return true
-        } else {
-            return false
-        }
-    }        
 }

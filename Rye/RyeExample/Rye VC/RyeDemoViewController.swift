@@ -14,7 +14,8 @@ class RyeDemoViewController: UITableViewController {
     // MARK: - Outlets
     @IBOutlet weak var ryeMessageTextField: UITextField!
     @IBOutlet weak var dismissRyeButton: UIButton!
-    
+    @IBOutlet weak var generateMessageButton: UIButton!
+
     // MARK: - Variables
     var ryeViewController: RyeViewController?
     var isShowingNonDismissableMessage: Bool = false
@@ -117,12 +118,14 @@ class RyeDemoViewController: UITableViewController {
     // MARK: - IBActions
     @IBAction func didTapGenerateMessage(_ sender: UIButton) {
         var selectedViewType = viewType
-        
+        generateMessageButton.isEnabled = false
+
         if case Rye.ViewType.standard = viewType {
             let ryeConfiguration: RyeConfiguration = [
                 .text : ryeMessageTextField.text ?? "",
                 .backgroundColor: UIColor.black.withAlphaComponent(0.5),
-                .animationType: animationType
+                .animationType: animationType,
+                .cornerRadius: CGFloat(15.0)
             ]
             selectedViewType = .standard(configuration: ryeConfiguration)
         }
@@ -133,6 +136,7 @@ class RyeDemoViewController: UITableViewController {
         
         ryeViewController?.show(withDismissCompletion: {
             self.ryeViewController = nil
+            self.generateMessageButton.isEnabled = true
         })
         
         if case Rye.DismissMode.nonDismissable = dismissMode {

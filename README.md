@@ -44,7 +44,7 @@ To display a Rye alert you declare a new `RyeViewController` and then call:
 - `show`: to show the alert
 - `dismiss`: to dismiss the alert
 
-**note:** Depending on which `dismissMode` you have selected, you may not need to dismiss the alert yourself, see the section about [`displayModes`](#display-modes) below for more information.
+**Note:** Depending on which `dismissMode` you have selected, you may not need to dismiss the alert yourself, see the section about [`displayModes`](#display-modes) below for more information.
 
 At the very minimum you need to consider:
 
@@ -73,9 +73,9 @@ public enum ViewType {
 }
 ```
 
-As you can see, the `standard` ViewType takes an optional `RyeConfiguration` as a parameter. This means that you don't _have_ to provide a `RyeConfiguration` in which case default values will be used for all parameters including the text (but you probably don't want an alert showing the text "Add a message" do you?).
+As you can see, the `standard` ViewType takes an optional `RyeConfiguration` as a parameter. This means that you don't _have_ to provide a `RyeConfiguration` in which case default values will be used for all parameters including the text (but you probably don't want an alert showing the text "Add a message", do you?).
 
- The `custom` ViewType takes the view you would like to use and an `Rye.AnimationType` (with a default value already provided). For more on the `AnimationType` please refer to the section [Animation Type](#animation-type) below.
+ The `custom` ViewType takes the view you would like to use and a `Rye.AnimationType` (with a default value already provided). For more on the `AnimationType` please refer to the section [Animation Type](#animation-type) below.
 
 #### Where To Show the Alert?
 
@@ -92,7 +92,7 @@ For more on the `Rye.Position` please refer to the section [Position](#position)
 
 ### Display a Default Rye
 
-Following these principles we are now ready to show our first Rye alert.
+Following these principles, we are now ready to show our first Rye alert.
 
 ```swift
 import Rye
@@ -131,7 +131,7 @@ import Rye
 let ryeConfiguration: RyeConfiguration = [
     Rye.Configuration.Key.text: "Error message for the user",
     Rye.Configuration.Key.backgroundColor: UIColor.red.withAlphaComponent(0.4),
-    Rye.Configuration.Key.animationType: Rye.AnimationType.fadeInOut]
+    Rye.Configuration.Key.animationType: Rye.AnimationType.fadeInOut
 ]
 
 let rye = RyeViewController.init(viewType: .standard(configuration: ryeConfiguration),
@@ -147,9 +147,9 @@ For even more control you can create your own subclass of `UIView` and use `.cus
 ```swift
 import Rye
 ...
-let customRyeView = RyeView()
 
-let rye = RyeViewController.init(viewType: .custom(customRyeView),
+let customView = YourCustomViewHere()
+let rye = RyeViewController.init(viewType: .custom(customView),
                                  at: .bottom(inset: 16))
 rye.show()
 
@@ -171,7 +171,7 @@ rye.show(withDismissCompletion: {
 
 ### Dismiss Rye Alerts Manually
 
-If you have selected a to show a Rye alert as `.nonDismissable` you have to dismiss it yourself. Keep a reference to the `RyeViewController` and call `dismiss` when you are ready to let go.
+If you have selected to show a Rye alert as `.nonDismissable` you have to dismiss it yourself. Keep a reference to the `RyeViewController` and call `dismiss` when you are ready to let go.
 
 ```swift
 import Rye
@@ -198,13 +198,13 @@ Rye supports three different `displayMode` values which can be passed when creat
 
 - `automatic`: The alert appears and disappears automatically after a specified interval.
 - `gesture`: To dismiss the alert you can tap or swipe it.
-- `nonDismissable`: The alert will stay permanently on screen until it is dismissed by calling `dismiss()` on your `RyeViewController` instance.
+- `nonDismissable`: The alert will stay permanently on the screen until it is dismissed by calling `dismiss()` on your `RyeViewController` instance.
 
 If you do not pass this value when creating a new `RyeViewController`, a default value of `automatic` with a default interval of 2.5 seconds is used (the default interval is defined in `Rye.defaultDismissInterval`)
 
 #### Position
 
-With Rye you can specify the position where the Rye alert will be displayed on screen via the `position` parameter, which takes an associated value that allows you to specify the inset.
+With Rye, you can specify the position where the Rye alert will be displayed on the screen via the `position` parameter, which takes an associated value that allows you to specify the inset.
 
 By default Rye will calculate the safe area insets for you, so be sure to specify only the extra desired inset.
 
@@ -213,8 +213,8 @@ By default Rye will calculate the safe area insets for you, so be sure to specif
 
 Rye provides two animation types:
 
-- slideInOut: slides the view in from either top or bottom (depending on which `Position` you have selected). When dismissed the view is slid out in the same direction.
-- fadeInOut: fades the view in and out again when dismissed.
+- `slideInOut`: slides the view in from either top or bottom (depending on which `Position` you have selected). When dismissed the view slides out in the same direction.
+- `fadeInOut`: fades the view in and out again when dismissed.
 
 To control how long the animation will take when using a `.standard` view, please use the `animationDuration` key of the `RyeConfiguration` and provide a `TimeInterval` value.
 
@@ -234,8 +234,32 @@ The following keys can be used in the configuration dictionary when presenting a
 
 If configuration is set to nil, a default configuration will be used. Any options set, will override the default state.
 
+## ⚠️ Gotchas
+
+In order to display a Rye message a `parentView` is needed to determine _in relation to what_ the Rye message is positioned.
+
+If you try to display a Rye message before a `parentView` can be obtained, you will see this warning in the console of your IDE.
+
+> A parentView could not be found to display the Rye message on. Are you trying to show a Rye message before the view lifecycle is ready to display views?
+
+This can be seen if you try to call `show()` on a `RyeViewController` in `viewDidLoad()` of a `UIViewController` for instance.
+
+
 ## Example Project
-To learn more, please refer to the example project contained in this repository.
+To learn more, please refer to the RyeExample project contained in this repository.
+
+## ⬆️ Updating from v1.x.x to v2.0.0
+In version 2.0.0 of Rye we changed the way you display messages.
+
+Gone is the distinction between `.toast` and `.snackBar`. Instead, every message is now displayed in a separate `UIWindow` at the very top level of your view stack and you must decide how to dismiss the message with the previously described [`displayModes`](#display-modes).
+
+This also means that the previous init method: `RyeViewController.init(alertType:viewType:at:timeAlive:)` has been deprecated. If you use this init method with version 2.0.0 you will receive a deprecation warning during compilation.
+
+You can - if you stubbornly insist - still use the now old `init` method. Behind the scenes Rye will create a new `RyeViewController` for you and set the `displayMode` based on these rules:
+
+_If_ you have added a `timeAlive` value, that `timeAlive` will be used to create a `displayMode` with a value of `.automatic(interval: timeAlive)`
+
+_If_ you have _not_ added a `timeAlive` value, the `displayMode` will be `.nonDismissable`.
 
 ## 👥 Credits
 Made with ❤️ at [Nodes](http://nodesagency.com).
