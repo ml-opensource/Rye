@@ -6,7 +6,7 @@
 //  Copyright © 2020 Nodes. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class PassThroughWindow: UIWindow {
     public var passThroughTag: Int?
