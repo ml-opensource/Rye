@@ -4,7 +4,7 @@ Pod::Spec.new do |spec|
 
   spec.name         = "Rye"
 
-  spec.version      = "2.0.0"
+  spec.version      = "2.0.1"
   spec.summary      = "Rye allows you to present non intrusive alerts to your users. You can choose to display the default Rye alert or your own custom UIView."
 
   spec.homepage     = "https://github.com/nodes-ios/Rye"
