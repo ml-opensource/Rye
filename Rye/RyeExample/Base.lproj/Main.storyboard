@@ -27,7 +27,7 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lf7-96-9iy">
                                                     <rect key="frame" x="16" y="16" width="382" height="158"/>
-                                                    <string key="text">This sandbox app shows you how the various settings of a Rye view affects how it is displayed. To change the dismissInterval and the contentInset, please update their values directly in the RyeDemoViewController.swift file.</string>
+                                                    <string key="text">This sandbox app shows you how the various settings of a Rye view affects how it is displayed. To change the dismissInterval please update the values directly in the RyeDemoViewController.swift file.</string>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -91,6 +91,7 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="a1M-uU-5aD" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="p9S-cJ-7az" secondAttribute="trailing" constant="16" id="H4q-cp-lfd"/>
                                                 <constraint firstItem="p9S-cJ-7az" firstAttribute="leading" secondItem="keP-ZO-SKV" secondAttribute="leading" constant="16" id="agN-jJ-MU6"/>
                                                 <constraint firstItem="a1M-uU-5aD" firstAttribute="centerY" secondItem="keP-ZO-SKV" secondAttribute="centerY" id="lge-2Y-gFM"/>
                                                 <constraint firstItem="p9S-cJ-7az" firstAttribute="centerY" secondItem="keP-ZO-SKV" secondAttribute="centerY" id="tLd-U3-Owc"/>
