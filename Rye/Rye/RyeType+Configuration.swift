@@ -46,7 +46,7 @@ public struct Rye {
         
     public enum ViewType {
         case standard(configuration: RyeConfiguration?)
-        case custom(UIView, animationType: AnimationType = .slideInOut)
+        case custom(UIView, animationType: AnimationType = .slideInOut, ignoreSafeAreas: Bool = false)
     }
     
     public enum Configuration {

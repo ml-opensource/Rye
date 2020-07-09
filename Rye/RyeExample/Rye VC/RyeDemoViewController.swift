@@ -96,6 +96,7 @@ class RyeDemoViewController: UITableViewController {
             viewType = .standard(configuration: nil)
         case 1:
             viewType = .custom(customView, animationType: animationType)
+//            viewType = .custom(customView, animationType: animationType, ignoreSafeAreas: true)
         default:
             break
         }
