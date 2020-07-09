@@ -118,9 +118,13 @@ public extension RyeViewController {
         }
         
         func getRyeViewPositionConstant() -> CGFloat {
-            let safeArea = getSafeAreaSpacing()
+            
+            var safeArea = getSafeAreaSpacing()
 
-            // update RyeView bottom constraint to position it on screen
+            if case Rye.ViewType.custom(_, animationType: _) = viewType {
+                safeArea = 0
+            }
+            
             switch position {
             case .bottom(let inset):
                 return -safeArea - inset
