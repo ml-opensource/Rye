@@ -32,7 +32,7 @@ github "nodes-ios/Rye"
 
 ### Cocoapods
 ~~~bash
-pod 'nodes-ios/Rye'
+pod 'Rye'
 ~~~
 
 ## 💻 Usage
