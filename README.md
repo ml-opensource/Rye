@@ -69,13 +69,24 @@ You can use the default Rye alert or you can create your own view and use that i
 ```swift
 public enum ViewType {
     case standard(configuration: RyeConfiguration?)
-    case custom(UIView, animationType: AnimationType = .slideInOut)
+    case custom(UIView, configuration: RyeConfiguration?)
 }
 ```
 
-As you can see, the `standard` ViewType takes an optional `RyeConfiguration` as a parameter. This means that you don't _have_ to provide a `RyeConfiguration` in which case default values will be used for all parameters including the text (but you probably don't want an alert showing the text "Add a message", do you?).
+As you can see, both the `standard` and the `custom` ViewType takes an optional `RyeConfiguration` as a parameter. This means that you don't _have_ to provide a `RyeConfiguration` in which case default values will be used for all parameters including the text (but you probably don't want an alert showing the text "Add a message", do you?).
 
- The `custom` ViewType takes the view you would like to use and a `Rye.AnimationType` (with a default value already provided). For more on the `AnimationType` please refer to the section [Animation Type](#animation-type) below.
+ Additionally, the `custom` ViewType takes the view you would like to use. 
+ 
+ Note that some of the `RyeConfiguration` keys are not relevant when using a custom view. More specificaly, theses are the keys not used when you decide to use a `custom` view for your message:
+
+ - backgroundColor
+ - textColor
+ - textFont
+ - text
+ - cornerRadius
+
+ 
+ For more on the `AnimationType` please refer to the section [Animation Type](#animation-type) below.
 
 #### Where To Show the Alert?
 
@@ -149,8 +160,7 @@ import Rye
 ...
 
 let customView = YourCustomViewHere()
-let rye = RyeViewController.init(viewType: .custom(customView),
-                                 at: .bottom(inset: 16))
+let rye = RyeViewController.init(viewType: .custom(customView))
 rye.show()
 
 ```
@@ -216,13 +226,21 @@ Rye provides two animation types:
 - `slideInOut`: slides the view in from either top or bottom (depending on which `Position` you have selected). When dismissed the view slides out in the same direction.
 - `fadeInOut`: fades the view in and out again when dismissed.
 
-To control how long the animation will take when using a `.standard` view, please use the `animationDuration` key of the `RyeConfiguration` and provide a `TimeInterval` value.
+To control how long the animation will take, please use the `animationDuration` key of the `RyeConfiguration` and provide a `TimeInterval` value.
 
-In case you are using a `.custom` view or you _do not_ provide a value for `animationDuration`, a standard value of 0.3 seconds is used.
+If you _do not_ provide a value for `animationDuration`, a standard value of 0.3 seconds is used.
+
+#### Ignore Safe Areas
+
+When determining where to show the Rye message you can select whether to include `safeLayoutArea` insets in the calculation or not.
+
+This is done by setting the `.ignoreSafeAreas` value in the `RyeConfiguration`.
+
+The default value is `false`, meaning that safe area insets will be used in the calculation.
 
 #### Possible Rye Configuration Values
 
-The following keys can be used in the configuration dictionary when presenting a default type Rye:
+The following keys can be used in the configuration dictionary:
 
     .backgroundColor (must be a UIColor)
     .textColor (must be a UIColor)
@@ -231,6 +249,7 @@ The following keys can be used in the configuration dictionary when presenting a
     .cornerRadius (must be a CGFloat)
     .animationType (must be a Rye.AnimationType)
     .animationDuration (must be a TimeInterval)
+    .ignoreSafeAreas (must be a bool)
 
 If configuration is set to nil, a default configuration will be used. Any options set, will override the default state.
 

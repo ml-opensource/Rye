@@ -117,7 +117,7 @@ public extension RyeViewController {
             }
         }
         
-        func getRyeViewPositionConstant() -> CGFloat {
+        var ryeViewPositionConstant: CGFloat {
             let safeArea = ignoreSafeAreas ? 0 : getSafeAreaSpacing()
             
             switch position {
@@ -131,10 +131,10 @@ public extension RyeViewController {
         switch self.animationType! {
         case .fadeInOut:
             ryeView.alpha = 0
-            ryeViewPositionConstraint.constant = getRyeViewPositionConstant()
+            ryeViewPositionConstraint.constant = ryeViewPositionConstant
         case .slideInOut:
             ryeView.alpha = 1
-            ryeViewPositionConstraint.constant = getRyeViewPositionConstant()
+            ryeViewPositionConstraint.constant = ryeViewPositionConstant
         }
         
         // animate

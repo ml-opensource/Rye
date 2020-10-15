@@ -19,6 +19,7 @@ class RyeDemoViewController: UITableViewController {
         case viewType
         case position
         case animationtype
+        case ignoreSafeAreas
     }
     
     @IBOutlet weak var insetStepper: UIStepper!
@@ -37,6 +38,7 @@ class RyeDemoViewController: UITableViewController {
     var viewType: Rye.ViewType = .standard(configuration: nil)
     var position: Rye.Position = .top(inset: 20.0)
     var animationType: Rye.AnimationType = .slideInOut
+    var ignoreSafeAreas: Bool = true
     var uniformInset: CGFloat = 0 {
         didSet {
             insetsLabel.text = "\(uniformInset)"
@@ -65,7 +67,8 @@ class RyeDemoViewController: UITableViewController {
             updatePosition(for: indexPath)
         case .animationtype:
             updateAnimationType(for: indexPath)
-       
+        case .ignoreSafeAreas:
+            updateIgnoreSafeAreas(for: indexPath)
         }
     }
     
@@ -95,8 +98,7 @@ class RyeDemoViewController: UITableViewController {
         case 0:
             viewType = .standard(configuration: nil)
         case 1:
-            viewType = .custom(customView, animationType: animationType)
-//            viewType = .custom(customView, animationType: animationType, ignoreSafeAreas: true)
+            viewType = .custom(customView, configuration: nil)
         default:
             break
         }
@@ -132,6 +134,12 @@ class RyeDemoViewController: UITableViewController {
             break
         }
     }
+
+    private func updateIgnoreSafeAreas(for indexPath: IndexPath) {
+        ignoreSafeAreas.toggle()
+        tableView.cellForRow(at: IndexPath(row: indexPath.row, section: indexPath.section))?.accessoryType = ignoreSafeAreas ? .checkmark : .none
+    }
+
     @IBAction func uniformInsetsChanged(_ sender: UIStepper) {
         
         self.uniformInset = CGFloat(sender.value)
@@ -139,20 +147,24 @@ class RyeDemoViewController: UITableViewController {
     
     // MARK: - IBActions
     @IBAction func didTapGenerateMessage(_ sender: UIButton) {
-        var selectedViewType = viewType
         generateMessageButton.isEnabled = false
 
-        if case Rye.ViewType.standard = viewType {
-            let ryeConfiguration: RyeConfiguration = [
-                .insets: UIEdgeInsets.init(top: uniformInset, left: uniformInset, bottom: uniformInset, right: uniformInset),
-                .text : ryeMessageTextField.text ?? "",
-                .backgroundColor: UIColor.black.withAlphaComponent(0.5),
-                .animationType: animationType,
-                .cornerRadius: CGFloat(15.0)
-            ]
+        let ryeConfiguration: RyeConfiguration = [
+            .insets: UIEdgeInsets.init(top: uniformInset, left: uniformInset, bottom: uniformInset, right: uniformInset),
+            .text : ryeMessageTextField.text ?? "",
+            .backgroundColor: UIColor.black.withAlphaComponent(0.5),
+            .animationType: animationType,
+            .cornerRadius: CGFloat(15.0),
+            .ignoreSafeAreas: ignoreSafeAreas
+        ]
+
+        var selectedViewType: Rye.ViewType
+        switch viewType {
+        case .standard:
             selectedViewType = .standard(configuration: ryeConfiguration)
+        case .custom(let view, _):
+            selectedViewType = .custom(view, configuration: ryeConfiguration)
         }
-        
         ryeViewController = RyeViewController(dismissMode: dismissMode,
                                               viewType: selectedViewType,
                                               at: position)
