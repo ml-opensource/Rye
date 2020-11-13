@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="jYf-jg-epa">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="jYf-jg-epa">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -14,7 +16,8 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="xU2-Zv-reF">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="hjV-EP-qDN"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <sections>
                             <tableViewSection headerTitle="introduction" id="VuG-cf-jj7">
                                 <cells>
@@ -270,40 +273,61 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="show me" id="4EL-du-N8D" userLabel="show me">
+                            <tableViewSection headerTitle="ignore safe areas" id="4EL-du-N8D" userLabel="ignore safe areas">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="100" id="Kf2-TO-aQ3">
-                                        <rect key="frame" x="0.0" y="1088.5" width="414" height="100"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="checkmark" indentationWidth="10" textLabel="1Tl-U8-6Mj" style="IBUITableViewCellStyleDefault" id="QtO-jt-NeD">
+                                        <rect key="frame" x="0.0" y="1088.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Kf2-TO-aQ3" id="7rl-MQ-nqH">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QtO-jt-NeD" id="Bkh-1U-hxg">
+                                            <rect key="frame" x="0.0" y="0.0" width="370" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text=".ignoreSafeAreas" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1Tl-U8-6Mj">
+                                                    <rect key="frame" x="20" y="0.0" width="342" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="show me" id="D8F-UY-eSi" userLabel="show me">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="100" id="eTL-7b-mh2">
+                                        <rect key="frame" x="0.0" y="1188" width="414" height="100"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="eTL-7b-mh2" id="ftu-qA-A2V">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="AKI-bb-s9G">
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="hrW-y4-dbe">
                                                     <rect key="frame" x="16" y="16" width="382" height="68"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4xz-C0-gCX">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jud-Gh-OgV">
                                                             <rect key="frame" x="0.0" y="0.0" width="382" height="29"/>
                                                             <state key="normal" title="Generate Rye Message"/>
                                                             <connections>
-                                                                <action selector="didTapGenerateMessage:" destination="jYf-jg-epa" eventType="touchUpInside" id="x4b-wU-Sau"/>
+                                                                <action selector="didTapGenerateMessage:" destination="jYf-jg-epa" eventType="touchUpInside" id="6UM-lW-cpv"/>
                                                             </connections>
                                                         </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8ou-wz-e3Y">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nVb-Z1-AuM">
                                                             <rect key="frame" x="0.0" y="39" width="382" height="29"/>
                                                             <state key="normal" title="Dismiss Rye Message"/>
                                                             <connections>
-                                                                <action selector="didTapDismissMessage:" destination="jYf-jg-epa" eventType="touchUpInside" id="LET-UT-AsP"/>
+                                                                <action selector="didTapDismissMessage:" destination="jYf-jg-epa" eventType="touchUpInside" id="UB8-M7-Dng"/>
                                                             </connections>
                                                         </button>
                                                     </subviews>
                                                 </stackView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="AKI-bb-s9G" firstAttribute="leading" secondItem="7rl-MQ-nqH" secondAttribute="leading" constant="16" id="Byx-k3-FiI"/>
-                                                <constraint firstAttribute="trailing" secondItem="AKI-bb-s9G" secondAttribute="trailing" constant="16" id="YJ5-Db-Clp"/>
-                                                <constraint firstAttribute="bottom" secondItem="AKI-bb-s9G" secondAttribute="bottom" constant="16" id="nCu-Or-QPl"/>
-                                                <constraint firstItem="AKI-bb-s9G" firstAttribute="top" secondItem="7rl-MQ-nqH" secondAttribute="top" constant="16" id="tVt-i5-WLQ"/>
+                                                <constraint firstAttribute="trailing" secondItem="hrW-y4-dbe" secondAttribute="trailing" constant="16" id="Jpk-Dg-4gB"/>
+                                                <constraint firstItem="hrW-y4-dbe" firstAttribute="leading" secondItem="ftu-qA-A2V" secondAttribute="leading" constant="16" id="c3Y-6j-i8Q"/>
+                                                <constraint firstAttribute="bottom" secondItem="hrW-y4-dbe" secondAttribute="bottom" constant="16" id="xaD-0B-lxw"/>
+                                                <constraint firstItem="hrW-y4-dbe" firstAttribute="top" secondItem="ftu-qA-A2V" secondAttribute="top" constant="16" id="zuu-2Q-VZm"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -316,8 +340,8 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <outlet property="dismissRyeButton" destination="8ou-wz-e3Y" id="2hk-fM-o5R"/>
-                        <outlet property="generateMessageButton" destination="4xz-C0-gCX" id="dyi-Jl-lPO"/>
+                        <outlet property="dismissRyeButton" destination="nVb-Z1-AuM" id="sbo-ur-SfR"/>
+                        <outlet property="generateMessageButton" destination="jud-Gh-OgV" id="yDk-KH-9bp"/>
                         <outlet property="insetStepper" destination="p9S-cJ-7az" id="Nt1-D5-l53"/>
                         <outlet property="insetsLabel" destination="a1M-uU-5aD" id="zc4-CJ-fK8"/>
                         <outlet property="ryeMessageTextField" destination="Yfv-08-rut" id="XYm-Pa-JLZ"/>
@@ -328,4 +352,9 @@
             <point key="canvasLocation" x="139" y="297"/>
         </scene>
     </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

@@ -39,6 +39,7 @@ public class RyeViewController: UIViewController {
     var viewType: Rye.ViewType
     var position: Rye.Position
     var animationDuration: TimeInterval!
+    var ignoreSafeAreas: Bool = false
     var animationType: Rye.AnimationType!
     var dismissCompletion: (() -> Void)? = nil
     private var dismissWorkItem: DispatchWorkItem?
@@ -64,14 +65,16 @@ public class RyeViewController: UIViewController {
         self.dismissMode = dismissMode
         self.viewType = viewType
         self.position = position
-        
+
         switch viewType {
         case .standard(let configuration):
             animationDuration = configuration?[Rye.Configuration.Key.animationDuration] as? TimeInterval ?? 0.3
             animationType = configuration?[Rye.Configuration.Key.animationType] as? Rye.AnimationType ?? .slideInOut
-        case .custom(_, let animationType):
-            animationDuration = 0.3
-            self.animationType = animationType
+            ignoreSafeAreas = configuration?[Rye.Configuration.Key.ignoreSafeAreas] as? Bool ?? false
+        case .custom(_, let configuration):
+            animationDuration = configuration?[Rye.Configuration.Key.animationDuration] as? TimeInterval ?? 0.3
+            animationType = configuration?[Rye.Configuration.Key.animationType] as? Rye.AnimationType ?? .slideInOut
+            ignoreSafeAreas = configuration?[Rye.Configuration.Key.ignoreSafeAreas] as? Bool ?? false
         }
         
         super.init(nibName: nil, bundle: nil)
