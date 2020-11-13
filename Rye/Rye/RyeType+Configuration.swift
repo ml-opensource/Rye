@@ -79,6 +79,10 @@ public struct Rye {
              RyeView's animation duration
              */
             case animationDuration
+            /**
+            RyeView's insets
+            */
+            case insets
         }
     }
     

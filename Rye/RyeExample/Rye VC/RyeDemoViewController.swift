@@ -11,6 +11,18 @@ import Rye
 
 class RyeDemoViewController: UITableViewController {
     
+    enum Section: Int {
+        case introduction
+        case text
+        case insets
+        case dismissMode
+        case viewType
+        case position
+        case animationtype
+    }
+    
+    @IBOutlet weak var insetStepper: UIStepper!
+    @IBOutlet weak var insetsLabel: UILabel!
     // MARK: - Outlets
     @IBOutlet weak var ryeMessageTextField: UITextField!
     @IBOutlet weak var dismissRyeButton: UIButton!
@@ -25,30 +37,35 @@ class RyeDemoViewController: UITableViewController {
     var viewType: Rye.ViewType = .standard(configuration: nil)
     var position: Rye.Position = .top(inset: 20.0)
     var animationType: Rye.AnimationType = .slideInOut
+    var uniformInset: CGFloat = 0 {
+        didSet {
+            insetsLabel.text = "\(uniformInset)"
+        }
+    }
     let customView = RyeImageView.fromNib()
     
     // MARK: - Lifecycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        uniformInset = { uniformInset }()
         tableView.tableFooterView = UIView()
         dismissRyeButton.isHidden = true
     }
     
     // MARK: - TableView methods
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch indexPath.section {
-        case 0, 1:
+        switch Section(rawValue: indexPath.section)! {
+        case .introduction, .insets, .text:
             break
-        case 2:
+        case .dismissMode:
             updateDismissMode(for: indexPath)
-        case 3:
+        case .viewType:
             updateViewMode(for: indexPath)
-        case 4:
+        case .position:
             updatePosition(for: indexPath)
-        case 5:
+        case .animationtype:
             updateAnimationType(for: indexPath)
-        default:
-            break
+       
         }
     }
     
@@ -114,6 +131,10 @@ class RyeDemoViewController: UITableViewController {
             break
         }
     }
+    @IBAction func uniformInsetsChanged(_ sender: UIStepper) {
+        
+        self.uniformInset = CGFloat(sender.value)
+    }
     
     // MARK: - IBActions
     @IBAction func didTapGenerateMessage(_ sender: UIButton) {
@@ -122,6 +143,7 @@ class RyeDemoViewController: UITableViewController {
 
         if case Rye.ViewType.standard = viewType {
             let ryeConfiguration: RyeConfiguration = [
+                .insets: UIEdgeInsets.init(top: uniformInset, left: uniformInset, bottom: uniformInset, right: uniformInset),
                 .text : ryeMessageTextField.text ?? "",
                 .backgroundColor: UIColor.black.withAlphaComponent(0.5),
                 .animationType: animationType,
