@@ -46,7 +46,7 @@ public class RyeViewController: UIViewController {
     
     // MARK: - Rye View Properties
     
-    var ryeViewPositionConstraint: NSLayoutConstraint!
+    var ryeViewPositionConstraint: NSLayoutConstraint?
     
     // MARK: - Init
     
@@ -155,7 +155,7 @@ public class RyeViewController: UIViewController {
                 ryeViewPositionConstraint = ryeView.topAnchor.constraint(equalTo: parentView.topAnchor)
             }
             
-            ryeViewPositionConstraint.isActive = true
+            ryeViewPositionConstraint?.isActive = true
             
             // force RyeView to layout so it calculates it's frames
             ryeView.setNeedsLayout()
@@ -164,9 +164,9 @@ public class RyeViewController: UIViewController {
             // update RyeView bottom constraint constat to position it outside of the application's UIWindow
             switch position {
             case .bottom:
-                ryeViewPositionConstraint.constant = ryeView.frame.height
+                ryeViewPositionConstraint?.constant = ryeView.frame.height
             case .top:
-                ryeViewPositionConstraint.constant = -ryeView.frame.height
+                ryeViewPositionConstraint?.constant = -ryeView.frame.height
             }
         }
         
