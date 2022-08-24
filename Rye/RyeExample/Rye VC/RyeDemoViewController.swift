@@ -58,23 +58,21 @@ class RyeDemoViewController: UITableViewController {
     
     // MARK: - TableView methods
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let section = Section(rawValue: indexPath.section) {
-            switch section {
-            case .introduction, .insets, .text:
-                break
-            case .dismissMode:
-                updateDismissMode(for: indexPath)
-            case .viewType:
-                updateViewMode(for: indexPath)
-            case .position:
-                updatePosition(for: indexPath)
-            case .alignment:
-                updateAlignment(for: indexPath)
-            case .animationtype:
-                updateAnimationType(for: indexPath)
-            case .ignoreSafeAreas:
-                updateIgnoreSafeAreas(for: indexPath)
-            }
+        switch Section(rawValue: indexPath.section)! {
+        case .introduction, .insets, .text:
+            break
+        case .dismissMode:
+            updateDismissMode(for: indexPath)
+        case .viewType:
+            updateViewMode(for: indexPath)
+        case .position:
+            updatePosition(for: indexPath)
+        case .alignment:
+            updateAlignment(for: indexPath)
+        case .animationtype:
+            updateAnimationType(for: indexPath)
+        case .ignoreSafeAreas:
+            updateIgnoreSafeAreas(for: indexPath)
         }
     }
     
