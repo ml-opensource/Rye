@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol RyeButtonViewDelegate: class {
+protocol RyeButtonViewDelegate: AnyObject {
     func didTapButton(in sender: RyeButtonView)
 }
 
