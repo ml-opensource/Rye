@@ -128,9 +128,9 @@ import Rye
 ...
 let ryeConfiguration: RyeConfiguration = [Rye.Configuration.Key.text: "Message for the user"]
 let rye = RyeViewController(
-             viewType: .standard(configuration: ryeConfiguration),
-             at: .bottom(inset: 16)
-          )
+   viewType: .standard(configuration: ryeConfiguration),
+   at: .bottom(inset: 16)
+)
 rye.show()
 ```
 
@@ -145,10 +145,10 @@ import Rye
 ...
 let ryeConfiguration: RyeConfiguration = [Rye.Configuration.Key.text: "Message for the user"]
 let rye = RyeViewController(
-             dismissMode: .gesture,
-             viewType: .standard(configuration: ryeConfiguration),
-             at: .bottom(inset: 16)
-          )
+   dismissMode: .gesture,
+   viewType: .standard(configuration: ryeConfiguration),
+   at: .bottom(inset: 16)
+)
 rye.show()
 ```
 
@@ -168,9 +168,9 @@ let ryeConfiguration: RyeConfiguration = [
 ]
 
 let rye = RyeViewController(
-             viewType: .standard(configuration: ryeConfiguration),
-             at: .bottom(inset: 16)
-          )
+   viewType: .standard(configuration: ryeConfiguration),
+   at: .bottom(inset: 16)
+)
 rye.show()
 ```
 
@@ -196,9 +196,9 @@ import Rye
 ...
 let ryeConfiguration: RyeConfiguration = [Rye.Configuration.Key.text: "Message for the user"]
 let rye = RyeViewController(
-             viewType: .standard(configuration: ryeConfiguration),
-             at: .bottom(inset: 16)
-          )
+   viewType: .standard(configuration: ryeConfiguration),
+   at: .bottom(inset: 16)
+)
 
 rye.show(withDismissCompletion: {
     print("Goodbye from Rye, time to dy..die")  
@@ -216,10 +216,10 @@ var rye: RyeViewController?
 
 let ryeConfiguration: RyeConfiguration = [Rye.Configuration.Key.text: "Message for the user"]
 rye = RyeViewController(
-         dismissMode: .nonDismissable,
-         viewType: .standard(configuration: ryeConfiguration),
-         at: .bottom(inset: 16)
-         )
+   dismissMode: .nonDismissable,
+   viewType: .standard(configuration: ryeConfiguration),
+   at: .bottom(inset: 16)
+)
 
 rye?.show()
 
