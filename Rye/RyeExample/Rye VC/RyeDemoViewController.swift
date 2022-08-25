@@ -190,7 +190,7 @@ class RyeDemoViewController: UITableViewController {
             dismissMode: dismissMode,
             viewType: selectedViewType,
             at: position,
-            with: alignment
+            aligned: alignment
         )
         
         ryeViewController?.show(withDismissCompletion: {

@@ -51,7 +51,7 @@ public class RyeViewController: UIViewController {
     
     // MARK: - Init
     
-    /// Instantiate a new Rye
+    /// Instantiate a new RyeViewController
     /// - Parameters:
     ///   - dismissMode: the Rye AlertType
     ///   - viewType: the Rye ViewType, contains the UIView + Configuration
@@ -61,7 +61,7 @@ public class RyeViewController: UIViewController {
         dismissMode: Rye.DismissMode = .automatic(interval: Rye.defaultDismissInterval),
         viewType: Rye.ViewType = .standard(configuration: nil),
         at position: Rye.Position = .bottom(inset: 16),
-        with alignment: Rye.Alignment = .center
+        aligned alignment: Rye.Alignment = .center
     ) {
         self.dismissMode = dismissMode
         self.viewType = viewType
@@ -85,14 +85,12 @@ public class RyeViewController: UIViewController {
         isShowing = UIApplication.shared.windows.contains(where: {$0.windowLevel == .alert})
     }
     
-    /**
-     Creates RyeViewController
-     
-     - Parameter alertType: the Rye AlertType
-     - Parameter viewType: the Rye ViewType, contains the UIView + Configuration
-     - Parameter position: contains the possition where the RyeView should be displayed on screen
-     - Parameter timeAlive: Represents the duration for the RyeView to be displayed to the user. If nil is provided, then you will be responsable of removing the RyeView
-     */
+    /// Instantiate a new RyeViewController
+    /// - Parameters:
+    ///   - alertType: the Rye AlertType
+    ///   - viewType: the Rye ViewType, contains the UIView + Configuration
+    ///   - position: contains the possition where the RyeView should be displayed on screen
+    ///   - timeAlive: Represents the duration for the RyeView to be displayed to the user. If nil is provided, then you will be responsable of removing the RyeView
     @available(*, deprecated, message: "Please see the README section \"Updating from v1.x.x to v2.0.0\" for notes on how to update")
     public convenience init(alertType: Rye.AlertType = .toast,
                             viewType: Rye.ViewType = .standard(configuration: nil),
