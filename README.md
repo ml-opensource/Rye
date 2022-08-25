@@ -1,9 +1,11 @@
 # 🍞 Rye
 
+![Swift Package Manager](https://img.shields.io/badge/Swift_Package_Manager-compatible-orange)
 [![Carthage Compatible](https://img.shields.io/badge/carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
-![Plaforms](https://img.shields.io/badge/platforms-iOS%20-lightgrey.svg)
+[![CocoaPods Compatible](https://img.shields.io/cocoapods/v/Rye.svg)](https://cocoapods.org/pods/Rye)
+![Platforms](https://img.shields.io/badge/platforms-iOS%20-lightgrey.svg)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/nodes-ios/Rye/blob/master/LICENSE)
-[![CircleCI](https://circleci.com/gh/nodes-ios/Rye.svg?style=shield)](https://circleci.com/gh/nodes-ios/Rye)
+
 
 ## Intro
 
@@ -20,20 +22,26 @@ You can choose to display the default Rye alert type or go fully custom and disp
 
 ## 📝 Requirements
 
-iOS 11.4
+iOS 11.4  
 Swift 5
 
 ## 📦 Installation
 
+### Swift Package Manager
+Copy this repository URL, and add the repo into your Package Dependencies:
+```
+https://github.com/nodes-ios/Rye.git
+```
+
 ### Carthage
-~~~bash
+```bash
 github "nodes-ios/Rye"
-~~~
+```
 
 ### Cocoapods
-~~~bash
+```bash
 pod 'Rye'
-~~~
+```
 
 ## 💻 Usage
 
@@ -41,8 +49,8 @@ pod 'Rye'
 
 To display a Rye alert you declare a new `RyeViewController` and then call:
 
-- `show`: to show the alert
-- `dismiss`: to dismiss the alert
+- `show()`: to show the alert
+- `dismiss()`: to dismiss the alert
 
 **Note:** Depending on which `dismissMode` you have selected, you may not need to dismiss the alert yourself, see the section about [`displayModes`](#display-modes) below for more information.
 
@@ -50,21 +58,21 @@ At the very minimum you need to consider:
 
 - which text to show
 - whether to show a standard alert or bring your own custom view to the party
-- where to show the text (`top` or `bottom`)
+- where to show the alert (`top` or `bottom`)
 
 #### Show Text
 
-To show a text using a Rye alert you need to create a `RyeConfiguration`. This is a dictionary allowing you to configure various UI related aspects of your Rye alert. For more information on available keys, please refer to the section: [Possible Rye Configuration Values](#possible-rye-configuration-values) below.
+To show a text using a Rye alert you need to create a `RyeConfiguration`. This is a dictionary allowing you to configure various UI related aspects of your Rye alert. For more information on available keys, please refer to the [Possible Rye Configuration Values](#possible-rye-configuration-values) section.
 
 One of the values you can add to a `RyeConfiguration` is a text to show in your alert.
 
 ```swift
-let ryeConfiguration: RyeConfiguration = [Rye.Configuration.Key.text: "Message for the user"]
+let ryeConfiguration: RyeConfiguration = [ Rye.Configuration.Key.text: "Message for the user" ]
 ```
 
 #### Alert Type
 
-You can use the default Rye alert or you can create your own view and use that instead. To determine which to use, you use the `Rye.ViewType` enum defined like so:
+You can use the default Rye alert or you can create your own UIView and use that instead. To determine which to use, you use the `Rye.ViewType` enum defined like so:
 
 ```swift
 public enum ViewType {
@@ -75,9 +83,9 @@ public enum ViewType {
 
 As you can see, both the `standard` and the `custom` ViewType takes an optional `RyeConfiguration` as a parameter. This means that you don't _have_ to provide a `RyeConfiguration` in which case default values will be used for all parameters including the text (but you probably don't want an alert showing the text "Add a message", do you?).
 
- Additionally, the `custom` ViewType takes the view you would like to use. 
+ Additionally, the `custom` ViewType takes your custom UIView that you would like to use. 
  
- Note that some of the `RyeConfiguration` keys are not relevant when using a custom view. More specificaly, theses are the keys not used when you decide to use a `custom` view for your message:
+ Note that some of the `RyeConfiguration` keys are not relevant when using a custom view. More specificaly, these are the keys not used when you decide to use a `custom` view for your message:
 
  - backgroundColor
  - textColor
@@ -90,7 +98,7 @@ As you can see, both the `standard` and the `custom` ViewType takes an optional 
 
 #### Where To Show the Alert?
 
-Where to show a Rye alert is determined by a `Rye.Position` enum which is defined like so:
+Where to show a Rye alert is determined by the `Rye.Position` and `Rye.Alignment` enums which are defined like so:
 
 ```swift
 public enum Position {
@@ -99,7 +107,17 @@ public enum Position {
 }
 ```
 
-For more on the `Rye.Position` please refer to the section [Position](#position) below.
+```swift
+public enum Alignment {
+    case leading(inset: CGFloat)
+    case center
+    case trailing(inset: CGFloat)
+}
+```
+
+If the alignment is not specified at init time, it will default to `.center` alignment.
+
+For more on `Rye.Position` and `Rye.Alignment`, please refer to the section [Position & Alignment](#position-and-alignment) below.
 
 ### Display a Default Rye
 
@@ -109,12 +127,14 @@ Following these principles, we are now ready to show our first Rye alert.
 import Rye
 ...
 let ryeConfiguration: RyeConfiguration = [Rye.Configuration.Key.text: "Message for the user"]
-let rye = RyeViewController.init(viewType: .standard(configuration: ryeConfiguration),
-                                 at: .bottom(inset: 16))
+let rye = RyeViewController(
+             viewType: .standard(configuration: ryeConfiguration),
+             at: .bottom(inset: 16)
+          )
 rye.show()
 ```
 
-This will result in a Rye alert with the text "Message for the user" appearing at the bottom at the screen and then disappearing automatically after 2.5 seconds.
+This will result in a Rye alert with the text "Message for the user" appearing at the bottom of the screen, and then disappearing automatically after 2.5 seconds.
 
 ### Control the Dismiss Type
 
@@ -124,9 +144,11 @@ If you would like the Rye alert to disappear in a different way, you can pass a 
 import Rye
 ...
 let ryeConfiguration: RyeConfiguration = [Rye.Configuration.Key.text: "Message for the user"]
-let rye = RyeViewController.init(dismissMode: .gesture,
-                                 viewType: .standard(configuration: ryeConfiguration),
-                                 at: .bottom(inset: 16))
+let rye = RyeViewController(
+             dismissMode: .gesture,
+             viewType: .standard(configuration: ryeConfiguration),
+             at: .bottom(inset: 16)
+          )
 rye.show()
 ```
 
@@ -134,7 +156,7 @@ The alert will now stay on the screen until the user taps or swipes at it.
 
 ### Display Default Rye with Custom Configuration
 
-If you want to have more control of the alert view you can add keys and values to the `RyeConfiguration` as shown here.
+If you want to have more control over the alert view, you can add keys and values to the `RyeConfiguration` dictionary as shown below:
 
 ```swift
 import Rye
@@ -145,10 +167,11 @@ let ryeConfiguration: RyeConfiguration = [
     Rye.Configuration.Key.animationType: Rye.AnimationType.fadeInOut
 ]
 
-let rye = RyeViewController.init(viewType: .standard(configuration: ryeConfiguration),
-                                 at: .bottom(inset: 16))
+let rye = RyeViewController(
+             viewType: .standard(configuration: ryeConfiguration),
+             at: .bottom(inset: 16)
+          )
 rye.show()
-
 ```
 
 ### Display Rye with a Custom `UIView`
@@ -159,10 +182,10 @@ For even more control you can create your own subclass of `UIView` and use `.cus
 import Rye
 ...
 
-let customView = YourCustomViewHere()
-let rye = RyeViewController.init(viewType: .custom(customView))
-rye.show()
+let customView = YourCustomView()
+let rye = RyeViewController(viewType: .custom(customView))
 
+rye.show()
 ```
 
 ### Dismiss Completion
@@ -172,8 +195,11 @@ If you would like to execute some code when the Rye alert is dismissed you can p
 import Rye
 ...
 let ryeConfiguration: RyeConfiguration = [Rye.Configuration.Key.text: "Message for the user"]
-let rye = RyeViewController.init(viewType: .standard(configuration: ryeConfiguration),
-                                 at: .bottom(inset: 16))
+let rye = RyeViewController(
+             viewType: .standard(configuration: ryeConfiguration),
+             at: .bottom(inset: 16)
+          )
+
 rye.show(withDismissCompletion: {
     print("Goodbye from Rye, time to dy..die")  
 })
@@ -189,9 +215,12 @@ import Rye
 var rye: RyeViewController?
 
 let ryeConfiguration: RyeConfiguration = [Rye.Configuration.Key.text: "Message for the user"]
-rye = RyeViewController.init(dismissMode: .nonDismissable,
-                             viewType: .standard(configuration: ryeConfiguration),
-                             at: .bottom(inset: 16))
+rye = RyeViewController(
+         dismissMode: .nonDismissable,
+         viewType: .standard(configuration: ryeConfiguration),
+         at: .bottom(inset: 16)
+         )
+
 rye?.show()
 
 ...at a later point in time
@@ -212,12 +241,14 @@ Rye supports three different `displayMode` values which can be passed when creat
 
 If you do not pass this value when creating a new `RyeViewController`, a default value of `automatic` with a default interval of 2.5 seconds is used (the default interval is defined in `Rye.defaultDismissInterval`)
 
-#### Position
+#### Position and Alignment
 
-With Rye, you can specify the position where the Rye alert will be displayed on the screen via the `position` parameter, which takes an associated value that allows you to specify the inset.
+You can specify if the Rye alert should be shown at the top or bottom of the screen. This is specified via the `position` parameter at init time. The `position` parameter takes an associated value, that allows you to define an inset.
 
 By default Rye will calculate the safe area insets for you, so be sure to specify only the extra desired inset.
 
+Similarly, you can set the alignment of the Rye via the `aligned` parameter. The `.leading` and `.trailing` alignments also take an associated value, that allows you to define an inset.
+If the `aligned` parameter is not specified at init time, it will default to `.center`
 
 #### Animation Type
 
@@ -255,7 +286,7 @@ If configuration is set to nil, a default configuration will be used. Any option
 
 ## ⚠️ Gotchas
 
-In order to display a Rye message a `parentView` is needed to determine _in relation to what_ the Rye message is positioned.
+In order to display a Rye message, a `parentView` is needed to determine _in relation to what_ the Rye message is positioned.
 
 If you try to display a Rye message before a `parentView` can be obtained, you will see this warning in the console of your IDE.
 
