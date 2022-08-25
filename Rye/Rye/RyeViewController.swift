@@ -34,10 +34,11 @@ public class RyeViewController: UIViewController {
         }
         return keyWindow
     }
-
+    
     var dismissMode: Rye.DismissMode
     var viewType: Rye.ViewType
     var position: Rye.Position
+    var alignment: Rye.Alignment
     var animationDuration: TimeInterval!
     var ignoreSafeAreas: Bool = false
     var animationType: Rye.AnimationType!
@@ -50,22 +51,23 @@ public class RyeViewController: UIViewController {
     
     // MARK: - Init
     
-    /**
-     Creates RyeViewController
-     
-     - Parameter alertType: the Rye AlertType
-     - Parameter viewType: the Rye ViewType, contains the UIView + Configuration
-     - Parameter position: contains the possition where the RyeView should be displayed on screen
-     - Parameter timeAlive: Represents the duration for the RyeView to be displayed to the user. If nil is provided, then you will be responsable of removing the RyeView
-
-     */
-    public init(dismissMode: Rye.DismissMode = .automatic(interval: Rye.defaultDismissInterval),
-                viewType: Rye.ViewType = .standard(configuration: nil),
-                at position: Rye.Position = .bottom(inset: 16)) {
+    /// Instantiate a new RyeViewController
+    /// - Parameters:
+    ///   - dismissMode: the Rye AlertType
+    ///   - viewType: the Rye ViewType, contains the UIView + Configuration
+    ///   - position: contains the possition where the RyeView should be displayed on screen
+    ///   - alignment: contains the alignment of where the RyeView should be displayed on screen
+    public init(
+        dismissMode: Rye.DismissMode = .automatic(interval: Rye.defaultDismissInterval),
+        viewType: Rye.ViewType = .standard(configuration: nil),
+        at position: Rye.Position = .bottom(inset: 16),
+        aligned alignment: Rye.Alignment = .center
+    ) {
         self.dismissMode = dismissMode
         self.viewType = viewType
         self.position = position
-
+        self.alignment = alignment
+        
         switch viewType {
         case .standard(let configuration):
             animationDuration = configuration?[Rye.Configuration.Key.animationDuration] as? TimeInterval ?? 0.3
@@ -83,19 +85,17 @@ public class RyeViewController: UIViewController {
         isShowing = UIApplication.shared.windows.contains(where: {$0.windowLevel == .alert})
     }
     
-    /**
-     Creates RyeViewController
-     
-     - Parameter alertType: the Rye AlertType
-     - Parameter viewType: the Rye ViewType, contains the UIView + Configuration
-     - Parameter position: contains the possition where the RyeView should be displayed on screen
-     - Parameter timeAlive: Represents the duration for the RyeView to be displayed to the user. If nil is provided, then you will be responsable of removing the RyeView
-     */
+    /// Instantiate a new RyeViewController
+    /// - Parameters:
+    ///   - alertType: the Rye AlertType
+    ///   - viewType: the Rye ViewType, contains the UIView + Configuration
+    ///   - position: contains the possition where the RyeView should be displayed on screen
+    ///   - timeAlive: Represents the duration for the RyeView to be displayed to the user. If nil is provided, then you will be responsable of removing the RyeView
     @available(*, deprecated, message: "Please see the README section \"Updating from v1.x.x to v2.0.0\" for notes on how to update")
     public convenience init(alertType: Rye.AlertType = .toast,
-                viewType: Rye.ViewType = .standard(configuration: nil),
-                at position: Rye.Position = .bottom(inset: 16),
-                timeAlive: TimeInterval? = nil) {
+                            viewType: Rye.ViewType = .standard(configuration: nil),
+                            at position: Rye.Position = .bottom(inset: 16),
+                            timeAlive: TimeInterval? = nil) {
         var dismissMode: Rye.DismissMode
         if let timeAlive = timeAlive {
             dismissMode = .automatic(interval: timeAlive)
@@ -139,12 +139,22 @@ public class RyeViewController: UIViewController {
                 addTapGestureRecognizer()
                 addSwipeGestureRecognizer()
             }
-        
+            
             
             // add RyeView to hierarchy
             parentView.addSubview(ryeView)
             ryeView.translatesAutoresizingMaskIntoConstraints = false
-            ryeView.centerXAnchor.constraint(equalTo: parentView.centerXAnchor).isActive = true
+            switch alignment {
+            case .leading(inset: let inset):
+                ryeView.leadingAnchor.constraint(equalTo: parentView.leadingAnchor, constant: inset).isActive = true
+                
+            case .center:
+                ryeView.centerXAnchor.constraint(equalTo: parentView.centerXAnchor).isActive = true
+            
+            case .trailing(inset: let inset):
+                ryeView.trailingAnchor.constraint(equalTo: parentView.trailingAnchor, constant: -inset).isActive = true
+            }
+            
             ryeView.widthAnchor.constraint(lessThanOrEqualTo: parentView.widthAnchor, constant: -16).isActive = true
             
             // setup constraint

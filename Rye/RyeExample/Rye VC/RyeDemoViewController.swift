@@ -18,6 +18,7 @@ class RyeDemoViewController: UITableViewController {
         case dismissMode
         case viewType
         case position
+        case alignment
         case animationtype
         case ignoreSafeAreas
     }
@@ -37,6 +38,7 @@ class RyeDemoViewController: UITableViewController {
     var dismissMode: Rye.DismissMode = .automatic(interval: Rye.defaultDismissInterval)
     var viewType: Rye.ViewType = .standard(configuration: nil)
     var position: Rye.Position = .top(inset: 20.0)
+    var alignment: Rye.Alignment = .center
     var animationType: Rye.AnimationType = .slideInOut
     var ignoreSafeAreas: Bool = true
     var uniformInset: CGFloat = 0 {
@@ -65,6 +67,8 @@ class RyeDemoViewController: UITableViewController {
             updateViewMode(for: indexPath)
         case .position:
             updatePosition(for: indexPath)
+        case .alignment:
+            updateAlignment(for: indexPath)
         case .animationtype:
             updateAnimationType(for: indexPath)
         case .ignoreSafeAreas:
@@ -119,6 +123,22 @@ class RyeDemoViewController: UITableViewController {
         }
     }
 
+    private func updateAlignment(for indexPath: IndexPath) {
+        for row in 0...2 {
+            tableView.cellForRow(at: IndexPath(row: row, section: indexPath.section))?.accessoryType = .none
+        }
+        tableView.cellForRow(at: IndexPath(row: indexPath.row, section: indexPath.section))?.accessoryType = .checkmark
+        switch indexPath.row {
+        case 0:
+            alignment = .leading(inset: contentInset)
+        case 1:
+            alignment = .center
+        case 2:
+            alignment = .trailing(inset: contentInset)
+        default:
+            break
+        }
+    }
 
     private func updateAnimationType(for indexPath: IndexPath) {
         for row in 0...1 {
@@ -165,9 +185,13 @@ class RyeDemoViewController: UITableViewController {
         case .custom(let view, _):
             selectedViewType = .custom(view, configuration: ryeConfiguration)
         }
-        ryeViewController = RyeViewController(dismissMode: dismissMode,
-                                              viewType: selectedViewType,
-                                              at: position)
+        
+        ryeViewController = RyeViewController(
+            dismissMode: dismissMode,
+            viewType: selectedViewType,
+            at: position,
+            aligned: alignment
+        )
         
         ryeViewController?.show(withDismissCompletion: {
             self.ryeViewController = nil

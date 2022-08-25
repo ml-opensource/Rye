@@ -95,6 +95,12 @@ public struct Rye {
         case bottom(inset: CGFloat)
     }
     
+    public enum Alignment {
+        case leading(inset: CGFloat)
+        case center
+        case trailing(inset: CGFloat)
+    }
+    
     public enum AnimationType {
         case slideInOut
         case fadeInOut
