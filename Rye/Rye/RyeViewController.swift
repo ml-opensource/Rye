@@ -13,7 +13,7 @@ public class RyeViewController: UIViewController {
     // MARK: - Properties
     
     var window: UIWindow?
-    var ryeView: UIView!
+    var ryeView: UIView?
     var isShowing: Bool {
         get {
             let key = "RyeViewControllerIsShowing"
@@ -39,9 +39,9 @@ public class RyeViewController: UIViewController {
     var viewType: Rye.ViewType
     var position: Rye.Position
     var alignment: Rye.Alignment
-    var animationDuration: TimeInterval!
+    var animationDuration: TimeInterval = 0.3
     var ignoreSafeAreas: Bool = false
-    var animationType: Rye.AnimationType!
+    var animationType: Rye.AnimationType = .fadeInOut
     var dismissCompletion: (() -> Void)? = nil
     private var dismissWorkItem: DispatchWorkItem?
     
@@ -196,8 +196,10 @@ public class RyeViewController: UIViewController {
             dismissWorkItem = DispatchWorkItem(block: {
                 self.dismiss()
             })
-            DispatchQueue.main.asyncAfter(deadline: .now() + interval + animationDuration,
-                                          execute: self.dismissWorkItem!)
+            if let dismissWorkItem = self.dismissWorkItem {
+                DispatchQueue.main.asyncAfter(deadline: .now() + interval + animationDuration,
+                                              execute: dismissWorkItem)
+            }
         default:
             break
         }
@@ -206,7 +208,7 @@ public class RyeViewController: UIViewController {
     // MARK: - Private Helper methods
     private func addTapGestureRecognizer() {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(cancelWorkItemAndDismissRye))
-        ryeView.addGestureRecognizer(tapGestureRecognizer)
+        ryeView?.addGestureRecognizer(tapGestureRecognizer)
     }
     
     private func addSwipeGestureRecognizer() {
@@ -217,7 +219,7 @@ public class RyeViewController: UIViewController {
         case .bottom:
             swipeGestureRecognizer.direction = .down
         }
-        ryeView.addGestureRecognizer(swipeGestureRecognizer)
+        ryeView?.addGestureRecognizer(swipeGestureRecognizer)
     }
     
     private func shouldAddGestureRecognizer(for dismissMode: Rye.DismissMode) -> Bool {
