@@ -128,7 +128,7 @@ public extension RyeViewController {
             }
         }
         
-        switch self.animationType! {
+        switch self.animationType {
         case .fadeInOut:
             ryeView.alpha = 0
             ryeViewPositionConstraint?.constant = ryeViewPositionConstant
@@ -139,7 +139,7 @@ public extension RyeViewController {
         
         // animate
         UIView.animate(withDuration: animationDuration) {
-            switch self.animationType! {
+            switch self.animationType {
             case .fadeInOut:
                 self.ryeView.alpha = 1
             case .slideInOut:
@@ -162,7 +162,7 @@ public extension RyeViewController {
             }
         }
         
-        switch self.animationType! {
+        switch self.animationType {
         case .fadeInOut:
             break
         case .slideInOut:
@@ -171,7 +171,7 @@ public extension RyeViewController {
         
         // animate
         UIView.animate(withDuration: animationDuration, animations: {
-            switch self.animationType! {
+            switch self.animationType {
             case .fadeInOut:
                 self.ryeView.alpha = 0
             case .slideInOut:

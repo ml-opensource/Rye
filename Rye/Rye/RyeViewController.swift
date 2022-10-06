@@ -39,9 +39,9 @@ public class RyeViewController: UIViewController {
     var viewType: Rye.ViewType
     var position: Rye.Position
     var alignment: Rye.Alignment
-    var animationDuration: TimeInterval!
+    var animationDuration: TimeInterval = 0.3
     var ignoreSafeAreas: Bool = false
-    var animationType: Rye.AnimationType!
+    var animationType: Rye.AnimationType = .fadeInOut
     var dismissCompletion: (() -> Void)? = nil
     private var dismissWorkItem: DispatchWorkItem?
     
@@ -196,8 +196,10 @@ public class RyeViewController: UIViewController {
             dismissWorkItem = DispatchWorkItem(block: {
                 self.dismiss()
             })
-            DispatchQueue.main.asyncAfter(deadline: .now() + interval + animationDuration,
-                                          execute: self.dismissWorkItem!)
+            if let dismissWorkItem = self.dismissWorkItem {
+                DispatchQueue.main.asyncAfter(deadline: .now() + interval + animationDuration,
+                                              execute: dismissWorkItem)
+            }
         default:
             break
         }
