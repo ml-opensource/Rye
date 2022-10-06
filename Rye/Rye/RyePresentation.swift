@@ -52,7 +52,7 @@ public extension RyeViewController {
             
             guard let self = self else { return }
             
-            self.ryeView.removeFromSuperview()
+            self.ryeView?.removeFromSuperview()
             
             // remove the UIWindow
             self.window?.isHidden = true
@@ -130,10 +130,10 @@ public extension RyeViewController {
         
         switch self.animationType {
         case .fadeInOut:
-            ryeView.alpha = 0
+            ryeView?.alpha = 0
             ryeViewPositionConstraint?.constant = ryeViewPositionConstant
         case .slideInOut:
-            ryeView.alpha = 1
+            ryeView?.alpha = 1
             ryeViewPositionConstraint?.constant = ryeViewPositionConstant
         }
         
@@ -141,7 +141,7 @@ public extension RyeViewController {
         UIView.animate(withDuration: animationDuration) {
             switch self.animationType {
             case .fadeInOut:
-                self.ryeView.alpha = 1
+                self.ryeView?.alpha = 1
             case .slideInOut:
                 self.parentView?.layoutIfNeeded()
             }
@@ -153,12 +153,12 @@ public extension RyeViewController {
         
         // update RyeView bottom constraint to position it off screen
         
-        func getRyeViewPositionConstant() -> CGFloat {
+        func getRyeViewPositionConstant() -> CGFloat? {
             switch position {
             case .bottom:
-                return ryeView.frame.height
+                return ryeView?.frame.height
             case .top:
-                return -ryeView.frame.height
+                return -(ryeView?.frame.height ?? 0)
             }
         }
         
@@ -166,14 +166,16 @@ public extension RyeViewController {
         case .fadeInOut:
             break
         case .slideInOut:
-            ryeViewPositionConstraint?.constant = getRyeViewPositionConstant()
+            if let constant = getRyeViewPositionConstant() {
+                ryeViewPositionConstraint?.constant = constant
+            }
         }
         
         // animate
         UIView.animate(withDuration: animationDuration, animations: {
             switch self.animationType {
             case .fadeInOut:
-                self.ryeView.alpha = 0
+                self.ryeView?.alpha = 0
             case .slideInOut:
                 self.parentView?.layoutIfNeeded()
             }

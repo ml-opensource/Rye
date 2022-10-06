@@ -13,7 +13,7 @@ public class RyeViewController: UIViewController {
     // MARK: - Properties
     
     var window: UIWindow?
-    var ryeView: UIView!
+    var ryeView: UIView?
     var isShowing: Bool {
         get {
             let key = "RyeViewControllerIsShowing"
@@ -208,7 +208,7 @@ public class RyeViewController: UIViewController {
     // MARK: - Private Helper methods
     private func addTapGestureRecognizer() {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(cancelWorkItemAndDismissRye))
-        ryeView.addGestureRecognizer(tapGestureRecognizer)
+        ryeView?.addGestureRecognizer(tapGestureRecognizer)
     }
     
     private func addSwipeGestureRecognizer() {
@@ -219,7 +219,7 @@ public class RyeViewController: UIViewController {
         case .bottom:
             swipeGestureRecognizer.direction = .down
         }
-        ryeView.addGestureRecognizer(swipeGestureRecognizer)
+        ryeView?.addGestureRecognizer(swipeGestureRecognizer)
     }
     
     private func shouldAddGestureRecognizer(for dismissMode: Rye.DismissMode) -> Bool {
